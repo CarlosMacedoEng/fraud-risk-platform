@@ -1,0 +1,31 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                          Allocation by Class
+
+Object Type                                                                                                                                                                         Allocation Pressure
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------
+java.lang.Object[]                                                                                                                                                                               27.49%
+byte[]                                                                                                                                                                                           20.20%
+java.util.LinkedHashMap$Entry                                                                                                                                                                    19.11%
+java.lang.String                                                                                                                                                                                 12.06%
+java.util.concurrent.ConcurrentHashMap$Node[]                                                                                                                                                    11.66%
+java.lang.Float                                                                                                                                                                                   0.54%
+int[]                                                                                                                                                                                             0.53%
+jdk.internal.vm.StackChunk                                                                                                                                                                        0.52%
+java.time.Instant                                                                                                                                                                                 0.37%
+long[]                                                                                                                                                                                            0.36%
+char[]                                                                                                                                                                                            0.34%
+io.micrometer.core.instrument.ImmutableTag                                                                                                                                                        0.24%
+java.lang.StringBuilder                                                                                                                                                                           0.22%
+java.lang.reflect.Method                                                                                                                                                                          0.20%
+java.util.concurrent.ConcurrentHashMap$ValueIterator                                                                                                                                              0.20%
+io.micrometer.common.KeyValue[]                                                                                                                                                                   0.19%
+jdk.internal.net.http.SocketTube$InternalReadPublisher$InternalReadSubscription$$Lambda.0x000073f2a8b4ebb8                                                                                        0.17%
+io.micrometer.common.ImmutableKeyValue                                                                                                                                                            0.16%
+java.util.concurrent.ConcurrentHashMap$Node                                                                                                                                                       0.16%
+java.util.ArrayList                                                                                                                                                                               0.16%
+jdk.internal.net.http.Http1Exchange$$Lambda.0x000073f2a8b50b00                                                                                                                                    0.15%
+java.util.concurrent.ConcurrentHashMap                                                                                                                                                            0.14%
+java.util.HashMap$Node[]                                                                                                                                                                          0.13%
+java.util.ArrayList$Itr                                                                                                                                                                           0.13%
+io.micrometer.common.KeyValues                                                                                                                                                                    0.12%

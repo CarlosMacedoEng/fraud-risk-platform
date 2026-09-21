@@ -1,0 +1,31 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                  Java Methods that Executes the Most
+
+Method                                                                                                                                                                                  Samples Percent
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------- -------
+org.springframework.boot.loader.net.protocol.jar.JarFileUrlKey.equals(Object)                                                                                                                 8   3.20%
+java.lang.Class.cast(Object)                                                                                                                                                                  5   2.00%
+java.util.concurrent.ConcurrentHashMap.get(Object)                                                                                                                                            4   1.60%
+io.netty.buffer.AbstractByteBuf.forEachByteAsc0(int, int, ByteProcessor)                                                                                                                      3   1.20%
+java.lang.invoke.Invokers$Holder.invokeExact_MT(Object, Object, Object)                                                                                                                       3   1.20%
+java.util.concurrent.ConcurrentHashMap$Traverser.advance()                                                                                                                                    3   1.20%
+tools.jackson.core.json.WriterBasedJsonGenerator._writeString2(int)                                                                                                                           3   1.20%
+java.lang.String.hashCode()                                                                                                                                                                   3   1.20%
+java.time.format.DateTimeFormatterBuilder$InstantPrinterParser.format(DateTimePrintContext, StringBuilder)                                                                                    2   0.80%
+org.apache.kafka.clients.NetworkClient$TelemetrySender.maybeUpdate(long)                                                                                                                      2   0.80%
+java.lang.AbstractStringBuilder.ensureCapacityInternal(int)                                                                                                                                   2   0.80%
+java.util.concurrent.ConcurrentHashMap.putVal(Object, Object, boolean)                                                                                                                        2   0.80%
+java.util.concurrent.atomic.DoubleAdder.add(double)                                                                                                                                           2   0.80%
+java.lang.StringLatin1.toLowerCase(String, byte[], Locale)                                                                                                                                    2   0.80%
+org.springframework.web.filter.ServerHttpObservationFilter.createOrFetchObservation(HttpServletRequest, HttpServletResponse)                                                                  2   0.80%
+tools.jackson.databind.util.internal.PrivateMaxEntriesMap.drainReadBuffer(int)                                                                                                                2   0.80%
+java.util.regex.Pattern.compile(String)                                                                                                                                                       2   0.80%
+java.lang.StringLatin1.regionMatchesCI(byte[], int, byte[], int, int)                                                                                                                         2   0.80%
+java.lang.String.equals(Object)                                                                                                                                                               2   0.80%
+java.util.concurrent.LinkedTransferQueue$DualNode.await(Object, long, Object, boolean)                                                                                                        2   0.80%
+io.micrometer.core.instrument.distribution.TimeWindowMax.record(long)                                                                                                                         2   0.80%
+jdk.internal.net.http.Http1Response.readBody(HttpResponse$BodySubscriber, boolean, Executor)                                                                                                  2   0.80%
+io.lettuce.core.protocol.CommandArgs.<init>(RedisCodec)                                                                                                                                       2   0.80%
+java.nio.Buffer.session()                                                                                                                                                                     1   0.40%
+java.util.Formatter$FormatSpecifier.print(Formatter, double, Locale)                                                                                                                          1   0.40%

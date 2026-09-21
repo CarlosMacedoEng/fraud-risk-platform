@@ -22,7 +22,7 @@ go-live and support — not just a fraud model.
 | 5 | Outbound REST integrations + downstream simulators (timeouts, retries, circuit breakers) | ✅ Done |
 | 6 | Kafka events: outbox, consumers, DLT, replay | ✅ Done |
 | 7 | File adapter: legacy files, validation, quarantine, reconciliation | ✅ Done |
-| 8 | Observability, performance tests (k6), JVM performance guide — **measured** results | Planned |
+| 8 | Observability, performance tests (k6), JVM performance guide — **measured** results | ✅ Done |
 | 9 | Troubleshooting lab: 18 reproducible incidents | Planned |
 | 10 | Docker Compose, Kubernetes manifests, AWS mapping | Planned |
 | 11 | Lifecycle: migration v1→v2, go-live, support, customer communication | Planned |

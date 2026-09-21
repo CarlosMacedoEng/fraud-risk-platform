@@ -1,0 +1,7 @@
+scenario=degradation
+requests=35976 rate=149.9/s failed=3.358%
+client latency ms: p50=13.8 p95=221.1 p99=441.2 max=1876.9
+server decision ms: p50=7.1 p95=88.2 p99=150.0
+degraded decisions=52.34%
+http_req_failed rate<0.01:FAIL
+time="2026-09-21T17:23:32Z" level=error msg="thresholds on metrics 'http_req_failed' have been crossed"

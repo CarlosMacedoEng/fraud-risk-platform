@@ -1,0 +1,31 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                  Java Methods that Executes the Most
+
+Method                                                                                                                                                                                  Samples Percent
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------- -------
+java.util.HashMap.getNode(Object)                                                                                                                                                            11   1.52%
+java.util.concurrent.ConcurrentLinkedDeque.linkLast(Object)                                                                                                                                   9   1.24%
+java.lang.Class.cast(Object)                                                                                                                                                                  8   1.10%
+java.util.concurrent.ConcurrentHashMap.get(Object)                                                                                                                                            7   0.97%
+java.lang.invoke.Invokers.checkCustomized(MethodHandle)                                                                                                                                       6   0.83%
+java.util.concurrent.ConcurrentHashMap$Traverser.advance()                                                                                                                                    6   0.83%
+java.lang.Math.multiplyHigh(long, long)                                                                                                                                                       6   0.83%
+ch.qos.logback.classic.spi.TurboFilterList.getTurboFilterChainDecision(Marker, Logger, Level, String, Object[], Throwable)                                                                    5   0.69%
+java.net.Socket$SocketOutputStream.write(byte[], int, int)                                                                                                                                    5   0.69%
+java.lang.String.equals(Object)                                                                                                                                                               5   0.69%
+java.util.concurrent.atomic.DoubleAdder.add(double)                                                                                                                                           5   0.69%
+java.util.HashMap.putVal(int, Object, Object, boolean, boolean)                                                                                                                               4   0.55%
+java.lang.StringLatin1.toLowerCase(String, byte[], Locale)                                                                                                                                    4   0.55%
+java.util.Collections$UnmodifiableMap$UnmodifiableEntrySet$UnmodifiableEntry.getValue()                                                                                                       4   0.55%
+tools.jackson.databind.ser.jdk.StringSerializer.serialize(Object, JsonGenerator, SerializationContext)                                                                                        4   0.55%
+java.util.concurrent.locks.AbstractQueuedSynchronizer.compareAndSetState(int, int)                                                                                                            4   0.55%
+java.util.ArrayList.add(Object, Object[], int)                                                                                                                                                4   0.55%
+java.lang.String.hashCode()                                                                                                                                                                   4   0.55%
+org.apache.coyote.http11.Http11Processor.prepareResponse()                                                                                                                                    3   0.41%
+io.micrometer.core.instrument.internal.DefaultLongTaskTimer$SampleImpl.compareTo(DefaultLongTaskTimer$SampleImpl)                                                                             3   0.41%
+tools.jackson.core.json.WriterBasedJsonGenerator._writeString2(int)                                                                                                                           3   0.41%
+io.micrometer.core.instrument.Meter$Id.equals(Object)                                                                                                                                         3   0.41%
+java.lang.Class.getComponentType()                                                                                                                                                            3   0.41%
+java.util.ArrayList.grow()                                                                                                                                                                    3   0.41%
+org.apache.kafka.common.metrics.stats.SampledStat.current(long)                                                                                                                               3   0.41%

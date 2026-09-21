@@ -17,6 +17,10 @@ import java.util.concurrent.TimeUnit;
 public class DecisionMetrics {
 
     private final MeterRegistry registry;
+    // Meters are cached per tag combination: building/registering them on every request showed up in the
+    // JFR profile (tag sorting, registry lookups) under load.
+    private final java.util.Map<String, Timer> timers = new java.util.concurrent.ConcurrentHashMap<>();
+    private final java.util.Map<String, io.micrometer.core.instrument.Counter> counters = new java.util.concurrent.ConcurrentHashMap<>();
 
     public DecisionMetrics(MeterRegistry registry) {
         this.registry = registry;
@@ -24,14 +28,16 @@ public class DecisionMetrics {
 
     public void recordDecision(RiskDecision d, double totalMs) {
         boolean degraded = !d.degradedModes().isEmpty();
-        Timer.builder("risk.decision.latency")
-                .description("Server-side scoring latency including persistence")
-                .tags("tenant", d.tenantId(), "decision", d.decision().name(), "degraded", Boolean.toString(degraded))
-                .publishPercentileHistogram()
-                .serviceLevelObjectives(Duration.ofMillis(50), Duration.ofMillis(100), Duration.ofMillis(250))
-                .register(registry)
+        String key = d.tenantId() + "|" + d.decision() + "|" + degraded;
+        timers.computeIfAbsent(key, k -> Timer.builder("risk.decision.latency")
+                        .description("Server-side scoring latency including persistence")
+                        .tags("tenant", d.tenantId(), "decision", d.decision().name(), "degraded", Boolean.toString(degraded))
+                        .publishPercentileHistogram()
+                        .serviceLevelObjectives(Duration.ofMillis(50), Duration.ofMillis(100), Duration.ofMillis(250))
+                        .register(registry))
                 .record((long) (totalMs * 1_000_000), TimeUnit.NANOSECONDS);
-        registry.counter("risk.decisions", "tenant", d.tenantId(), "decision", d.decision().name()).increment();
+        counters.computeIfAbsent("d|" + d.tenantId() + "|" + d.decision(),
+                k -> registry.counter("risk.decisions", "tenant", d.tenantId(), "decision", d.decision().name())).increment();
         for (DegradedMode m : d.degradedModes()) {
             registry.counter("risk.decisions.degraded", "tenant", d.tenantId(), "mode", m.name()).increment();
         }

@@ -1,0 +1,31 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                          Allocation by Class
+
+Object Type                                                                                                                                                                         Allocation Pressure
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------
+byte[]                                                                                                                                                                                           14.53%
+org.springframework.data.redis.connection.lettuce.LettuceResult$LettuceResultBuilder                                                                                                             13.82%
+java.lang.Object[]                                                                                                                                                                               12.48%
+com.fraudplatform.commons.integration.IntegrationClient$$Lambda.0x000072ec2ccb7388                                                                                                               11.07%
+char[]                                                                                                                                                                                            4.83%
+jdk.internal.vm.StackChunk                                                                                                                                                                        3.04%
+long[]                                                                                                                                                                                            2.01%
+int[]                                                                                                                                                                                             1.83%
+java.lang.String                                                                                                                                                                                  1.81%
+java.util.ArrayList$Itr                                                                                                                                                                           1.38%
+io.micrometer.core.instrument.ImmutableTag                                                                                                                                                        1.03%
+java.util.concurrent.ConcurrentHashMap                                                                                                                                                            0.99%
+io.micrometer.common.KeyValue[]                                                                                                                                                                   0.96%
+java.util.HashMap$Node                                                                                                                                                                            0.96%
+java.util.LinkedHashMap$Entry                                                                                                                                                                     0.91%
+java.util.concurrent.ConcurrentHashMap$Node                                                                                                                                                       0.90%
+io.lettuce.core.protocol.CommandArgs                                                                                                                                                              0.76%
+java.util.HashMap$Node[]                                                                                                                                                                          0.73%
+org.springframework.data.redis.connection.lettuce.LettuceInvoker$DefaultManyInvocationSpec                                                                                                        0.72%
+io.micrometer.common.KeyValues                                                                                                                                                                    0.65%
+java.nio.HeapByteBuffer                                                                                                                                                                           0.59%
+java.util.ArrayList                                                                                                                                                                               0.56%
+java.lang.StringBuilder                                                                                                                                                                           0.54%
+short[]                                                                                                                                                                                           0.53%
+java.util.concurrent.ConcurrentHashMap$ValueIterator                                                                                                                                              0.53%

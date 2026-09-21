@@ -18,6 +18,7 @@ public enum ErrorCode {
     INVALID_STATE_TRANSITION(422, "Operation not allowed in the current state"),
     UNKNOWN_TENANT(422, "Tenant is not configured"),
     DEPENDENCY_UNAVAILABLE(503, "A required dependency is unavailable"),
+    OVERLOADED(503, "Service is at capacity; retry after the indicated delay"),
     INTERNAL_ERROR(500, "Unexpected error");
 
     private final int httpStatus;

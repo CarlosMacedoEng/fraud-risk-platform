@@ -1,0 +1,8 @@
+scenario=baseline
+requests=30001 rate=125.0/s failed=0.000%
+client latency ms: p50=12.0 p95=18.1 p99=67.9 max=322.8
+server decision ms: p50=6.3 p95=9.4 p99=34.2
+degraded decisions=0.54%
+http_req_duration{scenario:sustained}: p95=18.4 p99=68.5
+http_req_duration{scenario:sustained} p(95)<100:PASS p(99)<250:PASS
+http_req_failed{scenario:sustained} rate<0.001:PASS

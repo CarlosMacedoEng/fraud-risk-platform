@@ -1,0 +1,6 @@
+scenario=calibration
+requests=2698 rate=30.0/s failed=0.000%
+client latency ms: p50=13.8 p95=28.1 p99=277.3 max=587.6
+server decision ms: p50=7.0 p95=12.6 p99=104.1
+degraded decisions=0.89%
+http_req_failed rate<0.01:PASS

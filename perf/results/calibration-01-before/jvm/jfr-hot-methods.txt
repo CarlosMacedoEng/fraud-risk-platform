@@ -1,0 +1,31 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                  Java Methods that Executes the Most
+
+Method                                                                                                                                                                                  Samples Percent
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------- -------
+java.util.HashMap.putVal(int, Object, Object, boolean, boolean)                                                                                                                               6   2.93%
+org.springframework.boot.loader.net.protocol.jar.JarFileUrlKey.equals(Object)                                                                                                                 5   2.44%
+java.util.concurrent.ConcurrentHashMap.get(Object)                                                                                                                                            4   1.95%
+java.util.concurrent.locks.AbstractQueuedSynchronizer.signalNext(AbstractQueuedSynchronizer$Node)                                                                                             4   1.95%
+ch.qos.logback.classic.Logger.isDebugEnabled(Marker)                                                                                                                                          3   1.46%
+org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(HttpInputMessage, MethodParameter, Type)                       3   1.46%
+io.netty.buffer.AdaptivePoolingAllocator$BuddyChunkController.computeBufferCapacity(int, int, boolean)                                                                                        3   1.46%
+tools.jackson.core.json.WriterBasedJsonGenerator._writeString2(int)                                                                                                                           3   1.46%
+sun.nio.cs.ISO_8859_1$Encoder.encodeBufferLoop(CharBuffer, ByteBuffer)                                                                                                                        2   0.98%
+java.lang.reflect.AccessibleObject.verifyAccess(Class, Class, Class, int)                                                                                                                     2   0.98%
+tools.jackson.core.util.TextBuffer.contentsAsString()                                                                                                                                         2   0.98%
+tools.jackson.core.base.ParserBase.getDoubleValue()                                                                                                                                           2   0.98%
+tools.jackson.databind.ser.BeanPropertyWriter.serializeAsProperty(Object, JsonGenerator, SerializationContext)                                                                                2   0.98%
+java.lang.ThreadLocal$ThreadLocalMap.getEntry(ThreadLocal)                                                                                                                                    2   0.98%
+java.util.Collections$UnmodifiableMap.get(Object)                                                                                                                                             2   0.98%
+io.netty.util.concurrent.DefaultPromise.addListener(GenericFutureListener)                                                                                                                    2   0.98%
+java.lang.ThreadLocal$ThreadLocalMap.set(ThreadLocal, Object)                                                                                                                                 2   0.98%
+java.util.concurrent.ConcurrentHashMap$Traverser.advance()                                                                                                                                    2   0.98%
+tools.jackson.databind.type.TypeBindings.invalidCacheKey()                                                                                                                                    2   0.98%
+java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.siftDown(int, RunnableScheduledFuture)                                                                                      2   0.98%
+java.lang.String.equals(Object)                                                                                                                                                               2   0.98%
+io.lettuce.core.AbstractRedisAsyncCommands.dispatch(RedisCommand)                                                                                                                             2   0.98%
+java.math.BigInteger.divideAndRemainderKnuth(BigInteger)                                                                                                                                      2   0.98%
+java.lang.StringLatin1.toLowerCase(String, byte[], Locale)                                                                                                                                    2   0.98%
+java.util.concurrent.LinkedTransferQueue$DualNode.await(Object, long, Object, boolean)                                                                                                        2   0.98%

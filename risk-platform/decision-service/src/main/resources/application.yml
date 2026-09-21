@@ -111,6 +111,9 @@ platform:
       currency: EUR
   faults:
     enabled: false
+  admission:
+    max-concurrent: ${ADMISSION_MAX_CONCURRENT:32}   # in-flight scoring requests (backpressure, journal J-20)
+    queue-timeout-ms: 20
   messaging:
     enabled: ${MESSAGING_ENABLED:false}   # outbox rows are always written; relay/consumers need Kafka
     relay-interval-ms: 200

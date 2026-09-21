@@ -1,0 +1,179 @@
+# Local development / demo / performance-test environment. NOT a production topology (single broker,
+# single database, no TLS, dev credentials). Production mapping: docs/AWS_AND_KUBERNETES.md.
+#
+#   (cd risk-platform && mvn -B package -DskipTests)
+#   docker compose -f deploy/docker-compose.yml up -d --build
+name: fraud-platform
+
+x-java-env: &java-env
+  DB_URL: jdbc:postgresql://postgres:5432/riskplatform
+  DB_USER: risk
+  DB_PASSWORD: risk
+  KAFKA_BOOTSTRAP: kafka:9092
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: riskplatform
+      POSTGRES_USER: risk
+      POSTGRES_PASSWORD: risk
+    command: ["postgres", "-c", "shared_preload_libraries=pg_stat_statements", "-c", "pg_stat_statements.track=all",
+              "-c", "max_connections=200", "-c", "log_min_duration_statement=200"]
+    ports: ["5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U risk -d riskplatform"]
+      interval: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--maxmemory", "256mb", "--maxmemory-policy", "volatile-lru", "--appendonly", "no"]
+    ports: ["6379:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 20
+
+  kafka:
+    image: apache/kafka-native:4.1.0
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093,HOST://:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,HOST://localhost:29092
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,HOST:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+    ports: ["29092:29092"]
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1 || nc -z localhost 9092"]
+      interval: 5s
+      retries: 30
+
+  simulators:
+    build:
+      context: ..
+      dockerfile: deploy/docker/java-service.Dockerfile
+      args:
+        JAR_FILE: risk-platform/downstream-simulators/target/downstream-simulators-1.0.0-SNAPSHOT.jar
+    environment:
+      THREAT_FEED: /data/threat_feed_ips.txt
+      JAVA_TOOL_OPTIONS: "-XX:MaxRAMPercentage=70"
+    volumes:
+      - ../data/samples/threat_feed_ips.txt:/data/threat_feed_ips.txt:ro
+    ports: ["8090:8090"]
+    deploy:
+      resources:
+        limits: { cpus: "1.0", memory: 512m }
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8090/actuator/health"]
+      interval: 5s
+      retries: 30
+
+  model-service:
+    build:
+      context: ..
+      dockerfile: deploy/docker/model-service.Dockerfile
+    environment:
+      MODELS_DIR: /models
+      ENABLE_FAULT_INJECTION: "true"
+    volumes:
+      - ../models:/models:ro
+    ports: ["8000:8000"]
+    deploy:
+      resources:
+        limits: { cpus: "1.0", memory: 1g }
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/health"]
+      interval: 5s
+      retries: 30
+
+  decision-service:
+    build:
+      context: ..
+      dockerfile: deploy/docker/java-service.Dockerfile
+      args:
+        JAR_FILE: risk-platform/decision-service/target/decision-service-1.0.0-SNAPSHOT.jar
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+      kafka: { condition: service_healthy }
+      simulators: { condition: service_healthy }
+    environment:
+      <<: *java-env
+      SPRING_PROFILES_ACTIVE: ${DECISION_PROFILES:-default}
+      PLATFORM_ENV: dev
+      REDIS_HOST: redis
+      MODELS_DIR: /app/models
+      CONFIG_DIR: /app/config
+      MESSAGING_ENABLED: "true"
+      SIMULATORS_URL: http://simulators:8090
+      MODEL_SERVICE_URL: http://model-service:8000
+      INTEGRATION_PROFILE_ENABLED: "true"
+      INTEGRATION_DEVICE_RISK_ENABLED: "true"
+      INTEGRATION_CASES_ENABLED: "true"
+      INTEGRATION_MODEL_SERVICE_ENABLED: "true"
+      DB_POOL_MAX: ${DB_POOL_MAX:-20}
+    volumes:
+      - ../models:/app/models:ro
+      - ../config:/app/config:ro
+      - ../data/runtime/dumps/decision-service:/dumps
+    ports: ["8080:8080"]
+    deploy:
+      resources:
+        limits: { cpus: "${DECISION_CPUS:-2.0}", memory: 1536m }
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/actuator/health/readiness"]
+      interval: 5s
+      retries: 40
+
+  file-adapter:
+    build:
+      context: ..
+      dockerfile: deploy/docker/java-service.Dockerfile
+      args:
+        JAR_FILE: risk-platform/file-adapter/target/file-adapter-1.0.0-SNAPSHOT.jar
+    depends_on:
+      decision-service: { condition: service_healthy }
+    environment:
+      <<: *java-env
+      FILES_DIR: /files
+    volumes:
+      - ../data/runtime/files:/files
+    ports: ["8081:8081"]
+    deploy:
+      resources:
+        limits: { cpus: "1.0", memory: 768m }
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8081/actuator/health"]
+      interval: 5s
+      retries: 30
+
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=3d", "--web.enable-lifecycle"]
+    volumes:
+      - ./prometheus:/etc/prometheus:ro
+    ports: ["9090:9090"]
+
+  grafana:
+    image: grafana/grafana:12.1.1
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports: ["3000:3000"]
+
+volumes:
+  pgdata:

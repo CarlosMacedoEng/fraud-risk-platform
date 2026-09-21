@@ -1,0 +1,3 @@
+decisions_persisted_during_run=34768
+k6_successful_decisions=
+outbox_unpublished_after_run=0

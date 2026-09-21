@@ -1,0 +1,7 @@
+scenario=stress
+requests=109437 rate=364.5/s failed=43.475%
+client latency ms: p50=97.5 p95=273.2 p99=364.6 max=1274.3
+server decision ms: p50=21.9 p95=117.5 p99=193.3
+degraded decisions=84.82%
+http_req_failed rate<0.01:FAIL
+time="2026-09-21T16:56:47Z" level=error msg="thresholds on metrics 'http_req_failed' have been crossed"

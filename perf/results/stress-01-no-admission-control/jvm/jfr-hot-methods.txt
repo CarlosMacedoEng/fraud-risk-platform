@@ -1,0 +1,31 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                  Java Methods that Executes the Most
+
+Method                                                                                                                                                                                  Samples Percent
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------- -------
+java.lang.Class.cast(Object)                                                                                                                                                                 14   1.88%
+tools.jackson.core.json.UTF8JsonGenerator._writeStringSegment2(String, int, int)                                                                                                             12   1.61%
+java.util.concurrent.ConcurrentHashMap.get(Object)                                                                                                                                           12   1.61%
+java.util.HashMap.getNode(Object)                                                                                                                                                            11   1.48%
+io.micrometer.core.instrument.internal.DefaultLongTaskTimer$SampleImpl.compareTo(DefaultLongTaskTimer$SampleImpl)                                                                            10   1.34%
+java.util.HashMap.putVal(int, Object, Object, boolean, boolean)                                                                                                                              10   1.34%
+java.util.concurrent.ConcurrentHashMap$Traverser.advance()                                                                                                                                    7   0.94%
+java.lang.String.equals(Object)                                                                                                                                                               7   0.94%
+java.util.concurrent.ConcurrentHashMap.putVal(Object, Object, boolean)                                                                                                                        7   0.94%
+java.lang.AbstractStringBuilder.ensureCapacityInternal(int)                                                                                                                                   5   0.67%
+java.util.concurrent.ConcurrentSkipListMap.cpr(Comparator, Object, Object)                                                                                                                    5   0.67%
+java.util.concurrent.LinkedTransferQueue$DualNode.await(Object, long, Object, boolean)                                                                                                        5   0.67%
+java.util.HashMap.hash(Object)                                                                                                                                                                5   0.67%
+java.lang.invoke.Invokers.checkCustomized(MethodHandle)                                                                                                                                       4   0.54%
+java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.siftDown(int, RunnableScheduledFuture)                                                                                      4   0.54%
+java.util.concurrent.ConcurrentLinkedDeque.pollFirst()                                                                                                                                        4   0.54%
+java.lang.Class.getComponentType()                                                                                                                                                            4   0.54%
+java.util.concurrent.locks.AbstractQueuedSynchronizer.signalNext(AbstractQueuedSynchronizer$Node)                                                                                             4   0.54%
+java.util.concurrent.ConcurrentSkipListMap.doPut(Object, Object, boolean)                                                                                                                     4   0.54%
+java.util.concurrent.locks.ReentrantLock$Sync.lock()                                                                                                                                          4   0.54%
+tools.jackson.core.io.NumberOutput._full3(int, byte[], int)                                                                                                                                   4   0.54%
+java.lang.StringConcatHelper.newArray(long)                                                                                                                                                   4   0.54%
+org.hibernate.validator.internal.engine.valuecontext.ValueContext.updateNode(ConstraintLocation)                                                                                              4   0.54%
+java.lang.AbstractStringBuilder.append(String)                                                                                                                                                4   0.54%
+io.micrometer.observation.SimpleObservation.stop()                                                                                                                                            3   0.40%

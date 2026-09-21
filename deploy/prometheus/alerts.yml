@@ -1,0 +1,58 @@
+# Alert rules (see docs/OBSERVABILITY_AND_OPERATIONS.md for runbook links and severities).
+groups:
+  - name: decision-service
+    rules:
+      - alert: ScoringLatencyP95High
+        expr: histogram_quantile(0.95, sum by (le) (rate(risk_decision_latency_seconds_bucket[5m]))) > 0.1
+        for: 5m
+        labels: { severity: SEV2 }
+        annotations: { summary: "p95 scoring latency above 100 ms for 5 minutes", runbook: "TROUBLESHOOTING_PLAYBOOK.md#ts-15" }
+      - alert: ScoringErrorRate
+        expr: sum(rate(http_server_requests_seconds_count{uri="/v1/decisions",status=~"5.."}[5m])) / sum(rate(http_server_requests_seconds_count{uri="/v1/decisions"}[5m])) > 0.005
+        for: 2m
+        labels: { severity: SEV1 }
+        annotations: { summary: "More than 0.5% of scoring requests fail with 5xx" }
+      - alert: DecisionsDegraded
+        expr: sum by (mode) (rate(risk_decisions_degraded_total[5m])) / scalar(sum(rate(risk_decisions_total[5m]))) > 0.05
+        for: 5m
+        labels: { severity: SEV2 }
+        annotations: { summary: "More than 5% of decisions degraded ({{ $labels.mode }})" }
+      - alert: ModelUnavailable
+        expr: sum(rate(risk_decisions_degraded_total{mode="MODEL_UNAVAILABLE"}[5m])) > 0
+        for: 2m
+        labels: { severity: SEV1 }
+        annotations: { summary: "Decisions are being made without the ML model (rules-only fallback)", runbook: "TROUBLESHOOTING_PLAYBOOK.md#ts-11" }
+      - alert: FeatureStoreFallback
+        expr: increase(risk_featurestore_fallback_reads_total[5m]) > 0
+        labels: { severity: SEV2 }
+        annotations: { summary: "Redis feature store degraded, PostgreSQL fallback in use", runbook: "TROUBLESHOOTING_PLAYBOOK.md#ts-12" }
+      - alert: OutboxLag
+        expr: max(risk_outbox_oldest_age_seconds) > 30
+        for: 2m
+        labels: { severity: SEV2 }
+        annotations: { summary: "Events waiting more than 30 s in the outbox (broker/producer problem)" }
+      - alert: CircuitOpen
+        expr: max by (integration) (integration_circuit_state) == 2
+        for: 1m
+        labels: { severity: SEV3 }
+        annotations: { summary: "Circuit breaker open for {{ $labels.integration }}" }
+      - alert: DbPoolPending
+        expr: max(hikaricp_connections_pending) > 5
+        for: 2m
+        labels: { severity: SEV2 }
+        annotations: { summary: "Threads waiting for DB connections", runbook: "TROUBLESHOOTING_PLAYBOOK.md#ts-02" }
+      - alert: ReviewVolumeSpike
+        expr: sum(rate(risk_decisions_total{decision="REVIEW"}[1h])) / sum(rate(risk_decisions_total[1h])) > 0.01
+        for: 30m
+        labels: { severity: SEV3 }
+        annotations: { summary: "REVIEW rate above 1% for 30 min — possible false-positive spike", runbook: "TROUBLESHOOTING_PLAYBOOK.md#ts-14" }
+  - name: file-adapter
+    rules:
+      - alert: FileRejected
+        expr: increase(ingestion_files_total{status="REJECTED"}[15m]) > 0
+        labels: { severity: SEV3 }
+        annotations: { summary: "An inbound {{ $labels.type }} file was rejected", runbook: "TROUBLESHOOTING_PLAYBOOK.md#ts-09" }
+      - alert: ScanErrors
+        expr: increase(ingestion_scan_errors_total[15m]) > 0
+        labels: { severity: SEV3 }
+        annotations: { summary: "Unexpected errors while scanning inbound files" }

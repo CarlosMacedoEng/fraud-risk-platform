@@ -24,7 +24,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
-from fraudlab.explain import FEATURE_REASON
+from fraudlab.reasons import FEATURE_REASON
 
 MODELS_DIR = Path(os.environ.get("MODELS_DIR", Path(__file__).resolve().parents[2] / "models"))
 FAULTS_ENABLED = os.environ.get("ENABLE_FAULT_INJECTION", "false").lower() == "true"

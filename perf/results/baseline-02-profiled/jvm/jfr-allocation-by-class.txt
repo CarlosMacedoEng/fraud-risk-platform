@@ -1,0 +1,31 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                          Allocation by Class
+
+Object Type                                                                                                                                                                         Allocation Pressure
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------
+char[]                                                                                                                                                                                           12.78%
+io.micrometer.common.KeyValues$ArrayIterator                                                                                                                                                     12.06%
+org.springframework.security.web.ObservationFilterChainDecorator$FilterChainObservationContext                                                                                                    9.57%
+byte[]                                                                                                                                                                                            8.99%
+java.lang.String                                                                                                                                                                                  7.07%
+java.util.concurrent.ConcurrentHashMap$ValueIterator                                                                                                                                              6.06%
+jdk.internal.vm.StackChunk                                                                                                                                                                        5.61%
+tools.jackson.core.sym.CharsToNameCanonicalizer                                                                                                                                                   5.04%
+java.lang.Object[]                                                                                                                                                                                2.77%
+int[]                                                                                                                                                                                             2.07%
+long[]                                                                                                                                                                                            1.50%
+java.util.ArrayList$Itr                                                                                                                                                                           1.02%
+java.util.HashMap$Node                                                                                                                                                                            0.83%
+io.micrometer.core.instrument.ImmutableTag                                                                                                                                                        0.81%
+java.util.HashMap$Node[]                                                                                                                                                                          0.79%
+java.util.ArrayList                                                                                                                                                                               0.73%
+java.util.concurrent.ConcurrentHashMap$Node                                                                                                                                                       0.70%
+java.util.LinkedHashMap$Entry                                                                                                                                                                     0.68%
+java.util.concurrent.ConcurrentHashMap$Node[]                                                                                                                                                     0.62%
+java.lang.reflect.Method                                                                                                                                                                          0.60%
+java.lang.StringBuilder                                                                                                                                                                           0.55%
+io.micrometer.common.KeyValue[]                                                                                                                                                                   0.52%
+java.util.concurrent.ConcurrentHashMap                                                                                                                                                            0.47%
+io.micrometer.common.ImmutableKeyValue                                                                                                                                                            0.46%
+short[]                                                                                                                                                                                           0.42%

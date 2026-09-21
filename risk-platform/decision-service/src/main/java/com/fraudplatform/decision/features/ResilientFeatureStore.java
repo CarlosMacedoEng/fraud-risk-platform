@@ -28,14 +28,24 @@ public class ResilientFeatureStore {
     private final FeatureStore primary;
     private final FeatureStore fallback;
     private final CircuitBreaker breaker;
+    private final java.util.concurrent.Semaphore fallbackPermits;
     private final Counter fallbackReads;
+    private final Counter fallbackRejected;
     private final Counter skippedWrites;
 
-    public ResilientFeatureStore(FeatureStore primary, FeatureStore fallback, CircuitBreaker breaker, MeterRegistry meters) {
+    /**
+     * @param fallbackConcurrency maximum concurrent PostgreSQL fallback reads. The fallback costs ~5 queries per
+     *     request; unbounded, it turned a Redis slowdown into database-pool exhaustion under load (journal J-18).
+     *     When all permits are taken the decision proceeds with empty state and is flagged degraded.
+     */
+    public ResilientFeatureStore(FeatureStore primary, FeatureStore fallback, CircuitBreaker breaker, MeterRegistry meters,
+                                 int fallbackConcurrency) {
         this.primary = primary;
         this.fallback = fallback;
         this.breaker = breaker;
+        this.fallbackPermits = new java.util.concurrent.Semaphore(fallbackConcurrency);
         this.fallbackReads = meters.counter("risk.featurestore.fallback.reads");
+        this.fallbackRejected = meters.counter("risk.featurestore.fallback.rejected");
         this.skippedWrites = meters.counter("risk.featurestore.skipped.writes");
     }
 
@@ -50,13 +60,19 @@ public class ResilientFeatureStore {
     }
 
     private Loaded fallbackLoad(Transaction tx, String cause) {
+        if (!fallbackPermits.tryAcquire()) {
+            fallbackRejected.increment();
+            return new Loaded(EntityState.empty(), true);   // bounded fallback: never queue on the database
+        }
         fallbackReads.increment();
-        log.warn("feature store degraded, using PostgreSQL fallback ({})", cause);
+        log.debug("feature store degraded, using PostgreSQL fallback ({})", cause);
         try {
             return new Loaded(fallback.load(tx), true);
         } catch (RuntimeException e) {
             log.error("feature store fallback failed; scoring with empty state", e);
             return new Loaded(EntityState.empty(), true);
+        } finally {
+            fallbackPermits.release();
         }
     }
 

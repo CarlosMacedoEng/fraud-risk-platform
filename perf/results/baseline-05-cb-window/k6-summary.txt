@@ -1,0 +1,9 @@
+scenario=baseline
+requests=29957 rate=124.8/s failed=5.458%
+client latency ms: p50=42.4 p95=344.3 p99=470.3 max=1946.2
+server decision ms: p50=11.0 p95=111.7 p99=197.7
+degraded decisions=36.15%
+http_req_duration{scenario:sustained}: p95=350.8 p99=480.7
+http_req_failed{scenario:sustained} rate<0.001:FAIL
+http_req_duration{scenario:sustained} p(95)<100:FAIL p(99)<250:FAIL
+time="2026-09-21T17:09:59Z" level=error msg="thresholds on metrics 'http_req_duration{scenario:sustained}, http_req_failed{scenario:sustained}' have been crossed"

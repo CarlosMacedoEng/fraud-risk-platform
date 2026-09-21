@@ -1,0 +1,31 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                  Java Methods that Executes the Most
+
+Method                                                                                                                                                                                  Samples Percent
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------- -------
+java.util.concurrent.ConcurrentHashMap.get(Object)                                                                                                                                            7   3.70%
+java.lang.invoke.Invokers$Holder.invokeExact_MT(Object, Object, Object)                                                                                                                       6   3.17%
+io.micrometer.core.instrument.distribution.TimeWindowMax.record(long)                                                                                                                         4   2.12%
+java.lang.Class.cast(Object)                                                                                                                                                                  4   2.12%
+java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(Object, long, Object)                                                                                                                 3   1.59%
+tools.jackson.core.json.WriterBasedJsonGenerator._writeString2(int)                                                                                                                           3   1.59%
+com.zaxxer.hikari.pool.ProxyStatement.close()                                                                                                                                                 2   1.06%
+io.netty.buffer.AdaptivePoolingAllocator.allocate(int, int, Thread, AdaptivePoolingAllocator$AdaptiveByteBuf)                                                                                 2   1.06%
+java.time.format.Parsed.resolve(ResolverStyle, Set)                                                                                                                                           2   1.06%
+java.util.concurrent.CompletableFuture.uniAcceptStage(Executor, Consumer)                                                                                                                     2   1.06%
+org.apache.catalina.connector.Response.getResponse()                                                                                                                                          2   1.06%
+org.apache.coyote.http11.Http11Processor.service(SocketWrapperBase)                                                                                                                           2   1.06%
+java.util.HashMap.removeNode(int, Object, Object, boolean, boolean)                                                                                                                           2   1.06%
+java.util.stream.AbstractPipeline.evaluate(Spliterator, boolean, IntFunction)                                                                                                                 2   1.06%
+java.util.HashMap.putVal(int, Object, Object, boolean, boolean)                                                                                                                               2   1.06%
+java.lang.String.hashCode()                                                                                                                                                                   2   1.06%
+java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.siftDown(int, RunnableScheduledFuture)                                                                                      2   1.06%
+java.util.concurrent.locks.AbstractQueuedSynchronizer.signalNext(AbstractQueuedSynchronizer$Node)                                                                                             2   1.06%
+io.micrometer.core.instrument.distribution.TimeWindowFixedBoundaryHistogram.recordLong(long)                                                                                                  2   1.06%
+java.util.concurrent.CompletableFuture.complete(Object)                                                                                                                                       2   1.06%
+org.apache.kafka.common.metrics.Sensor.checkQuotas(long)                                                                                                                                      2   1.06%
+tools.jackson.core.sym.CharsToNameCanonicalizer$Bucket.has(char[], int, int)                                                                                                                  1   0.53%
+org.springframework.jdbc.core.StatementCreatorUtils.cleanupParameters(Collection)                                                                                                             1   0.53%
+org.springframework.web.servlet.handler.AbstractHandlerMapping.hasCorsConfigurationSource(Object)                                                                                             1   0.53%
+org.apache.catalina.core.StandardContext.bind(ClassLoader)                                                                                                                                    1   0.53%

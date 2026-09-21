@@ -1,0 +1,5 @@
+virtual threads by top frame:
+  28 java.base/java.lang.VirtualThread.park
+by innermost app frame:
+  14 com.fraudplatform.decision.features.RedisGraphFeatureStore.lambda$lookup$0
+  14 com.fraudplatform.decision.features.RedisFeatureStore.load

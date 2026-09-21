@@ -86,14 +86,18 @@ public class DecisionServiceConfig {
     @Bean
     CircuitBreakerRegistry circuitBreakerRegistry(MeterRegistry meters) {
         CircuitBreakerConfig redis = CircuitBreakerConfig.custom()
-                .slidingWindowType(CircuitBreakerConfig.SlidingWindowType.COUNT_BASED)
-                .slidingWindowSize(20)
-                .minimumNumberOfCalls(10)
+                // Window sized to traffic: a 20-call window is ~0.13 s at 150 rps, so one GC pause opened the
+                // circuit for 10 s and degraded ~1,500 decisions (journal J-21). 10 s / >= 100 calls instead.
+                .slidingWindowType(CircuitBreakerConfig.SlidingWindowType.TIME_BASED)
+                .slidingWindowSize(10)
+                .minimumNumberOfCalls(100)
                 .failureRateThreshold(50)
-                .slowCallDurationThreshold(Duration.ofMillis(50))
-                .slowCallRateThreshold(80)
-                .waitDurationInOpenState(Duration.ofSeconds(10))
-                .permittedNumberOfCallsInHalfOpenState(5)
+                // Slow-call detection is for genuinely slow Redis, not for JVM CPU jitter under load: at 50 ms it
+                // opened the circuit whenever the service was CPU-saturated (journal J-18).
+                .slowCallDurationThreshold(Duration.ofMillis(250))
+                .slowCallRateThreshold(90)
+                .waitDurationInOpenState(Duration.ofSeconds(5))
+                .permittedNumberOfCallsInHalfOpenState(10)
                 .build();
         CircuitBreakerRegistry registry = CircuitBreakerRegistry.of(redis);
         TaggedCircuitBreakerMetrics.ofCircuitBreakerRegistry(registry).bindTo(meters);
@@ -104,7 +108,8 @@ public class DecisionServiceConfig {
 
     @Bean
     ResilientFeatureStore featureStore(StringRedisTemplate redis, DataSource dataSource, CircuitBreakerRegistry breakers,
-                                       MeterRegistry meters, FaultInjector faults) {
+                                       MeterRegistry meters, FaultInjector faults,
+                                       @org.springframework.beans.factory.annotation.Value("${platform.budgets.fallback-concurrency:4}") int fallbackConcurrency) {
         JdbcTemplate fallbackJdbc = new JdbcTemplate(dataSource);
         fallbackJdbc.setQueryTimeout(1);
         FeatureStore redisStore = new RedisFeatureStore(redis);
@@ -122,7 +127,7 @@ public class DecisionServiceConfig {
             }
         };
         return new ResilientFeatureStore(primary, new JdbcFallbackFeatureStore(JdbcClient.create(fallbackJdbc), 1),
-                breakers.circuitBreaker("redis-features"), meters);
+                breakers.circuitBreaker("redis-features"), meters, fallbackConcurrency);
     }
 
     @Bean

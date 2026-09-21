@@ -1,0 +1,31 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                  Java Methods that Executes the Most
+
+Method                                                                                                                                                                                  Samples Percent
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------- -------
+java.util.concurrent.ConcurrentHashMap.get(Object)                                                                                                                                           18   2.43%
+java.util.HashMap.putVal(int, Object, Object, boolean, boolean)                                                                                                                              10   1.35%
+org.springframework.boot.loader.net.protocol.jar.JarFileUrlKey.equals(Object)                                                                                                                10   1.35%
+java.lang.invoke.Invokers$Holder.invokeExact_MT(Object, Object, Object)                                                                                                                       8   1.08%
+org.postgresql.core.v3.QueryExecutorImpl.processResults(ResultHandler, int, boolean)                                                                                                          7   0.94%
+java.lang.AbstractStringBuilder.ensureCapacityInternal(int)                                                                                                                                   7   0.94%
+java.util.HashMap.get(Object)                                                                                                                                                                 7   0.94%
+java.lang.String.equals(Object)                                                                                                                                                               7   0.94%
+io.micrometer.core.instrument.Tags.tagsEqual(Tags)                                                                                                                                            6   0.81%
+java.util.concurrent.ConcurrentHashMap.putVal(Object, Object, boolean)                                                                                                                        6   0.81%
+tools.jackson.core.json.WriterBasedJsonGenerator._writeString2(int)                                                                                                                           5   0.67%
+org.apache.tomcat.util.net.NioEndpoint$Poller.run()                                                                                                                                           5   0.67%
+java.util.concurrent.locks.AbstractQueuedSynchronizer.signalNext(AbstractQueuedSynchronizer$Node)                                                                                             5   0.67%
+ch.qos.logback.classic.Logger.isTraceEnabled(Marker)                                                                                                                                          5   0.67%
+org.springframework.jdbc.core.StatementCreatorUtils.cleanupParameters(Collection)                                                                                                             4   0.54%
+java.util.ComparableTimSort.binarySort(Object[], int, int, int)                                                                                                                               4   0.54%
+java.lang.invoke.DirectMethodHandle.allocateInstance(Object)                                                                                                                                  4   0.54%
+java.util.concurrent.atomic.LongAdder.add(long)                                                                                                                                               4   0.54%
+org.springframework.util.MimeType.checkToken(String)                                                                                                                                          4   0.54%
+java.lang.String.hashCode()                                                                                                                                                                   4   0.54%
+java.lang.Math.multiplyHigh(long, long)                                                                                                                                                       4   0.54%
+io.netty.buffer.AbstractByteBuf.forEachByteAsc0(int, int, ByteProcessor)                                                                                                                      4   0.54%
+java.util.concurrent.locks.LockSupport.unpark(Thread)                                                                                                                                         4   0.54%
+io.micrometer.core.instrument.MeterRegistry.getOrCreateMeter(DistributionStatisticConfig, PauseDetector, MeterRegistry$NewMeterSupplier, Meter$Id, Function)                                  3   0.40%
+tools.jackson.core.util.TextBuffer.contentsAsString()                                                                                                                                         3   0.40%

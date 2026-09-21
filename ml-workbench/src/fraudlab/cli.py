@@ -78,6 +78,12 @@ def cmd_files(args: argparse.Namespace) -> None:
     print(json.dumps({c: export_legacy_files(c) for c in sorted(PROFILES)}))
 
 
+def cmd_perfdata(args: argparse.Namespace) -> None:
+    from .export import export_perf_pool
+
+    print(json.dumps({c: export_perf_pool(c) for c in sorted(PROFILES)}))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="fraudlab")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -112,6 +118,9 @@ def main() -> None:
 
     fl = sub.add_parser("files", help="generate legacy inbound file samples (and broken variants) for both tenants")
     fl.set_defaults(func=cmd_files)
+
+    pf = sub.add_parser("perfdata", help="export transaction templates for the k6 load tests")
+    pf.set_defaults(func=cmd_perfdata)
 
     args = parser.parse_args()
     args.func(args)

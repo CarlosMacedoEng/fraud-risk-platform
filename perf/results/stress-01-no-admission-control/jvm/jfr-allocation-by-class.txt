@@ -1,0 +1,31 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                          Allocation by Class
+
+Object Type                                                                                                                                                                         Allocation Pressure
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------
+jdk.internal.vm.StackChunk                                                                                                                                                                       28.69%
+java.lang.Object[]                                                                                                                                                                               27.66%
+byte[]                                                                                                                                                                                            7.27%
+java.lang.String                                                                                                                                                                                  5.49%
+io.netty.channel.DefaultChannelPromise                                                                                                                                                            4.94%
+java.util.concurrent.ConcurrentHashMap$MapEntry                                                                                                                                                   4.86%
+long[]                                                                                                                                                                                            1.41%
+java.util.ArrayDeque$DeqIterator                                                                                                                                                                  1.24%
+java.lang.StackTraceElement                                                                                                                                                                       1.07%
+int[]                                                                                                                                                                                             1.02%
+ch.qos.logback.classic.spi.StackTraceElementProxy                                                                                                                                                 0.85%
+jdk.internal.math.DoubleToDecimal                                                                                                                                                                 0.65%
+short[]                                                                                                                                                                                           0.54%
+java.util.concurrent.ConcurrentHashMap$ValueIterator                                                                                                                                              0.53%
+char[]                                                                                                                                                                                            0.52%
+io.micrometer.core.instrument.ImmutableTag                                                                                                                                                        0.43%
+java.util.HashMap                                                                                                                                                                                 0.38%
+java.util.HashMap$Node                                                                                                                                                                            0.37%
+org.hibernate.validator.internal.engine.constraintvalidation.ConstraintValidatorContextImpl                                                                                                       0.35%
+io.micrometer.core.instrument.Meter$Id                                                                                                                                                            0.34%
+java.lang.StackTraceElement[]                                                                                                                                                                     0.34%
+io.micrometer.common.KeyValues                                                                                                                                                                    0.33%
+io.micrometer.common.KeyValue[]                                                                                                                                                                   0.31%
+java.util.HashMap$Node[]                                                                                                                                                                          0.28%
+java.nio.HeapByteBuffer                                                                                                                                                                           0.26%

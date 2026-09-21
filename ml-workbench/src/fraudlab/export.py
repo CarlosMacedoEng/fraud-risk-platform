@@ -167,3 +167,26 @@ def export_legacy_files(customer: str, history_rows: int = 600) -> dict:
     _write_with_marker(lab / f"TXN_HISTORY_{customer}_{day}_903.csv", truncated, len(small))  # marker says 50
     (lab / f"transactions_{customer}_{day}.csv").write_text(good, encoding="utf-8")            # wrong name
     return counts
+
+
+def export_perf_pool(customer: str, n: int = 5000, seed: int = 21) -> int:
+    """Transaction templates for k6 (IDs and timestamps are generated per request by the load script)."""
+    import json as _json
+    tx, _, _ = load_raw(customer)
+    start = tx["event_time"].min() + (tx["event_time"].max() - tx["event_time"].min()) * 0.8
+    pool = tx[tx["event_time"] >= start].sample(n, random_state=seed)
+    cols = {"customer_id": "customerId", "account_id": "accountId", "transaction_type": "transactionType", "channel": "channel",
+            "amount": "amount", "currency": "currency", "card_token": "cardToken", "merchant_id": "merchantId", "mcc": "mcc",
+            "merchant_country": "merchantCountry", "beneficiary_id": "beneficiaryId", "beneficiary_country": "beneficiaryCountry",
+            "device_id": "deviceId", "ip_address": "ipAddress", "ip_country": "ipCountry"}
+    records = []
+    for r in pool[list(cols)].itertuples(index=False):
+        rec = {}
+        for (src, dst), v in zip(cols.items(), r):
+            if v is not None and not (isinstance(v, float) and pd.isna(v)):
+                rec[dst] = round(float(v), 2) if src == "amount" else v
+        records.append(rec)
+    out = paths.REPO_ROOT / "perf" / "data" / f"pool-{customer}.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(_json.dumps(records), encoding="utf-8")
+    return len(records)

@@ -1,0 +1,31 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                  Java Methods that Executes the Most
+
+Method                                                                                                                                                                                  Samples Percent
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------- -------
+java.util.concurrent.ConcurrentHashMap.get(Object)                                                                                                                                            8   1.00%
+org.springframework.boot.loader.net.protocol.jar.JarFileUrlKey.equals(Object)                                                                                                                 8   1.00%
+java.lang.Class.cast(Object)                                                                                                                                                                  8   1.00%
+io.micrometer.core.instrument.internal.DefaultLongTaskTimer$SampleImpl.compareTo(DefaultLongTaskTimer$SampleImpl)                                                                             7   0.87%
+java.util.concurrent.locks.ReentrantLock$Sync.lock()                                                                                                                                          7   0.87%
+java.lang.ref.Reference.refersToImpl(Object)                                                                                                                                                  6   0.75%
+java.lang.Class.getComponentType()                                                                                                                                                            5   0.62%
+java.util.stream.Sink$ChainedReference.begin(long)                                                                                                                                            5   0.62%
+java.lang.StringBuilder.<init>()                                                                                                                                                              5   0.62%
+java.util.concurrent.ConcurrentHashMap.putVal(Object, Object, boolean)                                                                                                                        5   0.62%
+tools.jackson.databind.ObjectMapper.writeValueAsString(Object)                                                                                                                                4   0.50%
+org.springframework.jdbc.core.StatementCreatorUtils.cleanupParameters(Collection)                                                                                                             4   0.50%
+java.util.concurrent.atomic.LongAdder.add(long)                                                                                                                                               4   0.50%
+java.lang.Math.multiplyHigh(long, long)                                                                                                                                                       4   0.50%
+java.lang.invoke.Invokers.checkCustomized(MethodHandle)                                                                                                                                       3   0.37%
+java.util.concurrent.ConcurrentHashMap$Traverser.advance()                                                                                                                                    3   0.37%
+java.lang.invoke.DirectMethodHandle$Holder.invokeStatic(Object, long, Object)                                                                                                                 3   0.37%
+io.prometheus.metrics.model.snapshots.PrometheusNaming.isValidLegacyMetricName(String)                                                                                                        3   0.37%
+tools.jackson.core.json.WriterBasedJsonGenerator._writeString2(int)                                                                                                                           3   0.37%
+io.micrometer.core.instrument.MeterRegistry.registerMeterIfNecessary(Class, Meter$Id, DistributionStatisticConfig, PauseDetector, MeterRegistry$NewMeterSupplier, Function)                   3   0.37%
+sun.nio.cs.ISO_8859_1$Encoder.encodeLoop(CharBuffer, ByteBuffer)                                                                                                                              3   0.37%
+java.util.concurrent.LinkedTransferQueue$DualNode.await(Object, long, Object, boolean)                                                                                                        3   0.37%
+java.lang.invoke.DirectMethodHandle.allocateInstance(Object)                                                                                                                                  3   0.37%
+java.util.HashMap$HashIterator.<init>(HashMap)                                                                                                                                                3   0.37%
+ch.qos.logback.classic.Level.toLevel(int)                                                                                                                                                     3   0.37%

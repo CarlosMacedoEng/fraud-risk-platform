@@ -17,3 +17,4 @@ perf/results/raw/
 .env
 
 target/
+perf/results/**/*.jfr
