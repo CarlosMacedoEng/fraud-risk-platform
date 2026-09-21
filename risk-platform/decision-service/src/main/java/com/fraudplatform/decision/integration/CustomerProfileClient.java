@@ -9,4 +9,8 @@ public interface CustomerProfileClient {
 
     /** Empty when the customer is unknown <em>or</em> the service is unavailable (the caller degrades). */
     Optional<CustomerProfile> fetch(String tenantId, String customerId);
+
+    /** Open connections before traffic arrives (no-op by default). */
+    default void warmUp() {
+    }
 }

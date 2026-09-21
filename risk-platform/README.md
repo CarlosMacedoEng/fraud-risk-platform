@@ -4,10 +4,10 @@ Maven multi-module build — Java 21 language level, Spring Boot 4.1.
 
 | Module | Purpose | Status |
 |---|---|---|
-| `platform-commons` | Correlation conventions, error codes; (Stage 5–6) event envelope, integration-client template | Stage 3 |
+| `platform-commons` | Correlation conventions, error codes, reusable integration-client template; (Stage 6) event envelope | Stage 5 |
 | `decision-service` | Real-time scoring API, strategy engine, ONNX inference, feature store, persistence | Stage 3 |
 | `file-adapter` | Legacy file ingestion | Stage 7 |
-| `downstream-simulators` | Fake customer systems with fault injection | Stage 5 |
+| `downstream-simulators` | Fake customer systems (CRM, device intel, case management) with fault injection | Stage 5 ✅ |
 
 ```bash
 mvn -B verify                      # all tests (needs Docker for Testcontainers)

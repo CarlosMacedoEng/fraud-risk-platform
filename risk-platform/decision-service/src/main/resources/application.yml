@@ -87,6 +87,48 @@ platform:
       currency: EUR
   faults:
     enabled: false
+  cases:
+    reconcile-ms: 60000
+  integrations:
+    endpoints:
+      # Hot path: one attempt inside the dependency budget, no retries.
+      customer-profile:
+        enabled: ${INTEGRATION_PROFILE_ENABLED:false}
+        base-url: ${SIMULATORS_URL:http://localhost:8090}
+        connect-timeout-ms: 100
+        attempt-timeout-ms: 35
+        deadline-ms: 35
+        max-attempts: 1
+        initial-backoff-ms: 5
+        max-concurrent-calls: 100
+      device-risk:
+        enabled: ${INTEGRATION_DEVICE_RISK_ENABLED:false}
+        base-url: ${SIMULATORS_URL:http://localhost:8090}
+        connect-timeout-ms: 100
+        attempt-timeout-ms: 55
+        deadline-ms: 55
+        max-attempts: 1
+        initial-backoff-ms: 5
+        max-concurrent-calls: 100
+      # Asynchronous: seconds of budget, retries with back-off (safe thanks to the idempotency key).
+      case-management:
+        enabled: ${INTEGRATION_CASES_ENABLED:false}
+        base-url: ${SIMULATORS_URL:http://localhost:8090}
+        connect-timeout-ms: 500
+        attempt-timeout-ms: 1500
+        deadline-ms: 5000
+        max-attempts: 4
+        initial-backoff-ms: 200
+        max-concurrent-calls: 20
+      model-service:
+        enabled: ${INTEGRATION_MODEL_SERVICE_ENABLED:false}
+        base-url: ${MODEL_SERVICE_URL:http://localhost:8000}
+        connect-timeout-ms: 500
+        attempt-timeout-ms: 2000
+        deadline-ms: 4000
+        max-attempts: 2
+        initial-backoff-ms: 200
+        max-concurrent-calls: 10
   governance:
     four-eyes: true           # the author of a strategy change cannot approve it
   # Local development credentials. Only SHA-256 hashes are configured; the clear-text dev keys are

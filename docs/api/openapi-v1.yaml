@@ -1,0 +1,234 @@
+openapi: 3.0.3
+info:
+  title: Fraud Risk Platform — Decision API
+  version: "1.0.0"
+  description: |
+    Real-time risk decisions for card payments and account-to-account transfers.
+    Portfolio project — synthetic data only. Versioning: breaking changes require /v2; additive,
+    optional fields may be added to v1 at any time, so clients must ignore unknown fields.
+servers:
+  - url: http://localhost:8080
+security:
+  - apiKey: []
+paths:
+  /v1/decisions:
+    post:
+      summary: Score a transaction
+      operationId: scoreTransaction
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          description: Unique per logical request and client. Retries with the same key return the original decision.
+          schema: { type: string, maxLength: 128, pattern: "^[A-Za-z0-9._:-]+$" }
+        - in: header
+          name: X-Correlation-Id
+          required: false
+          schema: { type: string, maxLength: 64 }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ScoreRequest" }
+            examples:
+              cardPayment:
+                value:
+                  transactionId: ALD-T000900001
+                  customerId: ALD-C000123
+                  accountId: ALD-A000123
+                  eventTime: "2026-04-20T14:03:11.250Z"
+                  transactionType: CARD_PAYMENT
+                  channel: ECOM
+                  amount: 249.90
+                  currency: EUR
+                  cardToken: tok_K000456
+                  merchantId: M000812
+                  mcc: "5732"
+                  merchantCountry: PT
+                  deviceId: D000321
+                  ipAddress: 81.20.30.40
+                  ipCountry: PT
+      responses:
+        "200":
+          description: Decision (also returned for idempotent replays; see Idempotent-Replayed header)
+          headers:
+            Idempotent-Replayed: { schema: { type: boolean } }
+            Server-Timing: { schema: { type: string } }
+            X-Correlation-Id: { schema: { type: string } }
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ScoreResponse" }
+        "400": { $ref: "#/components/responses/Problem" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        "503": { $ref: "#/components/responses/Problem" }
+    get:
+      summary: List decisions (keyset pagination)
+      parameters:
+        - { in: query, name: decision, schema: { type: string, enum: [APPROVE, REVIEW, DECLINE] } }
+        - { in: query, name: cursor, schema: { type: string } }
+        - { in: query, name: limit, schema: { type: integer, minimum: 1, maximum: 200, default: 50 } }
+      responses:
+        "200":
+          description: Page of decisions
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items]
+                properties:
+                  items: { type: array, items: { $ref: "#/components/schemas/ScoreResponse" } }
+                  nextCursor: { type: string, nullable: true }
+  /v1/decisions/{decisionId}:
+    get:
+      summary: Get a decision with all reasons
+      parameters:
+        - { in: path, name: decisionId, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200": { description: Decision, content: { application/json: { schema: { $ref: "#/components/schemas/ScoreResponse" } } } }
+        "404": { $ref: "#/components/responses/Problem" }
+  /v1/decisions/{decisionId}/explanation:
+    get:
+      summary: Investigator explanation (stored reasons + SHAP from the model-service when available)
+      parameters:
+        - { in: path, name: decisionId, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200":
+          description: Explanation
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [decisionId, shapAvailable, decisionReasons]
+                properties:
+                  decisionId: { type: string, format: uuid }
+                  modelVersion: { type: string, nullable: true }
+                  shapAvailable: { type: boolean }
+                  shap: { type: object, nullable: true }
+                  decisionReasons: { type: array, items: { $ref: "#/components/schemas/Reason" } }
+                  note: { type: string, nullable: true }
+  /v1/admin/tenants/{tenant}/deployments/{env}/promote:
+    post:
+      summary: Activate (100%) or canary (1-99%) a validated strategy version
+      parameters:
+        - { in: path, name: tenant, required: true, schema: { type: string } }
+        - { in: path, name: env, required: true, schema: { type: string, enum: [dev, staging, prod] } }
+        - { in: header, name: If-Match, required: false, description: Deployment row version (optimistic locking), schema: { type: integer } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [version]
+              properties:
+                version: { type: string, pattern: "^\\d+\\.\\d+\\.\\d+$" }
+                rolloutPercentage: { type: integer, minimum: 1, maximum: 100, default: 100 }
+                reason: { type: string }
+      responses:
+        "200": { description: New deployment state (ETag = row version) }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: Local build. Production assumption — OAuth2 client credentials or mTLS at the API gateway.
+  responses:
+    Problem:
+      description: RFC 9457 problem document
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+  schemas:
+    ScoreRequest:
+      type: object
+      required: [transactionId, customerId, accountId, eventTime, transactionType, channel, amount, currency]
+      properties:
+        transactionId: { type: string, maxLength: 64, pattern: "^[A-Za-z0-9._-]+$" }
+        customerId: { type: string, maxLength: 64 }
+        accountId: { type: string, maxLength: 64 }
+        eventTime: { type: string, format: date-time }
+        transactionType: { type: string, enum: [CARD_PAYMENT, TRANSFER] }
+        channel: { type: string, enum: [POS, ECOM, MOBILE, WEB, OPEN_BANKING, BRANCH] }
+        amount: { type: number, minimum: 0.01, maximum: 1000000 }
+        currency: { type: string, pattern: "^[A-Z]{3}$" }
+        cardToken: { type: string, description: "Required for CARD_PAYMENT. Tokens only — raw PANs are rejected." }
+        merchantId: { type: string, description: Required for CARD_PAYMENT }
+        mcc: { type: string, pattern: "^\\d{4}$" }
+        merchantCountry: { type: string, pattern: "^[A-Z]{2}$" }
+        beneficiaryId: { type: string, description: Required for TRANSFER }
+        beneficiaryCountry: { type: string, pattern: "^[A-Z]{2}$" }
+        deviceId: { type: string }
+        ipAddress: { type: string }
+        ipCountry: { type: string, pattern: "^[A-Z]{2}$" }
+    ScoreResponse:
+      type: object
+      required: [decisionId, transactionId, decision, riskScore, riskLevel, reasons, signals, versions, degradedModes,
+                 processingTimeMs, idempotentReplay, decidedAt]
+      properties:
+        decisionId: { type: string, format: uuid }
+        transactionId: { type: string }
+        decision: { type: string, enum: [APPROVE, REVIEW, DECLINE] }
+        riskScore: { type: number, minimum: 0, maximum: 1 }
+        riskLevel: { type: string, enum: [LOW, MEDIUM, HIGH, CRITICAL] }
+        fraudProbability: { type: number, minimum: 0, maximum: 1, description: Absent when the model was unavailable }
+        reasons: { type: array, maxItems: 5, items: { $ref: "#/components/schemas/Reason" } }
+        signals:
+          type: object
+          required: [graphRisk, rulePoints]
+          properties:
+            modelProbability: { type: number }
+            anomalyPercentile: { type: number }
+            graphRisk: { type: number }
+            rulePoints: { type: integer }
+        versions:
+          type: object
+          required: [strategy, featureSpec]
+          properties:
+            model: { type: string, description: Absent when the decision was made without a model }
+            strategy: { type: string }
+            featureSpec: { type: string }
+            challengerModel: { type: string }
+        degradedModes:
+          type: array
+          items: { type: string, enum: [MODEL_UNAVAILABLE, FEATURE_STORE_DEGRADED, GRAPH_FEATURES_UNAVAILABLE,
+                                        PROFILE_UNAVAILABLE, DEVICE_RISK_UNAVAILABLE, DEADLINE_EXCEEDED] }
+        processingTimeMs: { type: number }
+        idempotentReplay: { type: boolean }
+        correlationId: { type: string }
+        decidedAt: { type: string, format: date-time }
+    Reason:
+      type: object
+      required: [code, source, description, contribution]
+      properties:
+        code:
+          type: string
+          enum: [HIGH_TRANSACTION_VELOCITY, NEW_DEVICE, UNUSUAL_LOCATION, GRAPH_RISK, HIGH_MODEL_SCORE, NEW_BENEFICIARY,
+                 COMPROMISED_IP, CUSTOMER_BEHAVIOR_DEVIATION, HIGH_RISK_MERCHANT, UNUSUAL_TIME, ANOMALOUS_PATTERN,
+                 BLOCKED_ENTITY, EMERGENCY_RULE, MODEL_UNAVAILABLE_FALLBACK, DEGRADED_SIGNALS]
+        source: { type: string, enum: [RULE, POLICY, MODEL, ANOMALY, GRAPH, DEVICE_INTELLIGENCE, FALLBACK] }
+        description: { type: string }
+        detail: { type: string }
+        contribution: { type: number }
+        ruleId: { type: string, nullable: true }
+    Problem:
+      type: object
+      required: [type, title, status, detail, code]
+      properties:
+        type: { type: string, format: uri }
+        title: { type: string }
+        status: { type: integer }
+        detail: { type: string }
+        instance: { type: string }
+        code:
+          type: string
+          enum: [VALIDATION_FAILED, MISSING_IDEMPOTENCY_KEY, UNAUTHENTICATED, FORBIDDEN, NOT_FOUND, IDEMPOTENCY_IN_PROGRESS,
+                 DUPLICATE_TRANSACTION, VERSION_CONFLICT, IDEMPOTENCY_KEY_REUSED, STRATEGY_INVALID,
+                 INVALID_STATE_TRANSITION, UNKNOWN_TENANT, DEPENDENCY_UNAVAILABLE, INTERNAL_ERROR]
+        correlationId: { type: string }
+        details: { type: object }

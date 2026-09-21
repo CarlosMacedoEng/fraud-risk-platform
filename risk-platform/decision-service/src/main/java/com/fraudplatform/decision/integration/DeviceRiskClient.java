@@ -11,4 +11,8 @@ public interface DeviceRiskClient {
     }
 
     Optional<DeviceRisk> assess(Transaction transaction);
+
+    /** Open connections before traffic arrives (no-op by default). */
+    default void warmUp() {
+    }
 }

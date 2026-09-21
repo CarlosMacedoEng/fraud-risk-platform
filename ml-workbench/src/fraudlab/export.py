@@ -64,3 +64,23 @@ def export_graph_snapshot(customer: str) -> int:
         for rec in records:
             f.write(json.dumps(rec) + "\n")
     return len(records)
+
+
+def export_threat_feed(customers: list[str], coverage: float = 0.4, seed: int = 7) -> int:
+    """Simulated vendor threat feed: a *partial* sample of IPs used by fraudsters.
+
+    Real threat-intelligence feeds never cover every attacker; 40% coverage keeps COMPROMISED_IP a useful
+    but incomplete signal, which is the realistic situation.
+    """
+    ips: set[str] = set()
+    for customer in customers:
+        tx, _, _ = load_raw(customer)
+        fraud = tx[tx["is_fraud"] & tx["fraud_type"].isin(["stolen_card", "card_testing", "account_takeover"])]
+        ips.update(fraud["ip_address"].dropna().unique().tolist())
+    ordered = sorted(ips)
+    rng = pd.Series(ordered).sample(frac=coverage, random_state=seed).sort_values()
+    out = paths.SAMPLES_DIR / "threat_feed_ips.txt"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    lines = ["# Simulated threat-intelligence feed (synthetic, partial coverage)", *rng]
+    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return len(rng)

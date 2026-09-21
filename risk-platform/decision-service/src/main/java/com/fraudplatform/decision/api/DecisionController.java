@@ -52,12 +52,15 @@ public class DecisionController {
     private final DecisionRepository decisions;
     private final ObjectMapper json;
     private final PlatformProperties props;
+    private final java.util.Optional<com.fraudplatform.decision.integration.ModelServiceClient> modelService;
 
-    public DecisionController(DecisionService service, DecisionRepository decisions, ObjectMapper json, PlatformProperties props) {
+    public DecisionController(DecisionService service, DecisionRepository decisions, ObjectMapper json, PlatformProperties props,
+                              java.util.Optional<com.fraudplatform.decision.integration.ModelServiceClient> modelService) {
         this.service = service;
         this.decisions = decisions;
         this.json = json;
         this.props = props;
+        this.modelService = modelService;
     }
 
     @PostMapping
@@ -86,6 +89,33 @@ public class DecisionController {
         RiskDecision d = decisions.findById(client.tenantId(), decisionId)
                 .orElseThrow(() -> new PlatformException(ErrorCode.NOT_FOUND, "decision not found"));
         return ScoreResponse.of(d, false, Integer.MAX_VALUE);
+    }
+
+    public record Explanation(UUID decisionId, String modelVersion, boolean shapAvailable, Object shap,
+                              List<ScoreResponse.ReasonDto> decisionReasons, String note) {
+    }
+
+    /**
+     * Investigator view: the stored reasons plus exact SHAP contributions from the model-service for the
+     * stored feature vector. If the model-service is unavailable the stored reasons are still returned.
+     */
+    @GetMapping("/{decisionId}/explanation")
+    public Explanation explain(@AuthenticationPrincipal ApiClientPrincipal client, @PathVariable UUID decisionId) {
+        RiskDecision d = decisions.findById(client.tenantId(), decisionId)
+                .orElseThrow(() -> new PlatformException(ErrorCode.NOT_FOUND, "decision not found"));
+        List<ScoreResponse.ReasonDto> reasons = ScoreResponse.of(d, false, Integer.MAX_VALUE).reasons();
+        if (d.modelVersion() == null) {
+            return new Explanation(decisionId, null, false, null, reasons, "decision made without a model (fallback mode)");
+        }
+        if (modelService.isEmpty()) {
+            return new Explanation(decisionId, d.modelVersion(), false, null, reasons, "model-service integration disabled");
+        }
+        try {
+            return new Explanation(decisionId, d.modelVersion(), true,
+                    modelService.get().explain(d.tenantId(), d.modelVersion(), d.featureVector()), reasons, null);
+        } catch (com.fraudplatform.commons.integration.IntegrationException e) {
+            return new Explanation(decisionId, d.modelVersion(), false, null, reasons, "model-service unavailable: " + e.kind());
+        }
     }
 
     public record DecisionPage(List<ScoreResponse> items, String nextCursor) {

@@ -167,6 +167,21 @@ public class DecisionServiceConfig {
         };
     }
 
+    @Bean
+    com.fraudplatform.decision.application.DomainEvents domainEvents() {
+        return new com.fraudplatform.decision.application.DomainEvents() {
+            @Override
+            public void caseCreated(String tenant, java.util.UUID caseId, java.util.UUID decisionId, String transactionId,
+                                    String customerId, String priority, String externalCaseRef) {
+            }
+
+            @Override
+            public void fraudConfirmed(String tenant, String transactionId, String customerId, String label, String source,
+                                       String fraudType, java.util.UUID caseId) {
+            }
+        };
+    }
+
     // ------------------------------------------------------------------ startup
 
     @Bean

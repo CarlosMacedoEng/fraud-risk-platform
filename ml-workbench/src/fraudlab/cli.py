@@ -65,10 +65,11 @@ def cmd_explain(args: argparse.Namespace) -> None:
 
 
 def cmd_export(args: argparse.Namespace) -> None:
-    from .export import export_feature_parity, export_graph_snapshot
+    from .export import export_feature_parity, export_graph_snapshot, export_threat_feed
 
     print(json.dumps({"parity_events": export_feature_parity(args.customer),
-                      "graph_records": export_graph_snapshot(args.customer)}))
+                      "graph_records": export_graph_snapshot(args.customer),
+                      "threat_feed_ips": export_threat_feed(sorted(PROFILES))}))
 
 
 def main() -> None:

@@ -1,0 +1,15 @@
+server:
+  port: ${PORT:8090}
+spring:
+  application:
+    name: downstream-simulators
+  threads:
+    virtual:
+      enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+simulators:
+  threat-feed: ${THREAT_FEED:../../data/samples/threat_feed_ips.txt}
