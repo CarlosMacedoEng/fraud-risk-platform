@@ -1,0 +1,17 @@
+# Java
+target/
+*.class
+.idea/
+*.iml
+.vscode/
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+# Generated data and artifacts
+data/generated/
+data/runtime/
+perf/results/raw/
+*.log
+.env
