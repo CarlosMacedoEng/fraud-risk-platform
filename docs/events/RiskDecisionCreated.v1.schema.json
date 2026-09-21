@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.fraud-platform.example/events/RiskDecisionCreated.v1.json",
+  "title": "RiskDecisionCreated v1 payload",
+  "description": "A decision was persisted. Keyed by customerId so all decisions of a customer are ordered.",
+  "type": "object",
+  "required": [
+    "decisionId",
+    "transactionId",
+    "customerId",
+    "decision",
+    "riskScore",
+    "riskLevel",
+    "strategyVersion",
+    "reasonCodes",
+    "degradedModes"
+  ],
+  "properties": {
+    "decisionId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "transactionId": {
+      "type": "string"
+    },
+    "customerId": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "APPROVE",
+        "REVIEW",
+        "DECLINE"
+      ]
+    },
+    "riskScore": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "riskLevel": {
+      "type": "string",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
+    },
+    "modelProbability": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "modelVersion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "strategyVersion": {
+      "type": "string"
+    },
+    "reasonCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "degradedModes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "amount": {
+      "type": "number"
+    },
+    "channel": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.fraud-platform.example/events/FraudConfirmed.v1.json",
+  "title": "FraudConfirmed v1 payload",
+  "description": "A label arrived (analyst outcome, chargeback, customer report). Feeds model training and reporting. GENUINE labels are also published: false positives matter as much as fraud.",
+  "type": "object",
+  "required": [
+    "transactionId",
+    "customerId",
+    "label",
+    "source"
+  ],
+  "properties": {
+    "transactionId": {
+      "type": "string"
+    },
+    "customerId": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string",
+      "enum": [
+        "FRAUD",
+        "GENUINE"
+      ]
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "CHARGEBACK",
+        "ANALYST",
+        "CUSTOMER_REPORT",
+        "BATCH_LABEL"
+      ]
+    },
+    "fraudType": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "caseId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

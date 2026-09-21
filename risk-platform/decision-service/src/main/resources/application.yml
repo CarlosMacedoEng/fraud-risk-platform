@@ -27,6 +27,30 @@ spring:
       connect-timeout: 200ms
   flyway:
     locations: classpath:db/migration
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP:localhost:9092}
+    producer:
+      acks: all
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        enable.idempotence: true            # no duplicates from producer retries, per-partition order kept
+        max.in.flight.requests.per.connection: 5
+        linger.ms: 5
+        request.timeout.ms: 15000
+        delivery.timeout.ms: 60000          # must be >= linger.ms + request.timeout.ms (journal J-15)
+    consumer:
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        isolation.level: read_committed
+        max.poll.interval.ms: 300000
+    admin:
+      fail-fast: false
+    listener:
+      auto-startup: ${platform.messaging.enabled}
   jackson:
     serialization:
       indent-output: false
@@ -87,6 +111,11 @@ platform:
       currency: EUR
   faults:
     enabled: false
+  messaging:
+    enabled: ${MESSAGING_ENABLED:false}   # outbox rows are always written; relay/consumers need Kafka
+    relay-interval-ms: 200
+    partitions: 3
+    replication: 1
   cases:
     reconcile-ms: 60000
   integrations:

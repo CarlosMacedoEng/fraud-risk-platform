@@ -20,7 +20,7 @@ go-live and support — not just a fraud model.
 | 3 | Java decision service core: API, validation, idempotency, rules, ONNX inference, PostgreSQL, Redis | ✅ Done |
 | 4 | Configuration & strategy management: versioning, validation, promotion, rollback, rollout | ✅ Done |
 | 5 | Outbound REST integrations + downstream simulators (timeouts, retries, circuit breakers) | ✅ Done |
-| 6 | Kafka events: outbox, consumers, DLT, replay | Planned |
+| 6 | Kafka events: outbox, consumers, DLT, replay | ✅ Done |
 | 7 | File adapter: legacy files, validation, quarantine, reconciliation | Planned |
 | 8 | Observability, performance tests (k6), JVM performance guide — **measured** results | Planned |
 | 9 | Troubleshooting lab: 18 reproducible incidents | Planned |

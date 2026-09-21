@@ -1,6 +1,5 @@
 package com.fraudplatform.decision.config;
 
-import com.fraudplatform.decision.application.DecisionEventsWriter;
 import com.fraudplatform.decision.application.StrategyBootstrap;
 import com.fraudplatform.decision.features.FeatureStore;
 import com.fraudplatform.decision.features.JdbcFallbackFeatureStore;
@@ -144,43 +143,7 @@ public class DecisionServiceConfig {
         return new ModelScorer(registry, inferenceExecutor, props.budgets().modelMs(), faults, meters);
     }
 
-    // ------------------------------------------------------------------ events (replaced by the outbox in Stage 6)
-
-    @Bean
-    DecisionEventsWriter decisionEventsWriter() {
-        return (transaction, decision) -> {
-        };
-    }
-
-    @Bean
-    com.fraudplatform.decision.application.AdminEvents adminEvents() {
-        return new com.fraudplatform.decision.application.AdminEvents() {
-            @Override
-            public void configurationChanged(String tenant, String environment, String action, String version,
-                                             String previousVersion, Integer rolloutPercentage, String actor, String reason) {
-            }
-
-            @Override
-            public void modelStatusChanged(String tenant, String modelVersion, String fromStatus, String toStatus,
-                                           String actor, String reason) {
-            }
-        };
-    }
-
-    @Bean
-    com.fraudplatform.decision.application.DomainEvents domainEvents() {
-        return new com.fraudplatform.decision.application.DomainEvents() {
-            @Override
-            public void caseCreated(String tenant, java.util.UUID caseId, java.util.UUID decisionId, String transactionId,
-                                    String customerId, String priority, String externalCaseRef) {
-            }
-
-            @Override
-            public void fraudConfirmed(String tenant, String transactionId, String customerId, String label, String source,
-                                       String fraudType, java.util.UUID caseId) {
-            }
-        };
-    }
+    // Domain events: see messaging/OutboxWriter (transactional outbox).
 
     // ------------------------------------------------------------------ startup
 

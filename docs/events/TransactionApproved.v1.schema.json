@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.fraud-platform.example/events/TransactionApproved.v1.json",
+  "title": "TransactionApproved v1 payload",
+  "description": "Convenience event for consumers that only care about approvals (e.g. loyalty, notifications).",
+  "type": "object",
+  "required": [
+    "decisionId",
+    "transactionId",
+    "customerId"
+  ],
+  "properties": {
+    "decisionId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "transactionId": {
+      "type": "string"
+    },
+    "customerId": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

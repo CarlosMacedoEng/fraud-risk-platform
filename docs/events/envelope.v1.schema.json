@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.fraud-platform.example/events/envelope.v1.json",
+  "title": "EventEnvelope v1",
+  "description": "Common envelope for every domain event. Consumers must de-duplicate on eventId (at-least-once delivery) and ignore unknown fields.",
+  "type": "object",
+  "required": [
+    "eventId",
+    "eventType",
+    "eventVersion",
+    "occurredAt",
+    "tenantId",
+    "partitionKey",
+    "producer",
+    "payload"
+  ],
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "TransactionReceived",
+        "RiskDecisionCreated",
+        "TransactionApproved",
+        "TransactionDeclined",
+        "CaseCreated",
+        "FraudConfirmed",
+        "ConfigurationChanged",
+        "ModelVersionPromoted"
+      ]
+    },
+    "eventVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "tenantId": {
+      "type": "string"
+    },
+    "partitionKey": {
+      "type": "string"
+    },
+    "correlationId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "producer": {
+      "type": "string"
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

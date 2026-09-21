@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.fraud-platform.example/events/ConfigurationChanged.v1.json",
+  "title": "ConfigurationChanged v1 payload",
+  "description": "A strategy deployment changed. Every decision-service instance consumes it (broadcast) to refresh its cache immediately.",
+  "type": "object",
+  "required": [
+    "environment",
+    "action",
+    "version",
+    "actor"
+  ],
+  "properties": {
+    "environment": {
+      "type": "string",
+      "enum": [
+        "dev",
+        "staging",
+        "prod"
+      ]
+    },
+    "action": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "previousVersion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rolloutPercentage": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "actor": {
+      "type": "string"
+    },
+    "reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

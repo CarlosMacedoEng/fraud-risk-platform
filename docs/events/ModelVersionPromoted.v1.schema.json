@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.fraud-platform.example/events/ModelVersionPromoted.v1.json",
+  "title": "ModelVersionPromoted v1 payload",
+  "description": "A model changed lifecycle status (e.g. SHADOW -> CHAMPION).",
+  "type": "object",
+  "required": [
+    "modelVersion",
+    "fromStatus",
+    "toStatus",
+    "actor"
+  ],
+  "properties": {
+    "modelVersion": {
+      "type": "string"
+    },
+    "fromStatus": {
+      "type": "string"
+    },
+    "toStatus": {
+      "type": "string",
+      "enum": [
+        "CANDIDATE",
+        "SHADOW",
+        "CHAMPION",
+        "RETIRED"
+      ]
+    },
+    "actor": {
+      "type": "string"
+    },
+    "reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

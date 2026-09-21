@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.fraud-platform.example/events/TransactionReceived.v1.json",
+  "title": "TransactionReceived v1 payload",
+  "description": "A transaction was received for scoring (real time) or ingested (batch). Keyed by customerId. No card numbers, only tokens are ever present elsewhere; this event carries no card token.",
+  "type": "object",
+  "required": [
+    "transactionId",
+    "customerId",
+    "accountId",
+    "eventTime",
+    "transactionType",
+    "channel",
+    "amount",
+    "currency"
+  ],
+  "properties": {
+    "transactionId": {
+      "type": "string"
+    },
+    "customerId": {
+      "type": "string"
+    },
+    "accountId": {
+      "type": "string"
+    },
+    "eventTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "transactionType": {
+      "type": "string",
+      "enum": [
+        "CARD_PAYMENT",
+        "TRANSFER"
+      ]
+    },
+    "channel": {
+      "type": "string",
+      "enum": [
+        "POS",
+        "ECOM",
+        "MOBILE",
+        "WEB",
+        "OPEN_BANKING",
+        "BRANCH"
+      ]
+    },
+    "amount": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "merchantId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "mcc": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "beneficiaryId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

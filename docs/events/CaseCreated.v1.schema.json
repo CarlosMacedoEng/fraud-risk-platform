@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.fraud-platform.example/events/CaseCreated.v1.json",
+  "title": "CaseCreated v1 payload",
+  "description": "An investigation case was opened (internal and, if configured, in the customer's case-management system).",
+  "type": "object",
+  "required": [
+    "caseId",
+    "decisionId",
+    "transactionId",
+    "customerId",
+    "priority"
+  ],
+  "properties": {
+    "caseId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "decisionId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "transactionId": {
+      "type": "string"
+    },
+    "customerId": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
+    },
+    "externalCaseRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.fraud-platform.example/events/TransactionDeclined.v1.json",
+  "title": "TransactionDeclined v1 payload",
+  "description": "Convenience event for declines (e.g. customer notification, card-blocking workflows).",
+  "type": "object",
+  "required": [
+    "decisionId",
+    "transactionId",
+    "customerId",
+    "reasonCodes"
+  ],
+  "properties": {
+    "decisionId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "transactionId": {
+      "type": "string"
+    },
+    "customerId": {
+      "type": "string"
+    },
+    "reasonCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}
