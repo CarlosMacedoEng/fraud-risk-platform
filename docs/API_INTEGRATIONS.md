@@ -148,7 +148,7 @@ fraudster IPs — real feeds are incomplete.
   and direct service calls cover case creation.
 * Contract testing is provider-side against the published spec; consumer-driven contracts (e.g. Pact) are roadmap.
 
-## 7. Interview talking points
+## 7. Key takeaways
 * "Timeouts come from the latency budget. On the payment path the device vendor gets 55 ms and one attempt;
   case creation is asynchronous, so it gets 5 seconds and retries."
 * "POST isn't idempotent, but it can be made so: case creation sends the decision ID as the idempotency key,

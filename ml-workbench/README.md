@@ -73,7 +73,7 @@ Exact figures are in each `summary.json`.
 - The emerging pattern was deliberately designed to be hard for the supervised model — conclusions about drift are illustrative.
 - Fraud rate (0.17–0.46%) is higher than many real portfolios to keep enough positives for evaluation.
 
-### Interview talking points
+### Key takeaways
 - "I generated suspicious-looking legitimate behaviour on purpose, because false positives are the main cost driver for a fraud operation."
 - "Labels arrive late, so I modelled label delay and made training respect it — otherwise evaluation leaks future information."
 - "I injected a drifted attack pattern in the final weeks to test whether non-supervised signals add value when the supervised model hasn't seen the pattern."

@@ -73,7 +73,7 @@ caller can act on — with reasons, versions and latency — even when dependenc
 * No rate limiting / per-client quotas yet.
 * `processingTimeMs` excludes the persistence step; `Server-Timing: total` includes it.
 
-### Interview talking points
+### Key takeaways
 * "Every dependency except the database degrades the decision instead of failing it — and the
   response says exactly which signal was missing."
 * "Parity tests found two real bugs that graceful degradation had hidden. Since then, every fallback

@@ -19,3 +19,6 @@ perf/results/raw/
 target/
 perf/results/**/*.jfr
 *.hprof
+
+# personal notes - never published
+private/

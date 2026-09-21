@@ -109,7 +109,7 @@ Every alert names a runbook entry; alerts without an action are removed.
 * Housekeeping jobs (roadmap to schedule): idempotency keys > 7 days, published outbox rows > 14 days,
   processed_events > 30 days.
 
-## 8. Interview talking points
+## 8. Key takeaways
 * "Every degradation is observable: a response field, a reason code, a metric and an alert — because in my
   own project graceful degradation hid two real bugs until I made it visible."
 * "I alert on symptoms customers feel (errors, latency, degraded ratio, event lag) and every alert links to a

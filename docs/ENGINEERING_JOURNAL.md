@@ -1,7 +1,7 @@
 # Engineering Journal
 
 Real issues found while building this project (not simulated incidents). Each entry records what
-happened, how it was found and what changed. This is the most honest source for interview stories:
+happened, how it was found and what changed. This is the most honest record of how the project was built:
 everything here actually occurred during development, on synthetic data, on a laptop.
 
 | # | Stage | Issue | How it was found | Fix / lesson |

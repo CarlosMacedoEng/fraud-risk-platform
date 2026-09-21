@@ -186,7 +186,7 @@ Measured on a developer laptop. Java in-process figures are reported in the perf
 * Thresholds tuned on a single validation window; no confidence intervals (the test window contains
   only ~50 ATO transactions — per-typology recall has wide uncertainty).
 
-## 10. Interview talking points
+## 10. Key takeaways
 * "ML alone had the best PR-AUC on known patterns; the hybrid earned its place on incident recall and on
   an emerging pattern — and I can show the euro cost of that trade-off."
 * "Label delay nearly broke my validation: 11% of validation fraud was labelled at training time. A

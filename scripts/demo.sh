@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 10-minute interview demo (docs/INTERVIEW_DEMO_SCRIPT.md). Requires the compose stack; step 6 needs the
+# 10-minute end-to-end demo of the platform. Requires the compose stack; step 6 needs the
 # decision-service started with the lab profile:
 #   DECISION_PROFILES=lab docker compose -f deploy/docker-compose.yml up -d decision-service
 # Interactive by default (press Enter between steps); DEMO_PAUSE=0 runs straight through.

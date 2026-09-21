@@ -161,7 +161,7 @@ tenant-scoped admin credentials.
 * No scheduled activation, no automatic canary analysis/rollback (roadmap: guardrail metrics).
 * Simulation cannot replay decisions made in model-unavailable mode (reported as `skipped`).
 
-## 10. Interview talking points
+## 10. Key takeaways
 * "Changing a threshold is a governed data change: validated, simulated on real traffic, approved by
   a second person, canaried by customer, rolled back in one call, and audited end to end."
 * "The same artifact moves from dev to prod — environment differences stay in infrastructure config."

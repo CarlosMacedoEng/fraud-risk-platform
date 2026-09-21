@@ -87,7 +87,7 @@ is multi-instance safe (`SKIP LOCKED`); consumers scale with partitions (3 local
 instances: PostgreSQL write IOPS (4–5 writes/decision: transaction, decision, idempotency, 2–3 outbox rows)
 → partition `risk_decisions`/`outbox_events` by time, CDC instead of polling, read replicas for reporting.
 
-## 9. Interview talking points
+## 9. Key takeaways
 * "My first load test failed — p99 1.5 s. The cause was a fallback that cost more than the thing it replaced.
   Bounding it, sizing the breaker window to traffic and adding admission control got p99 to 68 ms at the same load."
 * "Virtual threads removed my accidental concurrency limit, so overload became collapse. Admission control

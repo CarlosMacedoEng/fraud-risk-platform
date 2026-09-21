@@ -131,7 +131,7 @@ misconfiguration looks exactly like "no traffic".
 * Outbox polling adds up to ~200 ms latency and DB load; CDC is the scale-out option.
 * No exactly-once processing across Kafka and PostgreSQL (by design: idempotent consumers instead).
 
-## 11. Interview talking points
+## 11. Key takeaways
 * "I never write to the database and Kafka in the same request path. The event goes into an outbox table in
   the same transaction, and a relay publishes it — so a broker outage can't lose a decision or slow a payment."
 * "Delivery is at-least-once, so every consumer de-duplicates on eventId and has idempotent side effects —

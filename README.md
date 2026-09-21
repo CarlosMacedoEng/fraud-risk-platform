@@ -26,7 +26,7 @@ go-live and support — not just a fraud model.
 | 9 | Troubleshooting lab: 18 reproducible incidents with evidence — [playbook](docs/TROUBLESHOOTING_PLAYBOOK.md); found and fixed 4 real defects (Redis connection churn, model-less pod reported ready, consumer throughput, missing alerts) | ✅ Done |
 | 10 | Kubernetes manifests (kustomize base + dev/prod overlays), deployed to a local kind cluster; AWS design mapping (not deployed) — [doc](docs/AWS_AND_KUBERNETES.md) | ✅ Done |
 | 11 | Release 1.x → 2.0 migration implemented and rehearsed (expand/backfill/contract, rollback, backfill impact measured) — [runbook](docs/MIGRATION_AND_UPGRADE_RUNBOOK.md); go-live runbook, implementation plan, customer communication and 11 customer artifacts ([docs/customer/](docs/customer/)) | ✅ Done |
-| 12 | Reusable assets and templates, engineering standards + mentoring exercise, role alignment, interview guide, project story, demo script (runnable) and readiness checklist | ✅ Done |
+| 12 | Reusable assets and templates, engineering standards + mentoring exercise, runnable end-to-end demo (`scripts/demo.sh`) | ✅ Done |
 
 ## Architecture at a glance
 
@@ -135,7 +135,7 @@ Grafana: http://localhost:3000 · Prometheus: http://localhost:9090 · Scoring A
 | `dev-aldermoor-approver-key` / `dev-quillon-approver-key` | second approver (four-eyes) |
 | `dev-file-ops-key` | file-adapter operations |
 
-**Demo flow** ([docs/INTERVIEW_DEMO_SCRIPT.md](docs/INTERVIEW_DEMO_SCRIPT.md)): real-time decision with reasons and
+**Demo flow** (`scripts/demo.sh`, about 10 minutes): real-time decision with reasons and
 versions → SHAP explanation → outbox events and case creation → emergency configuration change with four-eyes
 approval and rollback → legacy file ingestion (accepted and rejected) → slow-vendor troubleshooting → performance.
 
@@ -153,13 +153,12 @@ approval and rollback → legacy file ingestion (accepted and rejected) → slow
 
 | Topic | Documents |
 |---|---|
-| Purpose, context, requirements | [PROJECT_PURPOSE](docs/PROJECT_PURPOSE.md) · [BUSINESS_CONTEXT](docs/BUSINESS_CONTEXT.md) · [REQUIREMENTS_AND_ASSUMPTIONS](docs/REQUIREMENTS_AND_ASSUMPTIONS.md) · [ROLE_ALIGNMENT](docs/ROLE_ALIGNMENT.md) |
+| Purpose, context, requirements | [PROJECT_PURPOSE](docs/PROJECT_PURPOSE.md) · [BUSINESS_CONTEXT](docs/BUSINESS_CONTEXT.md) · [REQUIREMENTS_AND_ASSUMPTIONS](docs/REQUIREMENTS_AND_ASSUMPTIONS.md) |
 | Design | [ARCHITECTURE](docs/ARCHITECTURE.md) · [ADRs](docs/adr/) · [DATABASE_DESIGN](docs/DATABASE_DESIGN.md) · [MODEL_STRATEGY](docs/MODEL_STRATEGY.md) · [CONFIGURATION_AND_RISK_STRATEGY](docs/CONFIGURATION_AND_RISK_STRATEGY.md) |
 | Integrations | [API_INTEGRATIONS](docs/API_INTEGRATIONS.md) · [MESSAGING_AND_EVENTS](docs/MESSAGING_AND_EVENTS.md) · [FILE_INTEGRATIONS](docs/FILE_INTEGRATIONS.md) |
 | Runtime and operations | [REAL_TIME_ENGINEERING](docs/REAL_TIME_ENGINEERING.md) · [JAVA_PERFORMANCE_GUIDE](docs/JAVA_PERFORMANCE_GUIDE.md) · [OBSERVABILITY_AND_OPERATIONS](docs/OBSERVABILITY_AND_OPERATIONS.md) · [TROUBLESHOOTING_PLAYBOOK](docs/TROUBLESHOOTING_PLAYBOOK.md) · [SUPPORT_MODEL](docs/SUPPORT_MODEL.md) · [AWS_AND_KUBERNETES](docs/AWS_AND_KUBERNETES.md) |
 | Delivery | [CUSTOMER_IMPLEMENTATION_PLAN](docs/CUSTOMER_IMPLEMENTATION_PLAN.md) · [MIGRATION_AND_UPGRADE_RUNBOOK](docs/MIGRATION_AND_UPGRADE_RUNBOOK.md) · [GO_LIVE_RUNBOOK](docs/GO_LIVE_RUNBOOK.md) · [CUSTOMER_COMMUNICATION](docs/CUSTOMER_COMMUNICATION.md) · [customer artifacts](docs/customer/) |
 | Team | [REUSABLE_ENGINEERING_ASSETS](docs/REUSABLE_ENGINEERING_ASSETS.md) · [templates](docs/templates/) · [MENTORING_AND_ENGINEERING_STANDARDS](docs/MENTORING_AND_ENGINEERING_STANDARDS.md) · [ENGINEERING_JOURNAL](docs/ENGINEERING_JOURNAL.md) |
-| Interview | [INTERVIEW_GUIDE](docs/INTERVIEW_GUIDE.md) · [PROJECT_STORY](docs/PROJECT_STORY.md) · [INTERVIEW_DEMO_SCRIPT](docs/INTERVIEW_DEMO_SCRIPT.md) · [INTERVIEW_READINESS_CHECKLIST](docs/INTERVIEW_READINESS_CHECKLIST.md) |
 
 ## Limitations
 

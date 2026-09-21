@@ -136,7 +136,7 @@ warms the feature store (device no longer "new"); profile updates refresh the re
 * No PGP decryption / signature verification of inbound files (common bank requirement; roadmap).
 * Reconciliation tolerance is exact-amount; FX and partial captures need a configurable tolerance.
 
-## 9. Interview talking points
+## 9. Key takeaways
 * "A file is an integration contract like an API: naming, completeness marker, schema version, checksum, and
   an explicit policy for what happens with bad records."
 * "Below 5% invalid I quarantine and continue; above it I reject the whole file — at that point it's a format

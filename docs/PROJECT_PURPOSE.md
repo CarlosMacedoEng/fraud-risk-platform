@@ -2,9 +2,8 @@
 
 ## Why this project exists
 
-This is a portfolio project, built to prepare for an **Advanced Customer Success Engineer** role at a fraud
-and financial-crime platform vendor (job description in [reference/JOB_DESCRIPTION.md](reference/JOB_DESCRIPTION.md)).
-The role combines four things this project tries to practise end to end:
+This is a portfolio project that practises the work of a **customer success / solutions engineer** at a fraud and
+financial-crime platform vendor. That work combines four things this project tries to practise end to end:
 
 1. **Implementing** a real-time risk platform for a customer: integrations, configuration, data flows.
 2. **Operating** it: performance, troubleshooting, incidents, upgrades.
@@ -47,11 +46,11 @@ to show that one product serves different risk appetites through configuration.
 | Operations skills | [TROUBLESHOOTING_PLAYBOOK.md](TROUBLESHOOTING_PLAYBOOK.md), [JAVA_PERFORMANCE_GUIDE.md](JAVA_PERFORMANCE_GUIDE.md), [perf/README.md](../perf/README.md) |
 | Delivery and customer work | [CUSTOMER_IMPLEMENTATION_PLAN.md](CUSTOMER_IMPLEMENTATION_PLAN.md), [GO_LIVE_RUNBOOK.md](GO_LIVE_RUNBOOK.md), [customer/](customer/) |
 | Upgrades | [MIGRATION_AND_UPGRADE_RUNBOOK.md](MIGRATION_AND_UPGRADE_RUNBOOK.md) |
-| Fit with the role | [ROLE_ALIGNMENT.md](ROLE_ALIGNMENT.md) |
+| Reusable assets and standards | [REUSABLE_ENGINEERING_ASSETS.md](REUSABLE_ENGINEERING_ASSETS.md), [MENTORING_AND_ENGINEERING_STANDARDS.md](MENTORING_AND_ENGINEERING_STANDARDS.md) |
 
 ## Success criteria for the project itself
 
-* Every claim in an interview can be backed by a file in this repository.
+* Every claim can be backed by a file in this repository.
 * The difficult parts are explained with their trade-offs, including where the result was worse than expected.
 * Someone else can reproduce the key results with the scripts provided (`perf/`, `troubleshooting-lab/`,
   `migration-rehearsal/`).
