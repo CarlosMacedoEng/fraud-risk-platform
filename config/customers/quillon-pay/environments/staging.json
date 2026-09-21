@@ -1,0 +1,6 @@
+{
+  "tenantId": "quillon-pay",
+  "environment": "staging",
+  "activeStrategyVersion": "1.0.0",
+  "note": "Initial deployment only; afterwards promotions/rollbacks are made through the admin API and audited."
+}

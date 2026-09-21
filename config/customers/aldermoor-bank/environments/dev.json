@@ -1,0 +1,6 @@
+{
+  "tenantId": "aldermoor-bank",
+  "environment": "dev",
+  "activeStrategyVersion": "1.1.0",
+  "note": "Initial deployment only; afterwards promotions/rollbacks are made through the admin API and audited."
+}

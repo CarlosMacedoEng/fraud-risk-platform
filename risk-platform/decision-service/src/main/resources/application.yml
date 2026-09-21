@@ -1,0 +1,125 @@
+spring:
+  application:
+    name: decision-service
+  threads:
+    virtual:
+      enabled: true          # request handling on virtual threads (JDK 21+)
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/riskplatform}
+    username: ${DB_USER:risk}
+    password: ${DB_PASSWORD:risk}
+    hikari:
+      pool-name: decision-db
+      maximum-pool-size: ${DB_POOL_MAX:20}
+      minimum-idle: 5
+      connection-timeout: 1000        # fail fast: a request should not wait seconds for a connection
+      validation-timeout: 500
+      max-lifetime: 1800000
+      leak-detection-threshold: 5000
+      data-source-properties:
+        ApplicationName: decision-service
+        options: "-c statement_timeout=2000"   # server-side guard against runaway queries
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 50ms
+      connect-timeout: 200ms
+  flyway:
+    locations: classpath:db/migration
+  jackson:
+    serialization:
+      indent-output: false
+
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+  tomcat:
+    threads:
+      max: 200
+    accept-count: 100
+    connection-timeout: 5s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+      group:
+        readiness:
+          include: readinessState,db,redis,models,strategies
+        liveness:
+          include: livenessState
+  metrics:
+    tags:
+      application: decision-service
+      environment: ${platform.environment}
+  health:
+    redis:
+      enabled: true
+
+platform:
+  environment: ${PLATFORM_ENV:dev}
+  models-dir: ${MODELS_DIR:../../models}
+  config-dir: ${CONFIG_DIR:../../config}
+  strategy-refresh-ms: 15000
+  budgets:
+    profile-ms: 40
+    feature-store-ms: 30
+    graph-ms: 20
+    model-ms: 25
+    device-risk-ms: 60
+    inference-threads: 4
+  bootstrap:
+    import-strategies: true
+    load-graph-snapshots: true
+  tenants:
+    aldermoor-bank:
+      default-home-country: PT
+      currency: EUR
+    quillon-pay:
+      default-home-country: ES
+      currency: EUR
+  faults:
+    enabled: false
+  # Local development credentials. Only SHA-256 hashes are configured; the clear-text dev keys are
+  # documented in README.md. Production: OAuth2 client credentials / mTLS at the gateway.
+  clients:
+    - client-id: aldermoor-gateway
+      tenant-id: aldermoor-bank
+      key-sha256: affa5ac1114abd43ba8351385028ca75b21d65b0557c3389c7fe3677c5210899
+      roles: [SCORING]
+    - client-id: aldermoor-analyst
+      tenant-id: aldermoor-bank
+      key-sha256: f037c472b9e92a8901abf54581a19d43af2bc6b4cefefd5bdee076d2a35c6687
+      roles: [ANALYST]
+    - client-id: aldermoor-admin
+      tenant-id: aldermoor-bank
+      key-sha256: 39b01693e929414606a4958c571dc9ca5d40645abe88af93321f2322d0c1aedd
+      roles: [ADMIN, ANALYST]
+    - client-id: quillon-gateway
+      tenant-id: quillon-pay
+      key-sha256: d8ad46c650e2d1957befe38241c057428812807c32175eb2355d862a6f9dac6a
+      roles: [SCORING]
+    - client-id: quillon-admin
+      tenant-id: quillon-pay
+      key-sha256: 56cbe2aaab593df559fa6f148fac44b43899f59a4f06c96c887bf9c3f6f678f7
+      roles: [ADMIN, ANALYST]
+
+logging:
+  level:
+    root: INFO
+    com.fraudplatform: INFO
+---
+spring:
+  config:
+    activate:
+      on-profile: lab
+platform:
+  faults:
+    enabled: true
