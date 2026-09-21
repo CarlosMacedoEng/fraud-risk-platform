@@ -1,0 +1,8 @@
+# Mounted at /app/config-override (SPRING_CONFIG_ADDITIONAL_LOCATION). Placeholder endpoints.
+platform:
+  integrations:
+    endpoints:
+      customer-profile: { base-url: "https://crm.aldermoor.example/api" }
+      device-risk:      { base-url: "https://device-intel.vendor.example" }
+      case-management:  { base-url: "https://cases.aldermoor.example/api" }
+      model-service:    { base-url: "http://model-service:8000" }

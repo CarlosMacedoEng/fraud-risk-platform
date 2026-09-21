@@ -1,0 +1,36 @@
+# Non-secret configuration. Secrets (DB credentials, API-key hashes in production = OAuth2/mTLS at the gateway)
+# come from Secrets created by the overlay (dev: generator; prod: External Secrets Operator -> AWS Secrets Manager).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: decision-service-config
+data:
+  PLATFORM_ENV: dev                     # overridden per overlay; strategies are promoted per environment
+  SPRING_PROFILES_ACTIVE: default       # never "lab" outside the troubleshooting lab (fault injection)
+  DB_URL: jdbc:postgresql://postgres:5432/riskplatform
+  DB_POOL_MAX: "20"                     # Little's law at the measured 150 TPS per pod leaves headroom (0 pending)
+  REDIS_HOST: redis
+  KAFKA_BOOTSTRAP: kafka:9092
+  MESSAGING_ENABLED: "true"
+  MODELS_DIR: /app/models
+  CONFIG_DIR: /app/config
+  SIMULATORS_URL: http://simulators:8090
+  MODEL_SERVICE_URL: http://model-service:8000
+  INTEGRATION_PROFILE_ENABLED: "true"
+  INTEGRATION_DEVICE_RISK_ENABLED: "true"
+  INTEGRATION_CASES_ENABLED: "true"
+  INTEGRATION_MODEL_SERVICE_ENABLED: "true"
+  SPRING_LIFECYCLE_TIMEOUT_PER_SHUTDOWN_PHASE: 25s   # < terminationGracePeriodSeconds - preStop
+  JAVA_TOOL_OPTIONS: >-
+    -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50
+    -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps
+    -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: file-adapter-config
+data:
+  DB_URL: jdbc:postgresql://postgres:5432/riskplatform
+  KAFKA_BOOTSTRAP: kafka:9092
+  FILES_DIR: /files

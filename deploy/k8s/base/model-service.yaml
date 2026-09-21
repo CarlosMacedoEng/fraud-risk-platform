@@ -1,0 +1,57 @@
+# model-service (Python/FastAPI): SHAP explanations and challenger scoring, OFF the scoring hot path (ADR-001).
+# Its failure degrades explanations only (TS-11 A), so it runs with fewer replicas and no HPA.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: model-service
+  labels: { app.kubernetes.io/name: model-service, app.kubernetes.io/part-of: fraud-platform }
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app.kubernetes.io/name: model-service }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: model-service, app.kubernetes.io/part-of: fraud-platform }
+    spec:
+      automountServiceAccountToken: false
+      enableServiceLinks: false   # Service "redis" would inject REDIS_PORT=tcp://... and break config binding
+      securityContext: { runAsNonRoot: true, runAsUser: 999, seccompProfile: { type: RuntimeDefault } }
+      initContainers:
+        - name: artifacts
+          image: fraud-platform/artifact-bundle:1.1.0
+          command: ["sh", "-c", "cp -r /bundle/models /artifacts/"]
+          volumeMounts: [{ name: artifacts, mountPath: /artifacts }]
+          resources: { requests: { cpu: 50m, memory: 32Mi }, limits: { memory: 64Mi } }
+          securityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: [ALL] } }
+      containers:
+        - name: model-service
+          image: fraud-platform/model-service:1.0.0
+          ports: [{ name: http, containerPort: 8000 }]
+          env:
+            - { name: MODELS_DIR, value: /models }
+            - { name: ENABLE_FAULT_INJECTION, value: "false" }   # lab-only switch
+          resources:
+            requests: { cpu: 500m, memory: 768Mi }
+            limits: { memory: 1Gi }
+          readinessProbe:
+            httpGet: { path: /health, port: http }
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /health, port: http }
+            periodSeconds: 20
+            failureThreshold: 6
+          volumeMounts:
+            - { name: artifacts, mountPath: /models, subPath: models, readOnly: true }
+            - { name: tmp, mountPath: /tmp }
+          securityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: [ALL] } }
+      volumes:
+        - { name: artifacts, emptyDir: { sizeLimit: 512Mi } }
+        - { name: tmp, emptyDir: { sizeLimit: 256Mi } }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: model-service
+spec:
+  selector: { app.kubernetes.io/name: model-service }
+  ports: [{ name: http, port: 8000, targetPort: http }]

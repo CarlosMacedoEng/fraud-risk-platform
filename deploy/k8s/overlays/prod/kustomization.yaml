@@ -1,0 +1,54 @@
+# Prod overlay (EKS). Illustrative: account IDs, endpoints and ARNs are placeholders; nothing here has been
+# deployed to AWS. Managed dependencies: RDS PostgreSQL (Multi-AZ), ElastiCache Redis (replica + failover),
+# MSK (3 brokers, TLS). Secrets via External Secrets Operator from AWS Secrets Manager.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: fraud-prod
+resources:
+  - namespace.yaml
+  - ../../base
+  - external-secret.yaml
+configMapGenerator:
+  - name: decision-service-config
+    behavior: merge
+    literals:
+      - PLATFORM_ENV=prod
+      - DB_URL=jdbc:postgresql://fraud-platform.cluster-EXAMPLE.eu-west-1.rds.amazonaws.com:5432/riskplatform?sslmode=verify-full
+      - REDIS_HOST=master.fraud-platform.EXAMPLE.euw1.cache.amazonaws.com
+      - SPRING_DATA_REDIS_SSL_ENABLED=true
+      - KAFKA_BOOTSTRAP=b-1.fraud.EXAMPLE.kafka.eu-west-1.amazonaws.com:9094,b-2.fraud.EXAMPLE.kafka.eu-west-1.amazonaws.com:9094,b-3.fraud.EXAMPLE.kafka.eu-west-1.amazonaws.com:9094
+      - SPRING_KAFKA_SECURITY_PROTOCOL=SSL
+      - PLATFORM_MESSAGING_REPLICATION=3
+      - SPRING_CONFIG_ADDITIONAL_LOCATION=optional:file:/app/config-override/
+  # Map keys with dashes (endpoints.device-risk) cannot be set reliably through environment variables, so
+  # endpoint URLs live in a mounted profile file instead.
+  - name: decision-service-overrides
+    files: [application-prod.yml]
+  - name: file-adapter-config
+    behavior: merge
+    literals:
+      - DB_URL=jdbc:postgresql://fraud-platform.cluster-EXAMPLE.eu-west-1.rds.amazonaws.com:5432/riskplatform?sslmode=verify-full
+      - KAFKA_BOOTSTRAP=b-1.fraud.EXAMPLE.kafka.eu-west-1.amazonaws.com:9094
+images:
+  - { name: fraud-platform/decision-service, newName: 123456789012.dkr.ecr.eu-west-1.amazonaws.com/fraud-platform/decision-service, newTag: "1.0.0" }
+  - { name: fraud-platform/file-adapter, newName: 123456789012.dkr.ecr.eu-west-1.amazonaws.com/fraud-platform/file-adapter, newTag: "1.0.0" }
+  - { name: fraud-platform/model-service, newName: 123456789012.dkr.ecr.eu-west-1.amazonaws.com/fraud-platform/model-service, newTag: "1.0.0" }
+  - { name: fraud-platform/artifact-bundle, newName: 123456789012.dkr.ecr.eu-west-1.amazonaws.com/fraud-platform/artifact-bundle, newTag: "1.1.0" }
+patches:
+  - target: { kind: ServiceAccount, name: decision-service }
+    patch: |
+      - op: add
+        path: /metadata/annotations
+        value:
+          eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/fraud-prod-decision-service   # IRSA: S3 dumps bucket only
+  - target: { kind: Deployment, name: decision-service }
+    patch: |
+      - op: add
+        path: /spec/template/spec/volumes/-
+        value: { name: overrides, configMap: { name: decision-service-overrides } }
+      - op: add
+        path: /spec/template/spec/containers/0/volumeMounts/-
+        value: { name: overrides, mountPath: /app/config-override, readOnly: true }
+  - target: { kind: PersistentVolumeClaim, name: file-adapter-files }
+    patch: |
+      - { op: add, path: /spec/storageClassName, value: gp3 }

@@ -1,0 +1,7 @@
+decision-service-84457477b7-z242z 1/1 Running
+file-adapter-5f59588574-zh5dn 1/1 Running
+kafka-5c56bbbbb-f4qjz 1/1 Running
+model-service-5b56fbbf4b-mmkr6 1/1 Running
+postgres-757c58b499-4z9sx 1/1 Running
+redis-75c68f5676-psrh8 1/1 Running
+simulators-77d867b6c4-xswlc 1/1 Running

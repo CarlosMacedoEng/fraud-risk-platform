@@ -1,0 +1,47 @@
+19:35:46 BAD ROLLOUT: MODELS_DIR=/app/models-v2 (wrong path)
+deployment.apps/decision-service env updated
+--- t+15s
+decision-service-7cb6945b86-dc8zv 0/1 Running 0
+decision-service-84457477b7-z242z 1/1 Running 0
+--- t+30s
+decision-service-7cb6945b86-dc8zv 0/1 Running 0
+decision-service-84457477b7-z242z 1/1 Running 0
+--- t+45s
+decision-service-7cb6945b86-dc8zv 0/1 Running 0
+decision-service-84457477b7-z242z 1/1 Running 0
+--- t+60s
+decision-service-7cb6945b86-dc8zv 0/1 Running 0
+decision-service-84457477b7-z242z 1/1 Running 0
+--- t+75s
+decision-service-7cb6945b86-dc8zv 0/1 Running 0
+decision-service-84457477b7-z242z 1/1 Running 0
+--- t+90s
+decision-service-7cb6945b86-dc8zv 0/1 Running 0
+decision-service-84457477b7-z242z 1/1 Running 0
+--- t+105s
+decision-service-7cb6945b86-dc8zv 0/1 Running 0
+decision-service-84457477b7-z242z 1/1 Running 0
+--- t+120s
+decision-service-7cb6945b86-dc8zv 0/1 Running 0
+decision-service-84457477b7-z242z 1/1 Running 0
+--- rollout status
+error: timed out waiting for the condition
+--- readiness events of pod/decision-service-7cb6945b86-dc8zv
+  Ready                       False 
+  ContainersReady             False 
+  Warning  Unhealthy  7s (x24 over 118s)  kubelet            spec.containers{decision-service}: Readiness probe failed: HTTP probe failed with statuscode: 503
+--- old pod still serving:
+HTTP 200
+--- endpoints:
+decision-service-84457477b7-z242z ready=true
+decision-service-7cb6945b86-dc8zv ready=false
+19:37:58 FIX: kubectl rollout undo
+Warning: resource deployments/decision-service was previously managed with 'kubectl apply'. Rolling back will not update the kubectl.kubernetes.io/last-applied-configuration annotation, which may cause unexpected behavior on future 'kubectl apply' operations. Consider using 'kubectl apply' with your previous configuration file instead.
+deployment.apps/decision-service rolled back
+deployment "decision-service" successfully rolled out
+deployment.apps/decision-service 
+REVISION  CHANGE-CAUSE
+1         <none>
+3         <none>
+4         <none>
+

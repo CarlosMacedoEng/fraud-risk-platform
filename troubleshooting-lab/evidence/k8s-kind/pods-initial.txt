@@ -1,0 +1,8 @@
+NAME                                READY   STATUS    RESTARTS   AGE   IP            NODE                      NOMINATED NODE   READINESS GATES
+decision-service-84457477b7-z242z   1/1     Running   0          33s   10.244.0.13   fraud-dev-control-plane   <none>           <none>
+file-adapter-5f59588574-zh5dn       1/1     Running   0          32s   10.244.0.16   fraud-dev-control-plane   <none>           <none>
+kafka-5c56bbbbb-f4qjz               1/1     Running   0          11m   10.244.0.6    fraud-dev-control-plane   <none>           <none>
+model-service-5b56fbbf4b-mmkr6      1/1     Running   0          33s   10.244.0.14   fraud-dev-control-plane   <none>           <none>
+postgres-757c58b499-4z9sx           1/1     Running   0          11m   10.244.0.9    fraud-dev-control-plane   <none>           <none>
+redis-75c68f5676-psrh8              1/1     Running   0          11m   10.244.0.10   fraud-dev-control-plane   <none>           <none>
+simulators-77d867b6c4-xswlc         1/1     Running   0          33s   10.244.0.15   fraud-dev-control-plane   <none>           <none>

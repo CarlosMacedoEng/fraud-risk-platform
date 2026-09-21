@@ -1,0 +1,48 @@
+# Dev overlay for a local kind cluster: one replica, in-cluster dependencies, generated dev secret.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: fraud-dev
+resources:
+  - namespace.yaml
+  - ../../base
+  - dependencies.yaml
+secretGenerator:
+  - name: decision-service-db
+    literals: [username=risk, password=risk]        # dev only; prod uses External Secrets (see overlays/prod)
+configMapGenerator:
+  - name: simulators-threat-feed
+    files: [threat_feed_ips.txt]                    # copy of data/samples/threat_feed_ips.txt (kustomize cannot read outside its root)
+  - name: decision-service-config
+    behavior: merge
+    literals: [PLATFORM_ENV=dev, DB_POOL_MAX=10]
+images:                                             # images built by docker compose, loaded with `kind load`
+  - { name: fraud-platform/decision-service, newName: fraud-platform-decision-service, newTag: latest }
+  - { name: fraud-platform/file-adapter, newName: fraud-platform-file-adapter, newTag: latest }
+  - { name: fraud-platform/model-service, newName: fraud-platform-model-service, newTag: latest }
+  - { name: fraud-platform/artifact-bundle, newTag: "1.1.0" }
+patches:
+  - target: { kind: Deployment, name: decision-service }
+    patch: |
+      - { op: replace, path: /spec/replicas, value: 1 }
+      - { op: replace, path: /spec/template/spec/containers/0/resources/requests/cpu, value: 500m }
+      - { op: add, path: /spec/template/spec/containers/0/imagePullPolicy, value: IfNotPresent }
+  - target: { kind: Deployment, name: model-service }
+    patch: |
+      - { op: replace, path: /spec/replicas, value: 1 }
+      - { op: add, path: /spec/template/spec/containers/0/imagePullPolicy, value: IfNotPresent }
+  - target: { kind: Deployment, name: file-adapter }
+    patch: |
+      - { op: add, path: /spec/template/spec/containers/0/imagePullPolicy, value: IfNotPresent }
+  # single node: no HPA (needs metrics-server), no PDB (would block node drains with 1 replica)
+  - target: { kind: HorizontalPodAutoscaler, name: decision-service }
+    patch: |
+      $patch: delete
+      apiVersion: autoscaling/v2
+      kind: HorizontalPodAutoscaler
+      metadata: { name: decision-service }
+  - target: { kind: PodDisruptionBudget, name: decision-service }
+    patch: |
+      $patch: delete
+      apiVersion: policy/v1
+      kind: PodDisruptionBudget
+      metadata: { name: decision-service }

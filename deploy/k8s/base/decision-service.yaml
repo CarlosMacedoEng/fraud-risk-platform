@@ -1,0 +1,163 @@
+# decision-service: real-time scoring API. Sizing and probe settings come from measurements, not defaults:
+#   * ~11.7 CPU-ms per request (Stage 8 calibration) -> 1 vCPU ~ 85 rps at 100%; request 1 CPU, target 60%.
+#   * cold JVM spends minutes in the C2 JIT compiler (J-22) -> startupProbe budget, WarmUpRunner before readiness,
+#     scale-up before saturation (HPA at 60%), maxUnavailable 0.
+#   * readiness includes db, redis, models and strategies; a pod without models is NOT ready (J-29).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: decision-service
+  labels: { app.kubernetes.io/name: decision-service, app.kubernetes.io/part-of: fraud-platform }
+spec:
+  replicas: 3
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: { maxSurge: 1, maxUnavailable: 0 }     # a failed rollout never removes capacity (TS-16)
+  selector:
+    matchLabels: { app.kubernetes.io/name: decision-service }
+  template:
+    metadata:
+      labels: { app.kubernetes.io/name: decision-service, app.kubernetes.io/part-of: fraud-platform }
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8080"
+    spec:
+      serviceAccountName: decision-service
+      enableServiceLinks: false   # Service "redis" would inject REDIS_PORT=tcp://... and break config binding
+      terminationGracePeriodSeconds: 45
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+        fsGroup: 999
+        seccompProfile: { type: RuntimeDefault }
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector: { matchLabels: { app.kubernetes.io/name: decision-service } }
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector: { matchLabels: { app.kubernetes.io/name: decision-service } }
+      initContainers:
+        # Model artifacts and customer configuration are versioned, immutable bundles (image tag = bundle version),
+        # copied into a shared volume. Prod overlay can replace this with an S3 sync; the contract (/artifacts) is the same.
+        - name: artifacts
+          image: fraud-platform/artifact-bundle:1.1.0
+          command: ["sh", "-c", "cp -r /bundle/models /bundle/config /artifacts/ && ls -R /artifacts | head -50"]
+          volumeMounts: [{ name: artifacts, mountPath: /artifacts }]
+          resources:
+            requests: { cpu: 50m, memory: 32Mi }
+            limits: { memory: 64Mi }
+          securityContext: { allowPrivilegeEscalation: false, readOnlyRootFilesystem: true, capabilities: { drop: [ALL] } }
+      containers:
+        - name: decision-service
+          image: fraud-platform/decision-service:1.0.0
+          ports:
+            - { name: http, containerPort: 8080 }
+          envFrom:
+            - configMapRef: { name: decision-service-config }
+          env:
+            - name: DB_USER
+              valueFrom: { secretKeyRef: { name: decision-service-db, key: username } }
+            - name: DB_PASSWORD
+              valueFrom: { secretKeyRef: { name: decision-service-db, key: password } }
+            - name: POD_NAME
+              valueFrom: { fieldRef: { fieldPath: metadata.name } }
+          resources:
+            requests: { cpu: "1", memory: 1536Mi }
+            # No CPU limit: CFS throttling adds latency spikes on a latency-critical JVM (GC and JIT threads burst).
+            # Capacity is controlled by requests + HPA + admission control. Memory limit = request (no overcommit).
+            limits: { memory: 1536Mi }
+          startupProbe:                      # up to 3 min for boot + model load + warm-up before liveness applies
+            httpGet: { path: /actuator/health/liveness, port: http }
+            periodSeconds: 5
+            failureThreshold: 36
+          readinessProbe:
+            httpGet: { path: /actuator/health/readiness, port: http }
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+          livenessProbe:                     # liveness = JVM responsive only; dependencies never restart a pod
+            httpGet: { path: /actuator/health/liveness, port: http }
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 6
+          lifecycle:
+            preStop:                         # let endpoints/load balancers drop the pod before graceful shutdown
+              sleep: { seconds: 10 }
+          volumeMounts:
+            - { name: artifacts, mountPath: /app/models, subPath: models, readOnly: true }
+            - { name: artifacts, mountPath: /app/config, subPath: config, readOnly: true }
+            - { name: dumps, mountPath: /dumps }
+            - { name: tmp, mountPath: /tmp }
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: { drop: [ALL] }
+      volumes:
+        - { name: artifacts, emptyDir: { sizeLimit: 512Mi } }
+        - { name: dumps, emptyDir: { sizeLimit: 2Gi } }     # heap dumps / JFR; ship to S3 before the pod is gone
+        - { name: tmp, emptyDir: { sizeLimit: 256Mi } }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: decision-service
+  labels: { app.kubernetes.io/name: decision-service }
+spec:
+  selector: { app.kubernetes.io/name: decision-service }
+  ports:
+    - { name: http, port: 80, targetPort: http }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: decision-service
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels: { app.kubernetes.io/name: decision-service }
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: decision-service
+spec:
+  scaleTargetRef: { apiVersion: apps/v1, kind: Deployment, name: decision-service }
+  minReplicas: 3
+  maxReplicas: 12
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target: { type: Utilization, averageUtilization: 60 }   # headroom: new pods need minutes to warm up (J-22)
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies: [{ type: Pods, value: 2, periodSeconds: 60 }]
+    scaleDown:
+      stabilizationWindowSeconds: 600                           # avoid flapping; cold pods are expensive
+      policies: [{ type: Pods, value: 1, periodSeconds: 120 }]
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: decision-service
+automountServiceAccountToken: false
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: decision-service
+spec:
+  podSelector: { matchLabels: { app.kubernetes.io/name: decision-service } }
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - namespaceSelector: { matchLabels: { fraud-platform/access: scoring } }   # customer gateway namespace
+        - podSelector: { matchLabels: { app.kubernetes.io/name: file-adapter } }
+        - namespaceSelector: { matchLabels: { kubernetes.io/metadata.name: monitoring } }
+      ports: [{ port: 8080 }]
