@@ -1,0 +1,482 @@
+{
+  "customer": "quillon-pay",
+  "modelVersion": "quillon-pay-lgbm-1.0.0",
+  "strategyVersion": "1.1.0",
+  "globalImportance": {
+    "hour_of_day": 0.0795,
+    "is_foreign_merchant": 0.0792,
+    "amount_to_baseline": 0.0703,
+    "amount_log": 0.0439,
+    "ip_country_mismatch": 0.0247,
+    "is_ecom": 0.0125,
+    "is_transfer": 0.0124,
+    "log_seconds_since_last": 0.0095,
+    "beneficiary_foreign": 0.0076,
+    "tenure_log": 0.0075,
+    "is_night": 0.0068,
+    "account_amount_24h_to_baseline": 0.0056,
+    "is_new_device": 0.0051,
+    "device_txn_count_1h": 0.0046,
+    "mcc_high_risk": 0.0037,
+    "card_country_change_1h": 0.0035,
+    "card_txn_count_1h": 0.003,
+    "account_txn_count_24h": 0.0011,
+    "is_pos": 0.0003,
+    "has_device": 0.0002,
+    "is_new_beneficiary": 0.0001,
+    "card_txn_count_10m": 0.0,
+    "risk_tier_elevated": 0.0
+  },
+  "contrastingPairs": [
+    {
+      "label": "Card payment (e-commerce)",
+      "flagged": {
+        "transactionId": "QPY-T000382964",
+        "type": "CARD_PAYMENT",
+        "channel": "ECOM",
+        "amount": 595.32,
+        "segment": "merchant_owner",
+        "groundTruth": "stolen_card",
+        "decision": "DECLINE",
+        "riskScore": 0.947,
+        "modelProbability": 0.8673,
+        "anomalyPercentile": 0.9993,
+        "graphRisk": 0.0,
+        "rulePoints": 55.0,
+        "rulesHit": [
+          "GEO-001",
+          "MCC-001"
+        ],
+        "topModelReasons": [
+          {
+            "feature": "is_foreign_merchant",
+            "value": 1.0,
+            "contribution": 4.928,
+            "reasonCode": "UNUSUAL_LOCATION"
+          },
+          {
+            "feature": "card_country_change_1h",
+            "value": 1.0,
+            "contribution": 1.401,
+            "reasonCode": "UNUSUAL_LOCATION"
+          },
+          {
+            "feature": "ip_country_mismatch",
+            "value": 0.0,
+            "contribution": 1.122,
+            "reasonCode": "UNUSUAL_LOCATION"
+          }
+        ]
+      },
+      "approved": {
+        "transactionId": "QPY-T000385134",
+        "type": "CARD_PAYMENT",
+        "channel": "ECOM",
+        "amount": 669.75,
+        "segment": "merchant_owner",
+        "groundTruth": "legitimate",
+        "decision": "APPROVE",
+        "riskScore": 0.036,
+        "modelProbability": 0.0008,
+        "anomalyPercentile": 0.7628,
+        "graphRisk": 0.0,
+        "rulePoints": 5.0,
+        "rulesHit": [
+          "MCC-001"
+        ],
+        "topModelReasons": [
+          {
+            "feature": "amount_to_baseline",
+            "value": 5.15,
+            "contribution": 0.107,
+            "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+          },
+          {
+            "feature": "amount_log",
+            "value": 6.508,
+            "contribution": 0.08,
+            "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+          },
+          {
+            "feature": "mcc_high_risk",
+            "value": 1.0,
+            "contribution": 0.005,
+            "reasonCode": "HIGH_RISK_MERCHANT"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Account-to-account transfer",
+      "flagged": {
+        "transactionId": "QPY-T000387838",
+        "type": "TRANSFER",
+        "channel": "MOBILE",
+        "amount": 523.8,
+        "segment": "casual",
+        "groundTruth": "fraud_ring",
+        "decision": "REVIEW",
+        "riskScore": 0.868,
+        "modelProbability": 0.5847,
+        "anomalyPercentile": 0.9998,
+        "graphRisk": 1.0,
+        "rulePoints": 20.0,
+        "rulesHit": [
+          "BEH-001"
+        ],
+        "topModelReasons": [
+          {
+            "feature": "ip_country_mismatch",
+            "value": 1.0,
+            "contribution": 2.881,
+            "reasonCode": "UNUSUAL_LOCATION"
+          },
+          {
+            "feature": "beneficiary_foreign",
+            "value": 1.0,
+            "contribution": 1.993,
+            "reasonCode": "NEW_BENEFICIARY"
+          },
+          {
+            "feature": "amount_to_baseline",
+            "value": 27.0,
+            "contribution": 1.791,
+            "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+          }
+        ]
+      },
+      "approved": {
+        "transactionId": "QPY-T000383235",
+        "type": "TRANSFER",
+        "channel": "MOBILE",
+        "amount": 456.76,
+        "segment": "casual",
+        "groundTruth": "legitimate",
+        "decision": "APPROVE",
+        "riskScore": 0.002,
+        "modelProbability": 0.0016,
+        "anomalyPercentile": 0.9547,
+        "graphRisk": 0.0,
+        "rulePoints": 0.0,
+        "rulesHit": [],
+        "topModelReasons": [
+          {
+            "feature": "amount_to_baseline",
+            "value": 15.499,
+            "contribution": 0.763,
+            "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+          },
+          {
+            "feature": "log_seconds_since_last",
+            "value": 7.679,
+            "contribution": 0.118,
+            "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+          },
+          {
+            "feature": "hour_of_day",
+            "value": 6.0,
+            "contribution": 0.049,
+            "reasonCode": "UNUSUAL_TIME"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Card payment (in store)",
+      "flagged": {
+        "transactionId": "QPY-T000433387",
+        "type": "CARD_PAYMENT",
+        "channel": "POS",
+        "amount": 233.7,
+        "segment": "casual",
+        "groundTruth": "geo_counterfeit",
+        "decision": "REVIEW",
+        "riskScore": 0.838,
+        "modelProbability": 0.6484,
+        "anomalyPercentile": 0.9987,
+        "graphRisk": 0.0,
+        "rulePoints": 50.0,
+        "rulesHit": [
+          "GEO-001"
+        ],
+        "topModelReasons": [
+          {
+            "feature": "is_foreign_merchant",
+            "value": 1.0,
+            "contribution": 4.004,
+            "reasonCode": "UNUSUAL_LOCATION"
+          },
+          {
+            "feature": "card_country_change_1h",
+            "value": 1.0,
+            "contribution": 2.018,
+            "reasonCode": "UNUSUAL_LOCATION"
+          },
+          {
+            "feature": "ip_country_mismatch",
+            "value": 0.0,
+            "contribution": 1.765,
+            "reasonCode": "UNUSUAL_LOCATION"
+          }
+        ]
+      },
+      "approved": {
+        "transactionId": "QPY-T000393111",
+        "type": "CARD_PAYMENT",
+        "channel": "POS",
+        "amount": 214.64,
+        "segment": "casual",
+        "groundTruth": "legitimate",
+        "decision": "APPROVE",
+        "riskScore": 0.336,
+        "modelProbability": 0.0013,
+        "anomalyPercentile": 0.9992,
+        "graphRisk": 0.0,
+        "rulePoints": 0.0,
+        "rulesHit": [],
+        "topModelReasons": [
+          {
+            "feature": "amount_to_baseline",
+            "value": 7.378,
+            "contribution": 0.277,
+            "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+          },
+          {
+            "feature": "amount_log",
+            "value": 5.374,
+            "contribution": 0.124,
+            "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+          },
+          {
+            "feature": "tenure_log",
+            "value": 3.664,
+            "contribution": 0.081,
+            "reasonCode": "CUSTOMER_PROFILE"
+          }
+        ]
+      }
+    }
+  ],
+  "falsePositives": [
+    {
+      "transactionId": "QPY-T000415321",
+      "type": "CARD_PAYMENT",
+      "channel": "ECOM",
+      "amount": 508.95,
+      "segment": "frequent",
+      "groundTruth": "legitimate",
+      "decision": "REVIEW",
+      "riskScore": 0.779,
+      "modelProbability": 0.6574,
+      "anomalyPercentile": 0.9969,
+      "graphRisk": 0.2,
+      "rulePoints": 25.0,
+      "rulesHit": [
+        "BEH-001",
+        "MCC-001"
+      ],
+      "topModelReasons": [
+        {
+          "feature": "is_foreign_merchant",
+          "value": 1.0,
+          "contribution": 2.751,
+          "reasonCode": "UNUSUAL_LOCATION"
+        },
+        {
+          "feature": "ip_country_mismatch",
+          "value": 1.0,
+          "contribution": 1.784,
+          "reasonCode": "UNUSUAL_LOCATION"
+        },
+        {
+          "feature": "amount_to_baseline",
+          "value": 12.778,
+          "contribution": 1.396,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        }
+      ]
+    },
+    {
+      "transactionId": "QPY-T000406619",
+      "type": "CARD_PAYMENT",
+      "channel": "POS",
+      "amount": 726.65,
+      "segment": "frequent",
+      "groundTruth": "legitimate",
+      "decision": "REVIEW",
+      "riskScore": 0.607,
+      "modelProbability": 0.5222,
+      "anomalyPercentile": 0.9969,
+      "graphRisk": 0.0,
+      "rulePoints": 5.0,
+      "rulesHit": [
+        "MCC-001"
+      ],
+      "topModelReasons": [
+        {
+          "feature": "is_foreign_merchant",
+          "value": 1.0,
+          "contribution": 5.103,
+          "reasonCode": "UNUSUAL_LOCATION"
+        },
+        {
+          "feature": "ip_country_mismatch",
+          "value": 0.0,
+          "contribution": 1.731,
+          "reasonCode": "UNUSUAL_LOCATION"
+        },
+        {
+          "feature": "amount_to_baseline",
+          "value": 14.615,
+          "contribution": 0.822,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        }
+      ]
+    },
+    {
+      "transactionId": "QPY-T000445981",
+      "type": "TRANSFER",
+      "channel": "MOBILE",
+      "amount": 2017.19,
+      "segment": "merchant_owner",
+      "groundTruth": "legitimate",
+      "decision": "REVIEW",
+      "riskScore": 0.404,
+      "modelProbability": 0.0045,
+      "anomalyPercentile": 0.9971,
+      "graphRisk": 0.4,
+      "rulePoints": 20.0,
+      "rulesHit": [
+        "BEN-003",
+        "BEH-001"
+      ],
+      "topModelReasons": [
+        {
+          "feature": "amount_to_baseline",
+          "value": 22.143,
+          "contribution": 1.234,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        },
+        {
+          "feature": "tenure_log",
+          "value": 4.234,
+          "contribution": 0.464,
+          "reasonCode": "CUSTOMER_PROFILE"
+        },
+        {
+          "feature": "amount_log",
+          "value": 7.61,
+          "contribution": 0.183,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        }
+      ]
+    }
+  ],
+  "falseNegatives": [
+    {
+      "transactionId": "QPY-T000457388",
+      "type": "TRANSFER",
+      "channel": "WEB",
+      "amount": 88.81,
+      "segment": "frequent",
+      "groundTruth": "account_takeover",
+      "decision": "APPROVE",
+      "riskScore": 0.001,
+      "modelProbability": 0.0007,
+      "anomalyPercentile": 0.9734,
+      "graphRisk": 0.0,
+      "rulePoints": 0.0,
+      "rulesHit": [],
+      "topModelReasons": [
+        {
+          "feature": "device_txn_count_1h",
+          "value": 2.0,
+          "contribution": 0.009,
+          "reasonCode": "HIGH_TRANSACTION_VELOCITY"
+        },
+        {
+          "feature": "log_seconds_since_last",
+          "value": 5.678,
+          "contribution": 0.009,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        },
+        {
+          "feature": "account_amount_24h_to_baseline",
+          "value": 13.232,
+          "contribution": 0.001,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        }
+      ]
+    },
+    {
+      "transactionId": "QPY-T000457384",
+      "type": "TRANSFER",
+      "channel": "WEB",
+      "amount": 80.59,
+      "segment": "frequent",
+      "groundTruth": "account_takeover",
+      "decision": "APPROVE",
+      "riskScore": 0.001,
+      "modelProbability": 0.0007,
+      "anomalyPercentile": 0.9033,
+      "graphRisk": 0.0,
+      "rulePoints": 0.0,
+      "rulesHit": [],
+      "topModelReasons": [
+        {
+          "feature": "log_seconds_since_last",
+          "value": 7.041,
+          "contribution": 0.008,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        },
+        {
+          "feature": "device_txn_count_1h",
+          "value": 1.0,
+          "contribution": 0.007,
+          "reasonCode": "HIGH_TRANSACTION_VELOCITY"
+        },
+        {
+          "feature": "account_amount_24h_to_baseline",
+          "value": 9.918,
+          "contribution": 0.002,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        }
+      ]
+    },
+    {
+      "transactionId": "QPY-T000454864",
+      "type": "TRANSFER",
+      "channel": "MOBILE",
+      "amount": 154.05,
+      "segment": "merchant_owner",
+      "groundTruth": "account_takeover",
+      "decision": "APPROVE",
+      "riskScore": 0.001,
+      "modelProbability": 0.0007,
+      "anomalyPercentile": 0.821,
+      "graphRisk": 0.0,
+      "rulePoints": 0.0,
+      "rulesHit": [],
+      "topModelReasons": [
+        {
+          "feature": "amount_log",
+          "value": 5.044,
+          "contribution": 0.092,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        },
+        {
+          "feature": "log_seconds_since_last",
+          "value": 7.186,
+          "contribution": 0.035,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        },
+        {
+          "feature": "account_amount_24h_to_baseline",
+          "value": 7.021,
+          "contribution": 0.008,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        }
+      ]
+    }
+  ]
+}

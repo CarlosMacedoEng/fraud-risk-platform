@@ -1,0 +1,362 @@
+{
+  "customer": "quillon-pay",
+  "modelVersion": "quillon-pay-lgbm-1.1.0",
+  "strategyVersion": "1.0.0",
+  "reviewBudget": 0.002,
+  "declinePrecisionTarget": 0.8,
+  "costAssumptions": {
+    "false_decline": 10.0,
+    "review": 3.0
+  },
+  "testWindow": {
+    "from": "2026-04-14 00:02:35.914838+00:00",
+    "to": "2026-05-01 23:54:55+00:00",
+    "rows": 93482,
+    "fraud": 540
+  },
+  "variants": {
+    "rules_only": {
+      "weights": null,
+      "thresholds": {
+        "review": 0.5,
+        "decline": 0.9
+      },
+      "test": {
+        "roc_auc": 0.6371,
+        "pr_auc": 0.1555,
+        "precision": 0.3418,
+        "recall": 0.1741,
+        "f1": 0.2307,
+        "false_positive_rate": 0.00195,
+        "false_negative_rate": 0.8259,
+        "decline_precision": 1.0,
+        "precision_at_review_capacity": 0.3782,
+        "recall_at_review_capacity": 0.1352,
+        "reviews_per_day": 13.2,
+        "declines_per_day": 2.1,
+        "legit_flagged_per_1000_legit": 1.947,
+        "false_declines": 0,
+        "fraud_amount_total": 98126.16,
+        "fraud_amount_missed": 69536.79,
+        "fraud_amount_prevented": 28589.37,
+        "estimated_total_cost": 70250.79,
+        "incident_recall": 0.471,
+        "recall_by_fraud_type": {
+          "account_takeover": 0.107,
+          "card_testing": 0.587,
+          "fraud_ring": 0.091,
+          "geo_counterfeit": 0.25,
+          "stolen_card": 0.726,
+          "transaction_laundering": 0.022,
+          "account_takeover (emerging variant)": 0.107
+        },
+        "tp": 94,
+        "fp": 181,
+        "fn": 446,
+        "tn": 92761
+      }
+    },
+    "lr_only": {
+      "weights": null,
+      "thresholds": {
+        "review": 0.999992,
+        "decline": 1.01
+      },
+      "test": {
+        "roc_auc": 0.9939,
+        "pr_auc": 0.9379,
+        "precision": 1.0,
+        "recall": 0.213,
+        "f1": 0.3511,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.787,
+        "decline_precision": null,
+        "precision_at_review_capacity": 0.9793,
+        "recall_at_review_capacity": 0.35,
+        "reviews_per_day": 6.4,
+        "declines_per_day": 0.0,
+        "legit_flagged_per_1000_legit": 0.0,
+        "false_declines": 0,
+        "fraud_amount_total": 98126.16,
+        "fraud_amount_missed": 60705.45,
+        "fraud_amount_prevented": 37420.71,
+        "estimated_total_cost": 61050.45,
+        "incident_recall": 0.49,
+        "recall_by_fraud_type": {
+          "account_takeover": 0.0,
+          "card_testing": 0.239,
+          "fraud_ring": 0.318,
+          "geo_counterfeit": 0.0,
+          "stolen_card": 0.411,
+          "transaction_laundering": 0.183,
+          "account_takeover (emerging variant)": 0.0
+        },
+        "tp": 115,
+        "fp": 0,
+        "fn": 425,
+        "tn": 92942
+      }
+    },
+    "ml_only": {
+      "weights": null,
+      "thresholds": {
+        "review": 0.609543,
+        "decline": 0.814178
+      },
+      "test": {
+        "roc_auc": 0.9956,
+        "pr_auc": 0.8789,
+        "precision": 1.0,
+        "recall": 0.3074,
+        "f1": 0.4703,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.6926,
+        "decline_precision": 1.0,
+        "precision_at_review_capacity": 0.9689,
+        "recall_at_review_capacity": 0.3463,
+        "reviews_per_day": 8.3,
+        "declines_per_day": 0.9,
+        "legit_flagged_per_1000_legit": 0.0,
+        "false_declines": 0,
+        "fraud_amount_total": 98126.16,
+        "fraud_amount_missed": 58204.6,
+        "fraud_amount_prevented": 39921.56,
+        "estimated_total_cost": 58651.6,
+        "incident_recall": 0.549,
+        "recall_by_fraud_type": {
+          "account_takeover": 0.0,
+          "card_testing": 0.739,
+          "fraud_ring": 0.409,
+          "geo_counterfeit": 0.5,
+          "stolen_card": 0.603,
+          "transaction_laundering": 0.21,
+          "account_takeover (emerging variant)": 0.0
+        },
+        "tp": 166,
+        "fp": 0,
+        "fn": 374,
+        "tn": 92942
+      }
+    },
+    "hybrid_rules_ml": {
+      "weights": {
+        "model": 1.0,
+        "rules": 0.7,
+        "graph": 0.0,
+        "anomaly": 0.0
+      },
+      "thresholds": {
+        "review": 0.63518,
+        "decline": 0.891619
+      },
+      "test": {
+        "roc_auc": 0.989,
+        "pr_auc": 0.7113,
+        "precision": 0.7478,
+        "recall": 0.3185,
+        "f1": 0.4468,
+        "false_positive_rate": 0.00062,
+        "false_negative_rate": 0.6815,
+        "decline_precision": 1.0,
+        "precision_at_review_capacity": 0.8549,
+        "recall_at_review_capacity": 0.3056,
+        "reviews_per_day": 10.7,
+        "declines_per_day": 2.1,
+        "legit_flagged_per_1000_legit": 0.624,
+        "false_declines": 0,
+        "fraud_amount_total": 98126.16,
+        "fraud_amount_missed": 49592.93,
+        "fraud_amount_prevented": 48533.23,
+        "estimated_total_cost": 50168.93,
+        "incident_recall": 0.588,
+        "recall_by_fraud_type": {
+          "account_takeover": 0.0,
+          "card_testing": 0.804,
+          "fraud_ring": 0.5,
+          "geo_counterfeit": 0.75,
+          "stolen_card": 0.781,
+          "transaction_laundering": 0.174,
+          "account_takeover (emerging variant)": 0.0
+        },
+        "tp": 172,
+        "fp": 58,
+        "fn": 368,
+        "tn": 92884
+      }
+    },
+    "hybrid_full": {
+      "weights": {
+        "model": 1.0,
+        "rules": 0.7,
+        "graph": 0.4,
+        "anomaly": 0.4
+      },
+      "thresholds": {
+        "review": 0.760399,
+        "decline": 0.935643
+      },
+      "test": {
+        "roc_auc": 0.9944,
+        "pr_auc": 0.8187,
+        "precision": 0.7456,
+        "recall": 0.3148,
+        "f1": 0.4427,
+        "false_positive_rate": 0.00062,
+        "false_negative_rate": 0.6852,
+        "decline_precision": 1.0,
+        "precision_at_review_capacity": 0.943,
+        "recall_at_review_capacity": 0.337,
+        "reviews_per_day": 10.9,
+        "declines_per_day": 1.8,
+        "legit_flagged_per_1000_legit": 0.624,
+        "false_declines": 0,
+        "fraud_amount_total": 98126.16,
+        "fraud_amount_missed": 41321.4,
+        "fraud_amount_prevented": 56804.76,
+        "estimated_total_cost": 41909.4,
+        "incident_recall": 0.725,
+        "recall_by_fraud_type": {
+          "account_takeover": 0.0,
+          "card_testing": 0.783,
+          "fraud_ring": 0.818,
+          "geo_counterfeit": 0.75,
+          "stolen_card": 0.74,
+          "transaction_laundering": 0.161,
+          "account_takeover (emerging variant)": 0.0
+        },
+        "tp": 170,
+        "fp": 58,
+        "fn": 370,
+        "tn": 92884
+      }
+    },
+    "strategy_as_configured": {
+      "weights": {
+        "model": 1.0,
+        "rules": 0.4,
+        "graph": 0.8,
+        "anomaly": 0.2
+      },
+      "thresholds": {
+        "default": {
+          "review": 0.5,
+          "decline": 0.75
+        },
+        "bySegment": {
+          "merchant_owner": {
+            "review": 0.55
+          }
+        },
+        "byChannel": {}
+      },
+      "test": {
+        "roc_auc": 0.9944,
+        "pr_auc": 0.6824,
+        "precision": 0.5082,
+        "recall": 0.8056,
+        "f1": 0.6232,
+        "false_positive_rate": 0.00453,
+        "false_negative_rate": 0.1944,
+        "decline_precision": 0.5604,
+        "precision_at_review_capacity": 0.7927,
+        "recall_at_review_capacity": 0.2833,
+        "reviews_per_day": 24.6,
+        "declines_per_day": 23.0,
+        "legit_flagged_per_1000_legit": 4.53,
+        "false_declines": 182,
+        "fraud_amount_total": 98126.16,
+        "fraud_amount_missed": 13042.76,
+        "fraud_amount_prevented": 85083.4,
+        "estimated_total_cost": 16188.76,
+        "incident_recall": 0.824,
+        "recall_by_fraud_type": {
+          "account_takeover": 0.036,
+          "card_testing": 0.913,
+          "fraud_ring": 1.0,
+          "geo_counterfeit": 1.0,
+          "stolen_card": 0.89,
+          "transaction_laundering": 0.82,
+          "account_takeover (emerging variant)": 0.036
+        },
+        "tp": 435,
+        "fp": 421,
+        "fn": 105,
+        "tn": 92521
+      }
+    }
+  },
+  "ruleStats": {
+    "EMR-001": {
+      "hits_valid": 0,
+      "precision_valid_observed": null,
+      "hits_test": 0,
+      "precision_test": null
+    },
+    "VEL-001": {
+      "hits_valid": 24,
+      "precision_valid_observed": 0.5833,
+      "hits_test": 27,
+      "precision_test": 0.7037
+    },
+    "VEL-002": {
+      "hits_valid": 18,
+      "precision_valid_observed": 0.6667,
+      "hits_test": 24,
+      "precision_test": 0.625
+    },
+    "DEV-001": {
+      "hits_valid": 17,
+      "precision_valid_observed": 0.3529,
+      "hits_test": 24,
+      "precision_test": 0.375
+    },
+    "GEO-001": {
+      "hits_valid": 64,
+      "precision_valid_observed": 0.4219,
+      "hits_test": 96,
+      "precision_test": 0.8854
+    },
+    "GEO-003": {
+      "hits_valid": 18,
+      "precision_valid_observed": 0.6667,
+      "hits_test": 20,
+      "precision_test": 0.9
+    },
+    "BEN-001": {
+      "hits_valid": 847,
+      "precision_valid_observed": 0.0071,
+      "hits_test": 988,
+      "precision_test": 0.0061
+    },
+    "BEN-003": {
+      "hits_valid": 49,
+      "precision_valid_observed": 0.0204,
+      "hits_test": 58,
+      "precision_test": 0.0172
+    },
+    "BEH-001": {
+      "hits_valid": 830,
+      "precision_valid_observed": 0.0217,
+      "hits_test": 1024,
+      "precision_test": 0.0732
+    },
+    "MCC-001": {
+      "hits_valid": 1290,
+      "precision_valid_observed": 0.0116,
+      "hits_test": 1606,
+      "precision_test": 0.0336
+    }
+  },
+  "pythonInferenceLatency": {
+    "supervised": {
+      "p50_ms": 0.015,
+      "p95_ms": 0.03,
+      "p99_ms": 0.057
+    },
+    "anomaly": {
+      "p50_ms": 0.826,
+      "p95_ms": 1.181,
+      "p99_ms": 1.527
+    }
+  }
+}

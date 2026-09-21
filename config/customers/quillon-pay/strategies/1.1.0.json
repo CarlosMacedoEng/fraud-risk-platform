@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "customerId": "quillon-pay",
+  "version": "1.1.0",
+  "changeSummary": "Fix decline threshold (1.0.0 declined too many genuine payments), require context change for BEH-001, combine new beneficiary with new device, reduce MCC-001 weight. Model 1.1.0 scored in shadow mode.",
+  "model": {
+    "version": "quillon-pay-lgbm-1.0.0",
+    "challengerVersion": "quillon-pay-lgbm-1.1.0",
+    "challengerRolloutPercentage": 0,
+    "challengerMode": "SHADOW"
+  },
+  "weights": {
+    "model": 1.0,
+    "rules": 0.7,
+    "graph": 0.4,
+    "anomaly": 0.4
+  },
+  "anomaly": {
+    "tailStartPercentile": 0.995
+  },
+  "thresholds": {
+    "default": {
+      "review": 0.6,
+      "decline": 0.9
+    },
+    "bySegment": {
+      "merchant_owner": {
+        "review": 0.55
+      }
+    },
+    "byChannel": {}
+  },
+  "channelPolicies": {
+    "ECOM": {
+      "failMode": "APPROVE",
+      "maxFailOpenAmount": 100
+    },
+    "POS": {
+      "failMode": "APPROVE",
+      "maxFailOpenAmount": 100
+    },
+    "MOBILE": {
+      "failMode": "DECLINE"
+    },
+    "WEB": {
+      "failMode": "DECLINE"
+    }
+  },
+  "lists": {
+    "highRiskCountries": [
+      "KP",
+      "IR",
+      "MM"
+    ],
+    "blockedDevices": [],
+    "trustedDevices": [],
+    "blockedCardBins": [],
+    "highRiskMcc": [
+      "5732",
+      "5944",
+      "5816",
+      "6051",
+      "7995"
+    ]
+  },
+  "emergencyRules": [
+    {
+      "id": "EMR-001",
+      "description": "Device on the blocklist",
+      "action": "DECLINE",
+      "reasonCode": "BLOCKED_ENTITY",
+      "when": {
+        "field": "device_id",
+        "op": "in_list",
+        "value": "blockedDevices"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "VEL-001",
+      "description": "Card-testing burst (card or device)",
+      "points": 55,
+      "reasonCode": "HIGH_TRANSACTION_VELOCITY",
+      "when": {
+        "any": [
+          {
+            "field": "card_txn_count_10m",
+            "op": "gte",
+            "value": 3
+          },
+          {
+            "field": "device_txn_count_1h",
+            "op": "gte",
+            "value": 8
+          }
+        ]
+      }
+    },
+    {
+      "id": "VEL-002",
+      "description": "Micro-payment on a card with recent activity",
+      "points": 20,
+      "reasonCode": "HIGH_TRANSACTION_VELOCITY",
+      "when": {
+        "all": [
+          {
+            "field": "amount",
+            "op": "lt",
+            "value": 3
+          },
+          {
+            "field": "card_txn_count_1h",
+            "op": "gte",
+            "value": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEV-001",
+      "description": "New device with high amount",
+      "points": 20,
+      "reasonCode": "NEW_DEVICE",
+      "when": {
+        "all": [
+          {
+            "field": "is_new_device",
+            "op": "eq",
+            "value": 1
+          },
+          {
+            "field": "amount_to_baseline",
+            "op": "gte",
+            "value": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "GEO-001",
+      "description": "Card used in two countries within one hour",
+      "points": 50,
+      "reasonCode": "UNUSUAL_LOCATION",
+      "when": {
+        "field": "card_country_change_1h",
+        "op": "eq",
+        "value": 1
+      }
+    },
+    {
+      "id": "GEO-003",
+      "description": "Foreign IP on a new device",
+      "points": 20,
+      "reasonCode": "UNUSUAL_LOCATION",
+      "when": {
+        "all": [
+          {
+            "field": "ip_country_mismatch",
+            "op": "eq",
+            "value": 1
+          },
+          {
+            "field": "is_new_device",
+            "op": "eq",
+            "value": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "BEN-001",
+      "description": "New beneficiary with high amount from a new device",
+      "points": 40,
+      "reasonCode": "NEW_BENEFICIARY",
+      "when": {
+        "all": [
+          {
+            "field": "is_new_beneficiary",
+            "op": "eq",
+            "value": 1
+          },
+          {
+            "field": "amount_to_baseline",
+            "op": "gte",
+            "value": 3
+          },
+          {
+            "field": "is_new_device",
+            "op": "eq",
+            "value": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "BEN-003",
+      "description": "Policy: first wallet transfer to a new beneficiary above 1000 is always reviewed",
+      "action": "REVIEW",
+      "reasonCode": "NEW_BENEFICIARY",
+      "when": {
+        "all": [
+          {
+            "field": "is_new_beneficiary",
+            "op": "eq",
+            "value": 1
+          },
+          {
+            "field": "amount",
+            "op": "gte",
+            "value": 1000
+          }
+        ]
+      }
+    },
+    {
+      "id": "BEH-001",
+      "description": "Amount far above baseline together with a context change (new device, foreign IP or new beneficiary)",
+      "points": 20,
+      "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION",
+      "when": {
+        "all": [
+          {
+            "field": "amount_to_baseline",
+            "op": "gte",
+            "value": 12
+          },
+          {
+            "any": [
+              {
+                "field": "is_new_device",
+                "op": "eq",
+                "value": 1
+              },
+              {
+                "field": "ip_country_mismatch",
+                "op": "eq",
+                "value": 1
+              },
+              {
+                "field": "is_new_beneficiary",
+                "op": "eq",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "MCC-001",
+      "description": "High-risk merchant category, high amount",
+      "points": 5,
+      "reasonCode": "HIGH_RISK_MERCHANT",
+      "when": {
+        "all": [
+          {
+            "field": "mcc",
+            "op": "in_list",
+            "value": "highRiskMcc"
+          },
+          {
+            "field": "amount_to_baseline",
+            "op": "gte",
+            "value": 4
+          }
+        ]
+      }
+    }
+  ],
+  "thresholdRationale": "decline raised 0.75 -> 0.90 to cut false declines seen with 1.0.0; review lowered to 0.60 to recover recall within the review budget"
+}

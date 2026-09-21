@@ -1,0 +1,19 @@
+{
+  "customerId": "aldermoor-bank",
+  "versions": [
+    {
+      "modelVersion": "aldermoor-bank-lgbm-1.0.0",
+      "featureSet": "base",
+      "createdAt": "2026-09-21T13:11:30+00:00",
+      "status": "CANDIDATE",
+      "validPrAuc": 0.7683
+    },
+    {
+      "modelVersion": "aldermoor-bank-lgbm-1.1.0",
+      "featureSet": "graph",
+      "createdAt": "2026-09-21T13:11:49+00:00",
+      "status": "CANDIDATE",
+      "validPrAuc": 0.6493
+    }
+  ]
+}

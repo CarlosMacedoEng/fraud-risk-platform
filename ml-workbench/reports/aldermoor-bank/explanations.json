@@ -1,0 +1,479 @@
+{
+  "customer": "aldermoor-bank",
+  "modelVersion": "aldermoor-bank-lgbm-1.0.0",
+  "strategyVersion": "1.1.0",
+  "globalImportance": {
+    "is_ecom": 0.2921,
+    "amount_to_baseline": 0.1643,
+    "hour_of_day": 0.0859,
+    "is_transfer": 0.0664,
+    "amount_log": 0.0582,
+    "has_device": 0.0451,
+    "account_amount_24h_to_baseline": 0.0337,
+    "device_txn_count_1h": 0.0307,
+    "log_seconds_since_last": 0.0288,
+    "ip_country_mismatch": 0.0249,
+    "is_foreign_merchant": 0.0197,
+    "tenure_log": 0.0165,
+    "is_new_beneficiary": 0.0115,
+    "is_pos": 0.0091,
+    "is_new_device": 0.0073,
+    "card_country_change_1h": 0.0067,
+    "card_txn_count_1h": 0.0064,
+    "beneficiary_foreign": 0.0052,
+    "account_txn_count_24h": 0.005,
+    "mcc_high_risk": 0.0045,
+    "is_night": 0.0031,
+    "card_txn_count_10m": 0.0012,
+    "risk_tier_elevated": 0.0006
+  },
+  "contrastingPairs": [
+    {
+      "label": "Card payment (e-commerce)",
+      "flagged": {
+        "transactionId": "ALD-T000625747",
+        "type": "CARD_PAYMENT",
+        "channel": "ECOM",
+        "amount": 416.84,
+        "segment": "student",
+        "groundTruth": "fraud_ring",
+        "decision": "REVIEW",
+        "riskScore": 0.862,
+        "modelProbability": 0.6263,
+        "anomalyPercentile": 0.9991,
+        "graphRisk": 1.0,
+        "rulePoints": 5.0,
+        "rulesHit": [
+          "MCC-001"
+        ],
+        "topModelReasons": [
+          {
+            "feature": "amount_to_baseline",
+            "value": 33.321,
+            "contribution": 3.527,
+            "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+          },
+          {
+            "feature": "tenure_log",
+            "value": 4.111,
+            "contribution": 1.751,
+            "reasonCode": "CUSTOMER_PROFILE"
+          },
+          {
+            "feature": "hour_of_day",
+            "value": 4.0,
+            "contribution": 1.041,
+            "reasonCode": "UNUSUAL_TIME"
+          }
+        ]
+      },
+      "approved": {
+        "transactionId": "ALD-T000639688",
+        "type": "CARD_PAYMENT",
+        "channel": "ECOM",
+        "amount": 444.31,
+        "segment": "student",
+        "groundTruth": "legitimate",
+        "decision": "APPROVE",
+        "riskScore": 0.003,
+        "modelProbability": 0.0034,
+        "anomalyPercentile": 0.8201,
+        "graphRisk": 0.0,
+        "rulePoints": 0.0,
+        "rulesHit": [],
+        "topModelReasons": [
+          {
+            "feature": "amount_to_baseline",
+            "value": 19.168,
+            "contribution": 1.664,
+            "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+          },
+          {
+            "feature": "amount_log",
+            "value": 6.099,
+            "contribution": 0.186,
+            "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+          },
+          {
+            "feature": "has_device",
+            "value": 1.0,
+            "contribution": 0.036,
+            "reasonCode": "NEW_DEVICE"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Account-to-account transfer",
+      "flagged": {
+        "transactionId": "ALD-T000625682",
+        "type": "TRANSFER",
+        "channel": "WEB",
+        "amount": 130.98,
+        "segment": "retail",
+        "groundTruth": "account_takeover",
+        "decision": "REVIEW",
+        "riskScore": 0.678,
+        "modelProbability": 0.0067,
+        "anomalyPercentile": 0.9791,
+        "graphRisk": 0.5,
+        "rulePoints": 85.0,
+        "rulesHit": [
+          "DEV-001",
+          "DEV-002",
+          "BEN-001",
+          "TIM-001"
+        ],
+        "topModelReasons": [
+          {
+            "feature": "is_new_device",
+            "value": 1.0,
+            "contribution": 3.574,
+            "reasonCode": "NEW_DEVICE"
+          },
+          {
+            "feature": "is_new_beneficiary",
+            "value": 1.0,
+            "contribution": 0.115,
+            "reasonCode": "NEW_BENEFICIARY"
+          },
+          {
+            "feature": "has_device",
+            "value": 1.0,
+            "contribution": 0.11,
+            "reasonCode": "NEW_DEVICE"
+          }
+        ]
+      },
+      "approved": {
+        "transactionId": "ALD-T000625706",
+        "type": "TRANSFER",
+        "channel": "MOBILE",
+        "amount": 115.2,
+        "segment": "retail",
+        "groundTruth": "legitimate",
+        "decision": "APPROVE",
+        "riskScore": 0.001,
+        "modelProbability": 0.0006,
+        "anomalyPercentile": 0.9298,
+        "graphRisk": 0.0,
+        "rulePoints": 0.0,
+        "rulesHit": [],
+        "topModelReasons": [
+          {
+            "feature": "hour_of_day",
+            "value": 2.0,
+            "contribution": 1.136,
+            "reasonCode": "UNUSUAL_TIME"
+          },
+          {
+            "feature": "has_device",
+            "value": 1.0,
+            "contribution": 0.154,
+            "reasonCode": "NEW_DEVICE"
+          },
+          {
+            "feature": "amount_log",
+            "value": 4.755,
+            "contribution": 0.101,
+            "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Card payment (in store)",
+      "flagged": {
+        "transactionId": "ALD-T000685205",
+        "type": "CARD_PAYMENT",
+        "channel": "POS",
+        "amount": 81.14,
+        "segment": "retail",
+        "groundTruth": "geo_counterfeit",
+        "decision": "REVIEW",
+        "riskScore": 0.81,
+        "modelProbability": 0.6716,
+        "anomalyPercentile": 0.9884,
+        "graphRisk": 0.0,
+        "rulePoints": 60.0,
+        "rulesHit": [
+          "GEO-001",
+          "GEO-002"
+        ],
+        "topModelReasons": [
+          {
+            "feature": "card_country_change_1h",
+            "value": 1.0,
+            "contribution": 5.17,
+            "reasonCode": "UNUSUAL_LOCATION"
+          },
+          {
+            "feature": "is_foreign_merchant",
+            "value": 1.0,
+            "contribution": 2.772,
+            "reasonCode": "UNUSUAL_LOCATION"
+          },
+          {
+            "feature": "amount_to_baseline",
+            "value": 3.246,
+            "contribution": 0.536,
+            "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+          }
+        ]
+      },
+      "approved": {
+        "transactionId": "ALD-T000625779",
+        "type": "CARD_PAYMENT",
+        "channel": "POS",
+        "amount": 90.51,
+        "segment": "retail",
+        "groundTruth": "legitimate",
+        "decision": "APPROVE",
+        "riskScore": 0.0,
+        "modelProbability": 0.0003,
+        "anomalyPercentile": 0.8926,
+        "graphRisk": 0.0,
+        "rulePoints": 0.0,
+        "rulesHit": [],
+        "topModelReasons": [
+          {
+            "feature": "hour_of_day",
+            "value": 5.0,
+            "contribution": 0.674,
+            "reasonCode": "UNUSUAL_TIME"
+          },
+          {
+            "feature": "is_night",
+            "value": 1.0,
+            "contribution": 0.037,
+            "reasonCode": "UNUSUAL_TIME"
+          },
+          {
+            "feature": "account_txn_count_24h",
+            "value": 0.0,
+            "contribution": 0.019,
+            "reasonCode": "HIGH_TRANSACTION_VELOCITY"
+          }
+        ]
+      }
+    }
+  ],
+  "falsePositives": [
+    {
+      "transactionId": "ALD-T000653097",
+      "type": "CARD_PAYMENT",
+      "channel": "POS",
+      "amount": 261.88,
+      "segment": "retail",
+      "groundTruth": "legitimate",
+      "decision": "DECLINE",
+      "riskScore": 0.908,
+      "modelProbability": 0.845,
+      "anomalyPercentile": 0.9991,
+      "graphRisk": 0.0,
+      "rulePoints": 10.0,
+      "rulesHit": [
+        "GEO-002"
+      ],
+      "topModelReasons": [
+        {
+          "feature": "is_foreign_merchant",
+          "value": 1.0,
+          "contribution": 4.883,
+          "reasonCode": "UNUSUAL_LOCATION"
+        },
+        {
+          "feature": "amount_to_baseline",
+          "value": 4.9,
+          "contribution": 1.883,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        },
+        {
+          "feature": "log_seconds_since_last",
+          "value": 6.006,
+          "contribution": 1.247,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        }
+      ]
+    },
+    {
+      "transactionId": "ALD-T000751648",
+      "type": "CARD_PAYMENT",
+      "channel": "POS",
+      "amount": 128.11,
+      "segment": "student",
+      "groundTruth": "legitimate",
+      "decision": "REVIEW",
+      "riskScore": 0.829,
+      "modelProbability": 0.7547,
+      "anomalyPercentile": 0.9976,
+      "graphRisk": 0.0,
+      "rulePoints": 0.0,
+      "rulesHit": [],
+      "topModelReasons": [
+        {
+          "feature": "is_foreign_merchant",
+          "value": 1.0,
+          "contribution": 4.884,
+          "reasonCode": "UNUSUAL_LOCATION"
+        },
+        {
+          "feature": "amount_to_baseline",
+          "value": 5.926,
+          "contribution": 1.713,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        },
+        {
+          "feature": "log_seconds_since_last",
+          "value": 5.688,
+          "contribution": 1.18,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        }
+      ]
+    },
+    {
+      "transactionId": "ALD-T000758521",
+      "type": "CARD_PAYMENT",
+      "channel": "POS",
+      "amount": 75.2,
+      "segment": "student",
+      "groundTruth": "legitimate",
+      "decision": "REVIEW",
+      "riskScore": 0.789,
+      "modelProbability": 0.7581,
+      "anomalyPercentile": 0.9915,
+      "graphRisk": 0.0,
+      "rulePoints": 10.0,
+      "rulesHit": [
+        "GEO-002"
+      ],
+      "topModelReasons": [
+        {
+          "feature": "is_foreign_merchant",
+          "value": 1.0,
+          "contribution": 4.797,
+          "reasonCode": "UNUSUAL_LOCATION"
+        },
+        {
+          "feature": "amount_to_baseline",
+          "value": 5.697,
+          "contribution": 1.84,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        },
+        {
+          "feature": "log_seconds_since_last",
+          "value": 7.408,
+          "contribution": 1.158,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        }
+      ]
+    }
+  ],
+  "falseNegatives": [
+    {
+      "transactionId": "ALD-T000768565",
+      "type": "TRANSFER",
+      "channel": "WEB",
+      "amount": 68.36,
+      "segment": "retail",
+      "groundTruth": "account_takeover",
+      "decision": "APPROVE",
+      "riskScore": 0.0,
+      "modelProbability": 0.0002,
+      "anomalyPercentile": 0.8528,
+      "graphRisk": 0.0,
+      "rulePoints": 0.0,
+      "rulesHit": [],
+      "topModelReasons": [
+        {
+          "feature": "device_txn_count_1h",
+          "value": 1.0,
+          "contribution": 0.311,
+          "reasonCode": "HIGH_TRANSACTION_VELOCITY"
+        },
+        {
+          "feature": "log_seconds_since_last",
+          "value": 6.833,
+          "contribution": 0.03,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        },
+        {
+          "feature": "has_device",
+          "value": 1.0,
+          "contribution": 0.03,
+          "reasonCode": "NEW_DEVICE"
+        }
+      ]
+    },
+    {
+      "transactionId": "ALD-T000628245",
+      "type": "TRANSFER",
+      "channel": "MOBILE",
+      "amount": 170.19,
+      "segment": "retail",
+      "groundTruth": "account_takeover",
+      "decision": "APPROVE",
+      "riskScore": 0.0,
+      "modelProbability": 0.0002,
+      "anomalyPercentile": 0.8638,
+      "graphRisk": 0.0,
+      "rulePoints": 0.0,
+      "rulesHit": [],
+      "topModelReasons": [
+        {
+          "feature": "device_txn_count_1h",
+          "value": 1.0,
+          "contribution": 0.333,
+          "reasonCode": "HIGH_TRANSACTION_VELOCITY"
+        },
+        {
+          "feature": "log_seconds_since_last",
+          "value": 3.749,
+          "contribution": 0.032,
+          "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION"
+        },
+        {
+          "feature": "has_device",
+          "value": 1.0,
+          "contribution": 0.029,
+          "reasonCode": "NEW_DEVICE"
+        }
+      ]
+    },
+    {
+      "transactionId": "ALD-T000664840",
+      "type": "TRANSFER",
+      "channel": "MOBILE",
+      "amount": 123.06,
+      "segment": "retail",
+      "groundTruth": "account_takeover",
+      "decision": "APPROVE",
+      "riskScore": 0.0,
+      "modelProbability": 0.0003,
+      "anomalyPercentile": 0.849,
+      "graphRisk": 0.0,
+      "rulePoints": 0.0,
+      "rulesHit": [],
+      "topModelReasons": [
+        {
+          "feature": "device_txn_count_1h",
+          "value": 1.0,
+          "contribution": 0.336,
+          "reasonCode": "HIGH_TRANSACTION_VELOCITY"
+        },
+        {
+          "feature": "tenure_log",
+          "value": 7.806,
+          "contribution": 0.041,
+          "reasonCode": "CUSTOMER_PROFILE"
+        },
+        {
+          "feature": "has_device",
+          "value": 1.0,
+          "contribution": 0.037,
+          "reasonCode": "NEW_DEVICE"
+        }
+      ]
+    }
+  ]
+}

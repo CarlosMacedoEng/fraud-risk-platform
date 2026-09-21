@@ -1,0 +1,126 @@
+{"kind": "device", "id": "D000271", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 1.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D000931", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 1.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D001113", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 1.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D002582", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 1.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D002704", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 1.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D003018", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 1.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D003090", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 1.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D003554", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 1.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D004831", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 1.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005330", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 1.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005497", "risk": 1.0, "features": {"distinct_customers": 6.0, "fraud_txns": 0.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005498", "risk": 1.0, "features": {"distinct_customers": 6.0, "fraud_txns": 2.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005506", "risk": 1.0, "features": {"distinct_customers": 5.0, "fraud_txns": 1.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005507", "risk": 1.0, "features": {"distinct_customers": 5.0, "fraud_txns": 0.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005514", "risk": 1.0, "features": {"distinct_customers": 6.0, "fraud_txns": 2.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005515", "risk": 1.0, "features": {"distinct_customers": 6.0, "fraud_txns": 0.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005529", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 2.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005535", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 4.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005536", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 2.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005538", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 3.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005539", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 3.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005540", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 3.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005542", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 2.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005543", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 2.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005544", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 3.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005566", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 11.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005571", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 5.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005572", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 6.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005578", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 10.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005590", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 11.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005591", "risk": 0.4, "features": {"distinct_customers": 1.0, "fraud_txns": 3.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005607", "risk": 0.6, "features": {"distinct_customers": 5.0, "fraud_txns": 0.0, "fraud_linked": 0.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005608", "risk": 0.85, "features": {"distinct_customers": 4.0, "fraud_txns": 13.0, "fraud_linked": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "device", "id": "D005609", "risk": 0.3, "features": {"distinct_customers": 3.0, "fraud_txns": 0.0, "fraud_linked": 0.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "beneficiary", "id": "B-QPY-A003502", "risk": 0.5, "features": {"distinct_senders": 1.0, "fraud_inbound": 3.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "beneficiary", "id": "B-QPY-A003503", "risk": 0.5, "features": {"distinct_senders": 1.0, "fraud_inbound": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "beneficiary", "id": "B-QPY-A003506", "risk": 0.5, "features": {"distinct_senders": 1.0, "fraud_inbound": 3.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "beneficiary", "id": "B-QPY-A003507", "risk": 0.5, "features": {"distinct_senders": 1.0, "fraud_inbound": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "beneficiary", "id": "B-QPY-A003512", "risk": 0.6, "features": {"distinct_senders": 3.0, "fraud_inbound": 6.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "beneficiary", "id": "B-QPY-A003517", "risk": 0.5, "features": {"distinct_senders": 1.0, "fraud_inbound": 3.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "beneficiary", "id": "B020255", "risk": 0.8, "features": {"distinct_senders": 5.0, "fraud_inbound": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "beneficiary", "id": "B020271", "risk": 0.6, "features": {"distinct_senders": 3.0, "fraud_inbound": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "beneficiary", "id": "B020285", "risk": 0.9, "features": {"distinct_senders": 6.0, "fraud_inbound": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "beneficiary", "id": "B020310", "risk": 0.5, "features": {"distinct_senders": 1.0, "fraud_inbound": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "beneficiary", "id": "B020316", "risk": 0.5, "features": {"distinct_senders": 1.0, "fraud_inbound": 4.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000002", "risk": 0.2, "features": {"distinct_cards": 74.0, "round_share": 0.03571428571428571, "night_share": 0.02857142857142857, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000039", "risk": 0.2, "features": {"distinct_cards": 76.0, "round_share": 0.045454545454545456, "night_share": 0.012987012987012988, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000040", "risk": 0.2, "features": {"distinct_cards": 68.0, "round_share": 0.029411764705882353, "night_share": 0.04411764705882353, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000060", "risk": 0.2, "features": {"distinct_cards": 78.0, "round_share": 0.02531645569620253, "night_share": 0.02531645569620253, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000089", "risk": 0.2, "features": {"distinct_cards": 5.0, "round_share": 0.0, "night_share": 0.0, "fraud_txns": 3.0, "age_days": 82.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000095", "risk": 0.2, "features": {"distinct_cards": 57.0, "round_share": 0.02631578947368421, "night_share": 0.03508771929824561, "fraud_txns": 2.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000128", "risk": 0.2, "features": {"distinct_cards": 71.0, "round_share": 0.041379310344827586, "night_share": 0.027586206896551724, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000174", "risk": 0.2, "features": {"distinct_cards": 66.0, "round_share": 0.030534351145038167, "night_share": 0.022900763358778626, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000178", "risk": 0.2, "features": {"distinct_cards": 5.0, "round_share": 0.0, "night_share": 0.0, "fraud_txns": 1.0, "age_days": 60.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000188", "risk": 0.2, "features": {"distinct_cards": 69.0, "round_share": 0.05714285714285714, "night_share": 0.0380952380952381, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000197", "risk": 0.2, "features": {"distinct_cards": 69.0, "round_share": 0.026845637583892617, "night_share": 0.040268456375838924, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000243", "risk": 0.2, "features": {"distinct_cards": 73.0, "round_share": 0.04, "night_share": 0.02666666666666667, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000284", "risk": 0.2, "features": {"distinct_cards": 66.0, "round_share": 0.031007751937984496, "night_share": 0.031007751937984496, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000301", "risk": 0.2, "features": {"distinct_cards": 65.0, "round_share": 0.031007751937984496, "night_share": 0.023255813953488372, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000316", "risk": 0.2, "features": {"distinct_cards": 70.0, "round_share": 0.022388059701492536, "night_share": 0.029850746268656716, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000378", "risk": 0.2, "features": {"distinct_cards": 51.0, "round_share": 0.033707865168539325, "night_share": 0.07865168539325842, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000382", "risk": 0.2, "features": {"distinct_cards": 79.0, "round_share": 0.04316546762589928, "night_share": 0.014388489208633094, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000410", "risk": 0.2, "features": {"distinct_cards": 7.0, "round_share": 0.0, "night_share": 0.0, "fraud_txns": 1.0, "age_days": 71.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000444", "risk": 0.2, "features": {"distinct_cards": 88.0, "round_share": 0.012422360248447204, "night_share": 0.031055900621118012, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000487", "risk": 0.2, "features": {"distinct_cards": 56.0, "round_share": 0.010638297872340425, "night_share": 0.031914893617021274, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000496", "risk": 0.2, "features": {"distinct_cards": 91.0, "round_share": 0.0430622009569378, "night_share": 0.019138755980861243, "fraud_txns": 3.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000583", "risk": 0.2, "features": {"distinct_cards": 68.0, "round_share": 0.0, "night_share": 0.014705882352941176, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000593", "risk": 0.2, "features": {"distinct_cards": 60.0, "round_share": 0.02702702702702703, "night_share": 0.018018018018018018, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000636", "risk": 0.2, "features": {"distinct_cards": 72.0, "round_share": 0.06153846153846154, "night_share": 0.023076923076923078, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000662", "risk": 0.2, "features": {"distinct_cards": 70.0, "round_share": 0.028985507246376812, "night_share": 0.043478260869565216, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000724", "risk": 0.2, "features": {"distinct_cards": 6.0, "round_share": 0.0, "night_share": 0.16666666666666666, "fraud_txns": 2.0, "age_days": 80.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000805", "risk": 0.2, "features": {"distinct_cards": 7.0, "round_share": 0.0, "night_share": 0.0, "fraud_txns": 1.0, "age_days": 68.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000866", "risk": 0.2, "features": {"distinct_cards": 70.0, "round_share": 0.043478260869565216, "night_share": 0.006211180124223602, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000880", "risk": 0.2, "features": {"distinct_cards": 79.0, "round_share": 0.04225352112676056, "night_share": 0.035211267605633804, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000909", "risk": 0.2, "features": {"distinct_cards": 72.0, "round_share": 0.03597122302158273, "night_share": 0.007194244604316547, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000911", "risk": 0.2, "features": {"distinct_cards": 5.0, "round_share": 0.0, "night_share": 0.0, "fraud_txns": 1.0, "age_days": 82.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000968", "risk": 0.2, "features": {"distinct_cards": 62.0, "round_share": 0.018691588785046728, "night_share": 0.009345794392523364, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000989", "risk": 0.2, "features": {"distinct_cards": 56.0, "round_share": 0.010638297872340425, "night_share": 0.06382978723404255, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M000997", "risk": 0.2, "features": {"distinct_cards": 65.0, "round_share": 0.03418803418803419, "night_share": 0.03418803418803419, "fraud_txns": 2.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001014", "risk": 0.2, "features": {"distinct_cards": 62.0, "round_share": 0.03389830508474576, "night_share": 0.03389830508474576, "fraud_txns": 2.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001075", "risk": 0.2, "features": {"distinct_cards": 5.0, "round_share": 0.0, "night_share": 0.0, "fraud_txns": 1.0, "age_days": 75.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001084", "risk": 0.2, "features": {"distinct_cards": 64.0, "round_share": 0.046153846153846156, "night_share": 0.007692307692307693, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001113", "risk": 0.2, "features": {"distinct_cards": 5.0, "round_share": 0.0, "night_share": 0.0, "fraud_txns": 1.0, "age_days": 67.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001126", "risk": 0.2, "features": {"distinct_cards": 68.0, "round_share": 0.047619047619047616, "night_share": 0.02857142857142857, "fraud_txns": 2.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001173", "risk": 0.2, "features": {"distinct_cards": 62.0, "round_share": 0.06481481481481481, "night_share": 0.018518518518518517, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001229", "risk": 0.2, "features": {"distinct_cards": 59.0, "round_share": 0.03333333333333333, "night_share": 0.025, "fraud_txns": 1.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001267", "risk": 0.2, "features": {"distinct_cards": 5.0, "round_share": 0.2, "night_share": 0.0, "fraud_txns": 1.0, "age_days": 84.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001268", "risk": 0.2, "features": {"distinct_cards": 5.0, "round_share": 0.0, "night_share": 0.0, "fraud_txns": 2.0, "age_days": 76.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001278", "risk": 0.2, "features": {"distinct_cards": 67.0, "round_share": 0.041666666666666664, "night_share": 0.008333333333333333, "fraud_txns": 2.0, "age_days": 89.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001283", "risk": 0.2, "features": {"distinct_cards": 5.0, "round_share": 0.0, "night_share": 0.16666666666666666, "fraud_txns": 1.0, "age_days": 80.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001286", "risk": 0.2, "features": {"distinct_cards": 6.0, "round_share": 0.0, "night_share": 0.125, "fraud_txns": 1.0, "age_days": 82.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001297", "risk": 0.5, "features": {"distinct_cards": 131.0, "round_share": 1.0, "night_share": 0.5648854961832062, "fraud_txns": 0.0, "age_days": 53.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001298", "risk": 0.5, "features": {"distinct_cards": 120.0, "round_share": 1.0, "night_share": 0.5867768595041323, "fraud_txns": 0.0, "age_days": 51.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001299", "risk": 0.7, "features": {"distinct_cards": 109.0, "round_share": 1.0, "night_share": 0.5363636363636364, "fraud_txns": 10.0, "age_days": 81.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001300", "risk": 0.5, "features": {"distinct_cards": 113.0, "round_share": 1.0, "night_share": 0.5948275862068966, "fraud_txns": 0.0, "age_days": 53.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "merchant", "id": "M001301", "risk": 0.5, "features": {"distinct_cards": 129.0, "round_share": 1.0, "night_share": 0.5846153846153846, "fraud_txns": 0.0, "age_days": 88.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003504", "risk": 1.0, "features": {"component_accounts": 6.0, "component_fraud_accounts": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003501", "risk": 1.0, "features": {"component_accounts": 6.0, "component_fraud_accounts": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003505", "risk": 1.0, "features": {"component_accounts": 6.0, "component_fraud_accounts": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003503", "risk": 1.0, "features": {"component_accounts": 6.0, "component_fraud_accounts": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003502", "risk": 1.0, "features": {"component_accounts": 6.0, "component_fraud_accounts": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003506", "risk": 1.0, "features": {"component_accounts": 6.0, "component_fraud_accounts": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003508", "risk": 0.875, "features": {"component_accounts": 5.0, "component_fraud_accounts": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003510", "risk": 0.875, "features": {"component_accounts": 5.0, "component_fraud_accounts": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003511", "risk": 0.875, "features": {"component_accounts": 5.0, "component_fraud_accounts": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003509", "risk": 0.875, "features": {"component_accounts": 5.0, "component_fraud_accounts": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003507", "risk": 0.875, "features": {"component_accounts": 5.0, "component_fraud_accounts": 1.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003513", "risk": 1.0, "features": {"component_accounts": 7.0, "component_fraud_accounts": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003517", "risk": 1.0, "features": {"component_accounts": 7.0, "component_fraud_accounts": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003516", "risk": 1.0, "features": {"component_accounts": 7.0, "component_fraud_accounts": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003512", "risk": 1.0, "features": {"component_accounts": 7.0, "component_fraud_accounts": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003033", "risk": 1.0, "features": {"component_accounts": 7.0, "component_fraud_accounts": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003515", "risk": 1.0, "features": {"component_accounts": 7.0, "component_fraud_accounts": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C003514", "risk": 1.0, "features": {"component_accounts": 7.0, "component_fraud_accounts": 2.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C002204", "risk": 0.375, "features": {"component_accounts": 5.0, "component_fraud_accounts": 0.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C000847", "risk": 0.375, "features": {"component_accounts": 5.0, "component_fraud_accounts": 0.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C000159", "risk": 0.375, "features": {"component_accounts": 5.0, "component_fraud_accounts": 0.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C000685", "risk": 0.375, "features": {"component_accounts": 5.0, "component_fraud_accounts": 0.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C000787", "risk": 0.375, "features": {"component_accounts": 5.0, "component_fraud_accounts": 0.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C000147", "risk": 0.75, "features": {"component_accounts": 4.0, "component_fraud_accounts": 4.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C002232", "risk": 0.75, "features": {"component_accounts": 4.0, "component_fraud_accounts": 4.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C000641", "risk": 0.75, "features": {"component_accounts": 4.0, "component_fraud_accounts": 4.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C000315", "risk": 0.75, "features": {"component_accounts": 4.0, "component_fraud_accounts": 4.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C000387", "risk": 0.125, "features": {"component_accounts": 3.0, "component_fraud_accounts": 0.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C000927", "risk": 0.125, "features": {"component_accounts": 3.0, "component_fraud_accounts": 0.0}, "as_of": "2026-05-02T00:00:00+00:00"}
+{"kind": "account", "id": "QPY-C002192", "risk": 0.125, "features": {"component_accounts": 3.0, "component_fraud_accounts": 0.0}, "as_of": "2026-05-02T00:00:00+00:00"}

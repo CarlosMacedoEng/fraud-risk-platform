@@ -1,0 +1,378 @@
+{
+  "schemaVersion": 1,
+  "customerId": "aldermoor-bank",
+  "version": "1.1.0",
+  "changeSummary": "Retune after validation review: retire BEH-002 (0.27% precision), require context change for BEH-001, combine new beneficiary with new device (BEN-001), reduce MCC-001/GEO-002 weight. Model unchanged (1.1.0 candidate failed validation gate).",
+  "model": {
+    "version": "aldermoor-bank-lgbm-1.0.0",
+    "challengerVersion": null,
+    "challengerRolloutPercentage": 0
+  },
+  "weights": {
+    "model": 1.0,
+    "rules": 0.7,
+    "graph": 0.4,
+    "anomaly": 0.4
+  },
+  "anomaly": {
+    "tailStartPercentile": 0.99
+  },
+  "thresholds": {
+    "default": {
+      "review": 0.4,
+      "decline": 0.9
+    },
+    "bySegment": {
+      "premium": {
+        "review": 0.5
+      }
+    },
+    "byChannel": {
+      "BRANCH": {
+        "review": 0.6,
+        "decline": 0.97
+      }
+    }
+  },
+  "channelPolicies": {
+    "POS": {
+      "failMode": "APPROVE",
+      "maxFailOpenAmount": 250
+    },
+    "ECOM": {
+      "failMode": "APPROVE",
+      "maxFailOpenAmount": 150
+    },
+    "MOBILE": {
+      "failMode": "REVIEW"
+    },
+    "WEB": {
+      "failMode": "REVIEW"
+    },
+    "OPEN_BANKING": {
+      "failMode": "REVIEW"
+    },
+    "BRANCH": {
+      "failMode": "APPROVE",
+      "maxFailOpenAmount": 5000
+    }
+  },
+  "lists": {
+    "highRiskCountries": [
+      "KP",
+      "IR",
+      "MM"
+    ],
+    "blockedDevices": [],
+    "trustedDevices": [],
+    "blockedCardBins": [],
+    "highRiskMcc": [
+      "5732",
+      "5944",
+      "5816",
+      "6051",
+      "7995"
+    ]
+  },
+  "emergencyRules": [
+    {
+      "id": "EMR-001",
+      "description": "Device on the blocklist",
+      "action": "DECLINE",
+      "reasonCode": "BLOCKED_ENTITY",
+      "when": {
+        "field": "device_id",
+        "op": "in_list",
+        "value": "blockedDevices"
+      }
+    },
+    {
+      "id": "EMR-002",
+      "description": "Transfer to a sanctioned-country beneficiary",
+      "action": "DECLINE",
+      "reasonCode": "BLOCKED_ENTITY",
+      "when": {
+        "field": "beneficiary_country",
+        "op": "in_list",
+        "value": "highRiskCountries"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "id": "VEL-001",
+      "description": "Card or device burst",
+      "points": 45,
+      "reasonCode": "HIGH_TRANSACTION_VELOCITY",
+      "when": {
+        "any": [
+          {
+            "field": "card_txn_count_10m",
+            "op": "gte",
+            "value": 3
+          },
+          {
+            "field": "device_txn_count_1h",
+            "op": "gte",
+            "value": 6
+          }
+        ]
+      }
+    },
+    {
+      "id": "VEL-002",
+      "description": "Unusually many transactions in 24h",
+      "points": 15,
+      "reasonCode": "HIGH_TRANSACTION_VELOCITY",
+      "when": {
+        "field": "account_txn_count_24h",
+        "op": "gte",
+        "value": 15
+      }
+    },
+    {
+      "id": "DEV-001",
+      "description": "New device with high amount",
+      "points": 25,
+      "reasonCode": "NEW_DEVICE",
+      "when": {
+        "all": [
+          {
+            "field": "is_new_device",
+            "op": "eq",
+            "value": 1
+          },
+          {
+            "field": "amount_to_baseline",
+            "op": "gte",
+            "value": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "DEV-002",
+      "description": "New device",
+      "points": 10,
+      "reasonCode": "NEW_DEVICE",
+      "when": {
+        "field": "is_new_device",
+        "op": "eq",
+        "value": 1
+      }
+    },
+    {
+      "id": "GEO-001",
+      "description": "Card used in two countries within one hour",
+      "points": 50,
+      "reasonCode": "UNUSUAL_LOCATION",
+      "when": {
+        "field": "card_country_change_1h",
+        "op": "eq",
+        "value": 1
+      }
+    },
+    {
+      "id": "GEO-002",
+      "description": "Foreign card-present payment at high-risk merchant",
+      "points": 10,
+      "reasonCode": "UNUSUAL_LOCATION",
+      "when": {
+        "all": [
+          {
+            "field": "is_pos",
+            "op": "eq",
+            "value": 1
+          },
+          {
+            "field": "is_foreign_merchant",
+            "op": "eq",
+            "value": 1
+          },
+          {
+            "field": "mcc",
+            "op": "in_list",
+            "value": "highRiskMcc"
+          }
+        ]
+      }
+    },
+    {
+      "id": "GEO-003",
+      "description": "Foreign IP on a new device",
+      "points": 25,
+      "reasonCode": "UNUSUAL_LOCATION",
+      "when": {
+        "all": [
+          {
+            "field": "ip_country_mismatch",
+            "op": "eq",
+            "value": 1
+          },
+          {
+            "field": "is_new_device",
+            "op": "eq",
+            "value": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "BEN-001",
+      "description": "New beneficiary with high amount from a new device",
+      "points": 40,
+      "reasonCode": "NEW_BENEFICIARY",
+      "when": {
+        "all": [
+          {
+            "field": "is_new_beneficiary",
+            "op": "eq",
+            "value": 1
+          },
+          {
+            "field": "amount_to_baseline",
+            "op": "gte",
+            "value": 3
+          },
+          {
+            "field": "is_new_device",
+            "op": "eq",
+            "value": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "BEN-002",
+      "description": "New foreign beneficiary",
+      "points": 20,
+      "reasonCode": "NEW_BENEFICIARY",
+      "when": {
+        "all": [
+          {
+            "field": "is_new_beneficiary",
+            "op": "eq",
+            "value": 1
+          },
+          {
+            "field": "beneficiary_foreign",
+            "op": "eq",
+            "value": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "BEN-003",
+      "description": "Policy: first transfer to a new beneficiary above 5000 is always reviewed",
+      "action": "REVIEW",
+      "reasonCode": "NEW_BENEFICIARY",
+      "when": {
+        "all": [
+          {
+            "field": "is_new_beneficiary",
+            "op": "eq",
+            "value": 1
+          },
+          {
+            "field": "amount",
+            "op": "gte",
+            "value": 5000
+          }
+        ]
+      }
+    },
+    {
+      "id": "BEH-001",
+      "description": "Amount far above baseline together with a context change (new device, foreign IP or new beneficiary)",
+      "points": 20,
+      "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION",
+      "when": {
+        "all": [
+          {
+            "field": "amount_to_baseline",
+            "op": "gte",
+            "value": 10
+          },
+          {
+            "any": [
+              {
+                "field": "is_new_device",
+                "op": "eq",
+                "value": 1
+              },
+              {
+                "field": "ip_country_mismatch",
+                "op": "eq",
+                "value": 1
+              },
+              {
+                "field": "is_new_beneficiary",
+                "op": "eq",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "BEH-002",
+      "description": "24h spend far above baseline",
+      "points": 15,
+      "reasonCode": "CUSTOMER_BEHAVIOR_DEVIATION",
+      "when": {
+        "field": "account_amount_24h_to_baseline",
+        "op": "gte",
+        "value": 20
+      },
+      "enabled": false
+    },
+    {
+      "id": "MCC-001",
+      "description": "High-risk merchant category, online, high amount",
+      "points": 5,
+      "reasonCode": "HIGH_RISK_MERCHANT",
+      "when": {
+        "all": [
+          {
+            "field": "mcc",
+            "op": "in_list",
+            "value": "highRiskMcc"
+          },
+          {
+            "field": "is_ecom",
+            "op": "eq",
+            "value": 1
+          },
+          {
+            "field": "amount_to_baseline",
+            "op": "gte",
+            "value": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "TIM-001",
+      "description": "Night-time activity on a new device",
+      "points": 10,
+      "reasonCode": "UNUSUAL_TIME",
+      "when": {
+        "all": [
+          {
+            "field": "is_night",
+            "op": "eq",
+            "value": 1
+          },
+          {
+            "field": "is_new_device",
+            "op": "eq",
+            "value": 1
+          }
+        ]
+      }
+    }
+  ],
+  "thresholdRationale": "review threshold from validation review budget; decline 0.90 is a conservative business choice (validation labels too immature to estimate decline precision)"
+}

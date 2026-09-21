@@ -16,7 +16,7 @@ go-live and support — not just a fraud model.
 |---|---|---|
 | 0 | Discovery, requirements, architecture, ADRs, repository structure | ✅ Done (proposal) |
 | 1 | Python workbench: synthetic data generator (6 fraud typologies, 2 customers) | ✅ Done |
-| 2 | Models: LR baseline, LightGBM, Isolation Forest, graph features, SHAP, ONNX export, evaluation | Planned |
+| 2 | Models: LR baseline, LightGBM, Isolation Forest, graph features, SHAP, ONNX export, evaluation, model-service | ✅ Done |
 | 3 | Java decision service core: API, validation, idempotency, rules, ONNX inference, PostgreSQL, Redis | Planned |
 | 4 | Configuration & strategy management: versioning, validation, promotion, rollback, rollout | Planned |
 | 5 | Outbound REST integrations + downstream simulators (timeouts, retries, circuit breakers) | Planned |

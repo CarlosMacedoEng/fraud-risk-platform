@@ -1,0 +1,19 @@
+{
+  "customerId": "quillon-pay",
+  "versions": [
+    {
+      "modelVersion": "quillon-pay-lgbm-1.0.0",
+      "featureSet": "base",
+      "createdAt": "2026-09-21T13:12:42+00:00",
+      "status": "CANDIDATE",
+      "validPrAuc": 0.9072
+    },
+    {
+      "modelVersion": "quillon-pay-lgbm-1.1.0",
+      "featureSet": "graph",
+      "createdAt": "2026-09-21T13:12:57+00:00",
+      "status": "CANDIDATE",
+      "validPrAuc": 0.954
+    }
+  ]
+}

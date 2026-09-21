@@ -20,7 +20,7 @@ the same product supports different risk appetites through configuration rather 
 | Peak volume | ~250 TPS combined at peak, ~6M transactions/day (assumption) |
 | Modern estate | Mobile/web back-ends on AWS (EKS), RDS PostgreSQL, a Kafka (MSK) programme in progress |
 | Legacy estate | Core banking system exports **nightly fixed-layout/CSV files**; card processor sends **daily chargeback files**; customer master updated by batch |
-| Fraud operations | 14 analysts, single shift + on-call; capacity ≈ **600 reviews/day** (assumption) |
+| Fraud operations | 14 analysts, single shift + on-call; analyst queue ≈ 600 cases/day. REVIEW outcomes are handled first by automated customer confirmation (push/SMS), then by analysts. **Review budget used in evaluation: 0.3% of daily transactions** (assumption) |
 
 ### 1.2 Secondary customer — Quillon Pay
 
@@ -30,7 +30,7 @@ the same product supports different risk appetites through configuration rather 
 | Products in scope | Card-not-present payments, wallet-to-wallet transfers |
 | Channels | Merchant API, mobile wallet |
 | Risk profile | High volume, low ticket, merchant-driven fraud (transaction laundering), small review team |
-| Fraud operations | Capacity ≈ **150 reviews/day**; strong preference for automated decisions |
+| Fraud operations | Small team; strong preference for automated decisions. **Review budget used in evaluation: 0.2% of daily transactions** (assumption) |
 
 ## 2. Problem statement (Aldermoor Bank)
 
