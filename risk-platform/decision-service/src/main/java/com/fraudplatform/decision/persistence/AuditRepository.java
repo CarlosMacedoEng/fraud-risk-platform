@@ -33,7 +33,7 @@ public class AuditRepository {
         return jdbc.sql("""
                         SELECT audit_id, tenant_id, actor, action, entity_type, entity_id, before_state::text, after_state::text,
                                correlation_id, created_at
-                        FROM audit_events WHERE tenant_id = ? AND (? IS NULL OR entity_type = ?)
+                        FROM audit_events WHERE tenant_id = ? AND (?::text IS NULL OR entity_type = ?)
                         ORDER BY created_at DESC, audit_id DESC LIMIT ?
                         """)
                 .params(tenant, entityType, entityType, limit)

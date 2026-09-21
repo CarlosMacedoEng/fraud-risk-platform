@@ -87,6 +87,8 @@ platform:
       currency: EUR
   faults:
     enabled: false
+  governance:
+    four-eyes: true           # the author of a strategy change cannot approve it
   # Local development credentials. Only SHA-256 hashes are configured; the clear-text dev keys are
   # documented in README.md. Production: OAuth2 client credentials / mTLS at the gateway.
   clients:
@@ -102,6 +104,10 @@ platform:
       tenant-id: aldermoor-bank
       key-sha256: 39b01693e929414606a4958c571dc9ca5d40645abe88af93321f2322d0c1aedd
       roles: [ADMIN, ANALYST]
+    - client-id: aldermoor-approver
+      tenant-id: aldermoor-bank
+      key-sha256: 07af1d8c7e1644a11ca800bcdf49d5655001ee5fb138c2f8ffd52a2cd7b5d07e
+      roles: [ADMIN, ANALYST]
     - client-id: quillon-gateway
       tenant-id: quillon-pay
       key-sha256: d8ad46c650e2d1957befe38241c057428812807c32175eb2355d862a6f9dac6a
@@ -109,6 +115,10 @@ platform:
     - client-id: quillon-admin
       tenant-id: quillon-pay
       key-sha256: 56cbe2aaab593df559fa6f148fac44b43899f59a4f06c96c887bf9c3f6f678f7
+      roles: [ADMIN, ANALYST]
+    - client-id: quillon-approver
+      tenant-id: quillon-pay
+      key-sha256: 4377e0f399c02c1de7e0eac0192e91eea169d4b8a9657c105ddb7db74e9ca823
       roles: [ADMIN, ANALYST]
 
 logging:

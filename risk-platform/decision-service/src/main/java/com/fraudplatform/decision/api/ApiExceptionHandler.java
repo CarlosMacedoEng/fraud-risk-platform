@@ -8,6 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.QueryTimeoutException;
+import org.springframework.dao.RecoverableDataAccessException;
+import org.springframework.dao.TransientDataAccessException;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -109,10 +113,22 @@ public class ApiExceptionHandler {
         return respond(ErrorCode.NOT_FOUND, null, Map.of());
     }
 
-    @ExceptionHandler(DataAccessException.class)
-    ResponseEntity<ProblemDetail> database(DataAccessException e) {
-        log.error("database error", e);
+    /**
+     * Only transient data-access failures (connection, timeout, deadlock) are reported as "unavailable,
+     * retry". Anything else (bad SQL, constraint bugs) is a defect: telling the caller to retry would send
+     * their support team down the wrong path (journal J-12).
+     */
+    @ExceptionHandler({TransientDataAccessException.class, RecoverableDataAccessException.class,
+            CannotGetJdbcConnectionException.class, QueryTimeoutException.class})
+    ResponseEntity<ProblemDetail> databaseUnavailable(DataAccessException e) {
+        log.error("database unavailable", e);
         return respond(ErrorCode.DEPENDENCY_UNAVAILABLE, "database unavailable, retry with the same Idempotency-Key", Map.of());
+    }
+
+    @ExceptionHandler(DataAccessException.class)
+    ResponseEntity<ProblemDetail> databaseDefect(DataAccessException e) {
+        log.error("data access defect", e);
+        return respond(ErrorCode.INTERNAL_ERROR, null, Map.of());
     }
 
     @ExceptionHandler(Exception.class)

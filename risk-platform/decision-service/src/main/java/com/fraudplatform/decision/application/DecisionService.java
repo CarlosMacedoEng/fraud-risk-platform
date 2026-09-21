@@ -149,7 +149,7 @@ public class DecisionService {
 
     RiskDecision decide(Command cmd) {
         Transaction t = cmd.transaction();
-        CompiledStrategy strategy = strategies.get(t.tenantId());
+        CompiledStrategy strategy = strategies.forCustomer(t.tenantId(), t.customerId());
         Set<DegradedMode> degraded = EnumSet.noneOf(DegradedMode.class);
 
         // 2. parallel enrichment, each call bounded by its own budget

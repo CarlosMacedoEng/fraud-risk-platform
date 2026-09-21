@@ -27,6 +27,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.JdbcClient;
+import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 
 import javax.sql.DataSource;
@@ -151,14 +152,40 @@ public class DecisionServiceConfig {
         };
     }
 
+    @Bean
+    com.fraudplatform.decision.application.AdminEvents adminEvents() {
+        return new com.fraudplatform.decision.application.AdminEvents() {
+            @Override
+            public void configurationChanged(String tenant, String environment, String action, String version,
+                                             String previousVersion, Integer rolloutPercentage, String actor, String reason) {
+            }
+
+            @Override
+            public void modelStatusChanged(String tenant, String modelVersion, String fromStatus, String toStatus,
+                                           String actor, String reason) {
+            }
+        };
+    }
+
     // ------------------------------------------------------------------ startup
 
     @Bean
     @Order(1)
-    ApplicationRunner strategyBootstrap(StrategyRepository repo, StrategyCompiler compiler, ObjectMapper json, PlatformProperties props) {
+    ApplicationRunner strategyBootstrap(StrategyRepository repo, StrategyCompiler compiler, ObjectMapper json, PlatformProperties props,
+                                        com.fraudplatform.decision.application.ModelGovernanceService models) {
         return args -> {
             if (props.bootstrap() != null && props.bootstrap().importStrategies()) {
                 new StrategyBootstrap(repo, compiler, json, props).run();
+                // Register the models referenced by imported strategies (primary -> champion, challenger -> shadow).
+                for (String tenant : props.tenants().keySet()) {
+                    repo.findDeployment(tenant, props.environment()).ifPresent(d -> {
+                        var active = repo.findVersion(tenant, d.activeVersion()).orElseThrow();
+                        JsonNode model = json.readTree(active.definition()).path("model");
+                        JsonNode ch = model.path("challengerVersion");
+                        models.bootstrap(tenant, model.path("version").asString(),
+                                ch.isMissingNode() || ch.isNull() ? null : ch.asString());
+                    });
+                }
             }
         };
     }
