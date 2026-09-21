@@ -84,3 +84,86 @@ def export_threat_feed(customers: list[str], coverage: float = 0.4, seed: int = 
     lines = ["# Simulated threat-intelligence feed (synthetic, partial coverage)", *rng]
     out.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return len(rng)
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# Legacy file samples for the file-adapter (see docs/FILE_INTEGRATIONS.md)
+
+HISTORY_COLUMNS = ["transaction_id", "event_time", "customer_id", "account_id", "transaction_type", "channel", "amount",
+                   "currency", "card_token", "merchant_id", "mcc", "merchant_country", "beneficiary_id",
+                   "beneficiary_country", "device_id", "ip_address", "ip_country"]
+
+
+def _write_with_marker(path, text: str, records: int) -> None:
+    import hashlib
+    path.parent.mkdir(parents=True, exist_ok=True)
+    data = text.encode("utf-8")
+    path.write_bytes(data)
+    (path.parent / (path.name + ".done")).write_text(
+        f"records={records}\nsha256={hashlib.sha256(data).hexdigest()}\n", encoding="utf-8")
+
+
+def _csv(frame: pd.DataFrame, columns: list[str]) -> str:
+    out = frame[columns].copy()
+    for c in out.columns:
+        if pd.api.types.is_datetime64_any_dtype(out[c]):
+            out[c] = out[c].dt.strftime("%Y-%m-%dT%H:%M:%S.%f").str[:-3] + "Z"
+    return out.to_csv(index=False, lineterminator="\n", float_format="%.2f")
+
+
+def export_legacy_files(customer: str, history_rows: int = 600) -> dict:
+    """Sample inbound files for one tenant, plus deliberately broken variants for the troubleshooting lab."""
+    import json as _json
+    tx, customers, _ = load_raw(customer)
+    end = tx["event_time"].max().normalize()
+    day = end.strftime("%Y%m%d")
+    out = paths.SAMPLES_DIR / "files" / customer
+    lab = paths.SAMPLES_DIR / "files" / "troubleshooting" / customer
+    counts = {}
+
+    hist = tx[tx["event_time"] >= end - pd.Timedelta(days=1)].head(history_rows).copy()
+    hist["amount"] = hist["amount"].map(lambda v: f"{v:.2f}")
+    text = _csv(hist.rename(columns={}), HISTORY_COLUMNS)
+    _write_with_marker(out / f"TXN_HISTORY_{customer}_{day}_001.csv", text, len(hist))
+    counts["TXN_HISTORY"] = len(hist)
+
+    labelled = tx[tx["is_fraud"] & tx["label_available_at"].notna()]
+    cb = labelled[labelled["fraud_type"].isin(["stolen_card", "card_testing", "geo_counterfeit"])].head(40).copy()
+    cb["chargeback_date"] = cb["label_available_at"].dt.strftime("%Y-%m-%d")
+    cb["reason_code"] = "4837"
+    cb["amount"] = cb["amount"].map(lambda v: f"{v:.2f}")
+    _write_with_marker(out / f"CHARGEBACKS_{customer}_{day}_001.csv",
+                       _csv(cb, ["transaction_id", "chargeback_date", "reason_code", "amount", "currency", "customer_id"]), len(cb))
+    counts["CHARGEBACKS"] = len(cb)
+
+    other = labelled[~labelled["fraud_type"].isin(["stolen_card", "card_testing", "geo_counterfeit"])].head(30)
+    genuine = tx[~tx["is_fraud"]].sample(10, random_state=3)
+    lines = [_json.dumps({"transactionId": r.transaction_id, "customerId": r.customer_id, "label": "FRAUD",
+                          "fraudType": r.fraud_type, "reportedAt": r.label_available_at.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                          "source": "CUSTOMER_REPORT"}) for r in other.itertuples()]
+    lines += [_json.dumps({"transactionId": r.transaction_id, "customerId": r.customer_id, "label": "GENUINE",
+                           "fraudType": None, "reportedAt": end.strftime("%Y-%m-%dT%H:%M:%SZ"), "source": "BATCH_LABEL"})
+              for r in genuine.itertuples()]
+    _write_with_marker(out / f"FRAUD_LABELS_{customer}_{day}_001.jsonl", "\n".join(lines) + "\n", len(lines))
+    counts["FRAUD_LABELS"] = len(lines)
+
+    prof = [_json.dumps({"customerId": r.customer_id, "segment": r.segment, "homeCountry": r.home_country,
+                         "tenureDays": int(r.tenure_days), "avgAmount90d": f"{r.avg_amount_90d:.2f}", "riskTier": r.risk_tier,
+                         "boundDeviceIds": [d for d in (r.bound_device_ids or "").split(";") if d]})
+            for r in customers.itertuples()]
+    _write_with_marker(out / f"CUSTOMER_PROFILES_{customer}_{day}_001.jsonl", "\n".join(prof) + "\n", len(prof))
+    counts["CUSTOMER_PROFILES"] = len(prof)
+
+    # --- troubleshooting variants (incidents TS-09 malformed file, TS-10 schema mismatch)
+    small = hist.head(50)
+    swapped = _csv(small, HISTORY_COLUMNS).replace("amount,currency", "currency,amount", 1)
+    _write_with_marker(lab / f"TXN_HISTORY_{customer}_{day}_901.csv", swapped, len(small))
+    bad = small.copy()
+    bad.loc[bad.index[:8], "amount"] = "12,50"          # decimal comma from a spreadsheet export
+    bad.loc[bad.index[8:10], "event_time"] = pd.NaT       # missing timestamps
+    _write_with_marker(lab / f"TXN_HISTORY_{customer}_{day}_902.csv", _csv(bad, HISTORY_COLUMNS), len(bad))
+    good = _csv(small, HISTORY_COLUMNS)
+    truncated = "\n".join(good.splitlines()[:30]) + "\n"
+    _write_with_marker(lab / f"TXN_HISTORY_{customer}_{day}_903.csv", truncated, len(small))  # marker says 50
+    (lab / f"transactions_{customer}_{day}.csv").write_text(good, encoding="utf-8")            # wrong name
+    return counts

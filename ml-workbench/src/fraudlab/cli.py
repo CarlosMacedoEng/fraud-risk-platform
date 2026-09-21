@@ -72,6 +72,12 @@ def cmd_export(args: argparse.Namespace) -> None:
                       "threat_feed_ips": export_threat_feed(sorted(PROFILES))}))
 
 
+def cmd_files(args: argparse.Namespace) -> None:
+    from .export import export_legacy_files
+
+    print(json.dumps({c: export_legacy_files(c) for c in sorted(PROFILES)}))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="fraudlab")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -103,6 +109,9 @@ def main() -> None:
     ex = sub.add_parser("export", help="export Java parity stream and graph snapshot")
     ex.add_argument("--customer", choices=sorted(PROFILES), default="aldermoor-bank")
     ex.set_defaults(func=cmd_export)
+
+    fl = sub.add_parser("files", help="generate legacy inbound file samples (and broken variants) for both tenants")
+    fl.set_defaults(func=cmd_files)
 
     args = parser.parse_args()
     args.func(args)

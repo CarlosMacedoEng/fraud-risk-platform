@@ -1,0 +1,49 @@
+server:
+  port: ${PORT:8081}
+  shutdown: graceful
+spring:
+  application:
+    name: file-adapter
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/riskplatform}
+    username: ${DB_USER:risk}
+    password: ${DB_PASSWORD:risk}
+    hikari:
+      pool-name: file-adapter-db
+      maximum-pool-size: 5
+  flyway:
+    schemas: ingestion
+    default-schema: ingestion
+    create-schemas: true
+    table: flyway_history_ingestion
+    locations: classpath:db/ingestion
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP:localhost:9092}
+    producer:
+      acks: all
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        enable.idempotence: true
+        linger.ms: 20
+        request.timeout.ms: 15000
+        delivery.timeout.ms: 60000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus,metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true
+file-adapter:
+  base-dir: ${FILES_DIR:../../data/runtime/files}
+  scan-interval-ms: 10000
+  stale-run-minutes: 15
+  tenants: [aldermoor-bank, quillon-pay]
+  # SHA-256 of the local development key "dev-file-ops-key".
+  ops-key-sha256: 692fae1d9a6f33e3e7b7ea2e77c601554f94a467778d4383ae097bcaee59f1b9

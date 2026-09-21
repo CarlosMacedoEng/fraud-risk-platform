@@ -38,9 +38,18 @@ public class EventConsumers {
     private final CaseRepository caseRepository;
     private final ActiveStrategyProvider strategies;
     private final MeterRegistry meters;
+    private final com.fraudplatform.decision.persistence.DecisionRepository decisions;
+    private final com.fraudplatform.decision.persistence.CustomerRepository customers;
+    private final com.fraudplatform.decision.features.ResilientFeatureStore featureStore;
 
     public EventConsumers(ObjectMapper json, ProcessedEvents processed, CaseService cases, CaseRepository caseRepository,
-                          ActiveStrategyProvider strategies, MeterRegistry meters) {
+                          ActiveStrategyProvider strategies, MeterRegistry meters,
+                          com.fraudplatform.decision.persistence.DecisionRepository decisions,
+                          com.fraudplatform.decision.persistence.CustomerRepository customers,
+                          com.fraudplatform.decision.features.ResilientFeatureStore featureStore) {
+        this.decisions = decisions;
+        this.customers = customers;
+        this.featureStore = featureStore;
         this.json = json;
         this.processed = processed;
         this.cases = cases;
@@ -107,6 +116,72 @@ public class EventConsumers {
         } finally {
             MDC.clear();
         }
+    }
+
+    /**
+     * Batch history from the core-banking file (via file-adapter): persisted as BATCH transactions and folded
+     * into the feature store, so "seen device / beneficiary" and velocity features reflect activity that never
+     * went through real-time scoring. Real-time TransactionReceived events (our own) are ignored.
+     */
+    @KafkaListener(topics = EventType.Topics.TRANSACTIONS, groupId = MessagingConfig.HISTORY_INGESTOR,
+            containerFactory = "historyIngestorFactory")
+    public void onHistoryTransaction(ConsumerRecord<String, String> record) {
+        try {
+            JsonNode env = envelope(record);
+            if (!EventType.TransactionReceived.name().equals(env.get("eventType").asString())) return;
+            JsonNode p = env.get("payload");
+            if (!"BATCH".equals(p.path("source").asString())) return;
+            UUID eventId = UUID.fromString(env.get("eventId").asString());
+            if (processed.alreadyProcessed(MessagingConfig.HISTORY_INGESTOR, eventId)) return;
+            com.fraudplatform.decision.domain.Transaction t;
+            try {
+                t = new com.fraudplatform.decision.domain.Transaction(env.get("tenantId").asString(),
+                        p.get("transactionId").asString(), p.get("customerId").asString(), p.get("accountId").asString(),
+                        Instant.parse(p.get("eventTime").asString()),
+                        com.fraudplatform.decision.domain.TransactionType.valueOf(p.get("transactionType").asString()),
+                        com.fraudplatform.decision.domain.Channel.valueOf(p.get("channel").asString()),
+                        new java.math.BigDecimal(p.get("amount").asString()), p.get("currency").asString(),
+                        text(p, "cardToken"), text(p, "merchantId"), text(p, "mcc"), text(p, "merchantCountry"),
+                        text(p, "beneficiaryId"), text(p, "beneficiaryCountry"), text(p, "deviceId"), text(p, "ipAddress"),
+                        text(p, "ipCountry"));
+            } catch (RuntimeException e) {
+                throw new NonRetryableEventException("invalid history transaction payload", e);
+            }
+            if (decisions.insertTransaction(t, "BATCH")) {
+                featureStore.record(t);
+            }
+            processed.markProcessed(MessagingConfig.HISTORY_INGESTOR, eventId);
+        } finally {
+            MDC.clear();
+        }
+    }
+
+    /** Customer-master updates → local profile replica used on the hot path. */
+    @KafkaListener(topics = EventType.Topics.CUSTOMERS, groupId = MessagingConfig.PROFILE_INGESTOR,
+            containerFactory = "profileIngestorFactory")
+    public void onProfile(ConsumerRecord<String, String> record) {
+        try {
+            JsonNode env = envelope(record);
+            if (!EventType.CustomerProfileUpdated.name().equals(env.get("eventType").asString())) return;
+            JsonNode p = env.get("payload");
+            java.util.Set<String> devices = new java.util.HashSet<>();
+            p.path("boundDeviceIds").forEach(d -> devices.add(d.asString()));
+            try {
+                customers.upsert(env.get("tenantId").asString(), new com.fraudplatform.decision.domain.CustomerProfile(
+                        p.get("customerId").asString(), p.get("segment").asString(), p.get("homeCountry").asString(),
+                        p.get("tenureDays").asInt(), p.get("avgAmount90d").asDouble(), p.get("riskTier").asString(),
+                        devices, false), "EVENT");
+            } catch (NullPointerException | IllegalArgumentException e) {
+                throw new NonRetryableEventException("invalid profile payload", e);
+            }
+        } finally {
+            MDC.clear();
+        }
+    }
+
+    private static String text(JsonNode n, String field) {
+        JsonNode v = n.get(field);
+        return v == null || v.isNull() ? null : v.asString();
     }
 
     /**

@@ -263,4 +263,49 @@ class MessagingIntegrationTest extends IntegrationTestBase {
         assertThat(events).hasSize(1);
         assertThat(EventSchemas.validate(events.getFirst())).isEmpty();
     }
+
+    @Test
+    void batchHistoryFromTheFileAdapterIsPersistedAndWarmsTheFeatureStore() throws Exception {
+        String customer = "ALD-HIST-" + UUID.randomUUID().toString().substring(0, 8);
+        customers.upsert("aldermoor-bank", new com.fraudplatform.decision.domain.CustomerProfile(customer, "retail", "PT", 900, 40,
+                "standard", java.util.Set.of(), false), "BATCH");
+        String device = "D-HIST-" + UUID.randomUUID();
+        String txId = "HIST-" + UUID.randomUUID();
+        String env = """
+                {"eventId":"%s","eventType":"TransactionReceived","eventVersion":1,"occurredAt":"%s","tenantId":"aldermoor-bank",
+                 "partitionKey":"%s","correlationId":null,"producer":"file-adapter",
+                 "payload":{"transactionId":"%s","customerId":"%s","accountId":"%s-ACC","eventTime":"%s","transactionType":"CARD_PAYMENT",
+                            "channel":"ECOM","amount":25.00,"currency":"EUR","cardToken":"tok_H","merchantId":"M1","mcc":"5411",
+                            "merchantCountry":"PT","beneficiaryId":null,"beneficiaryCountry":null,"deviceId":"%s","ipAddress":"1.2.3.4",
+                            "ipCountry":"PT","source":"BATCH"}}
+                """.formatted(UUID.randomUUID(), Instant.now(), customer, txId, customer, customer,
+                Instant.now().minusSeconds(3600).truncatedTo(ChronoUnit.MILLIS), device).replace("\n", "");
+        produce(EventType.Topics.TRANSACTIONS, customer, env);
+        await("batch transaction persisted", Duration.ofSeconds(20), () -> "BATCH".equals(jdbc.sql(
+                "SELECT source FROM transactions WHERE tenant_id = 'aldermoor-bank' AND transaction_id = ?").param(txId)
+                .query(String.class).optional().orElse(null)));
+
+        // The device used in the batch history is now "known" for real-time scoring.
+        String tx = "RT-" + UUID.randomUUID();
+        JsonNode r = JSON.readTree(http.post().uri("/v1/decisions").header("X-Api-Key", GATEWAY_KEY).header("Idempotency-Key", tx)
+                .body(cardPayment(tx, customer, 30, device, "PT", Instant.now().truncatedTo(ChronoUnit.MILLIS).toString()))
+                .retrieve().body(String.class));
+        String full = http.get().uri("/v1/decisions/" + r.get("decisionId").asString()).header("X-Api-Key", ANALYST_KEY)
+                .retrieve().body(String.class);
+        assertThat(full).doesNotContain("\"NEW_DEVICE\"");
+    }
+
+    @Test
+    void customerProfileUpdatesRefreshTheReplica() throws Exception {
+        String customer = "ALD-PROF-" + UUID.randomUUID().toString().substring(0, 8);
+        String env = """
+                {"eventId":"%s","eventType":"CustomerProfileUpdated","eventVersion":1,"occurredAt":"%s","tenantId":"aldermoor-bank",
+                 "partitionKey":"%s","correlationId":null,"producer":"file-adapter",
+                 "payload":{"customerId":"%s","segment":"premium","homeCountry":"PT","tenureDays":2000,"avgAmount90d":120.50,
+                            "riskTier":"low","boundDeviceIds":["D-P1"]}}
+                """.formatted(UUID.randomUUID(), Instant.now(), customer, customer).replace("\n", "");
+        produce(EventType.Topics.CUSTOMERS, customer, env);
+        await("profile upserted", Duration.ofSeconds(20), () -> customers.find("aldermoor-bank", customer).isPresent());
+        assertThat(customers.find("aldermoor-bank", customer).get().segment()).isEqualTo("premium");
+    }
 }

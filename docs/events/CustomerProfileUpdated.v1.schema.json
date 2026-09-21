@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.fraud-platform.example/events/CustomerProfileUpdated.v1.json",
+  "title": "CustomerProfileUpdated v1 payload",
+  "description": "Customer master update (daily file from the customer master). Keyed by customerId. The decision-service keeps a local replica for the scoring hot path.",
+  "type": "object",
+  "required": [
+    "customerId",
+    "segment",
+    "homeCountry",
+    "tenureDays",
+    "avgAmount90d",
+    "riskTier"
+  ],
+  "properties": {
+    "customerId": {
+      "type": "string"
+    },
+    "segment": {
+      "type": "string"
+    },
+    "homeCountry": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "tenureDays": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "avgAmount90d": {
+      "type": "number",
+      "minimum": 0
+    },
+    "riskTier": {
+      "type": "string",
+      "enum": [
+        "low",
+        "standard",
+        "elevated"
+      ]
+    },
+    "boundDeviceIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

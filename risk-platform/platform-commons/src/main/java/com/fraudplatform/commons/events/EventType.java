@@ -12,6 +12,7 @@ public enum EventType {
     TransactionDeclined(Topics.DECISIONS, 1),
     CaseCreated(Topics.CASES, 1),
     FraudConfirmed(Topics.LABELS, 1),
+    CustomerProfileUpdated(Topics.CUSTOMERS, 1),
     ConfigurationChanged(Topics.CONFIG, 1),
     ModelVersionPromoted(Topics.CONFIG, 1);
 
@@ -36,6 +37,7 @@ public enum EventType {
         public static final String DECISIONS = "fraud.decisions.v1";
         public static final String CASES = "fraud.cases.v1";
         public static final String LABELS = "fraud.labels.v1";
+        public static final String CUSTOMERS = "fraud.customers.v1";
         public static final String CONFIG = "platform.config.v1";
 
         /** Dead-letter topic of a consumer group on a source topic. */

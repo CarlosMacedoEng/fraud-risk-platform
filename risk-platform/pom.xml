@@ -22,6 +22,7 @@
         <module>platform-commons</module>
         <module>decision-service</module>
         <module>downstream-simulators</module>
+        <module>file-adapter</module>
     </modules>
 
     <properties>

@@ -40,6 +40,8 @@ public class MessagingConfig {
     private static final Logger log = LoggerFactory.getLogger(MessagingConfig.class);
     public static final String CASE_CREATOR = "case-creator";
     public static final String LABEL_INGESTOR = "label-ingestor";
+    public static final String HISTORY_INGESTOR = "history-ingestor";
+    public static final String PROFILE_INGESTOR = "profile-ingestor";
 
     @Bean
     KafkaAdmin.NewTopics topics(@Value("${platform.messaging.partitions:3}") int partitions,
@@ -49,7 +51,10 @@ public class MessagingConfig {
                 topic(EventType.Topics.DECISIONS, partitions, replication),
                 topic(EventType.Topics.CASES, partitions, replication),
                 topic(EventType.Topics.LABELS, partitions, replication),
+                topic(EventType.Topics.CUSTOMERS, partitions, replication),
                 topic(EventType.Topics.CONFIG, 1, replication),
+                topic(EventType.Topics.deadLetter(EventType.Topics.TRANSACTIONS, HISTORY_INGESTOR), 1, replication),
+                topic(EventType.Topics.deadLetter(EventType.Topics.CUSTOMERS, PROFILE_INGESTOR), 1, replication),
                 topic(EventType.Topics.deadLetter(EventType.Topics.DECISIONS, CASE_CREATOR), 1, replication),
                 topic(EventType.Topics.deadLetter(EventType.Topics.LABELS, LABEL_INGESTOR), 1, replication));
     }
@@ -89,6 +94,18 @@ public class MessagingConfig {
     ConcurrentKafkaListenerContainerFactory<String, String> labelIngestorFactory(ConsumerFactory<String, String> cf,
                                                                                 KafkaTemplate<String, String> template) {
         return factory(cf, template, LABEL_INGESTOR);
+    }
+
+    @Bean
+    ConcurrentKafkaListenerContainerFactory<String, String> historyIngestorFactory(ConsumerFactory<String, String> cf,
+                                                                                  KafkaTemplate<String, String> template) {
+        return factory(cf, template, HISTORY_INGESTOR);
+    }
+
+    @Bean
+    ConcurrentKafkaListenerContainerFactory<String, String> profileIngestorFactory(ConsumerFactory<String, String> cf,
+                                                                                  KafkaTemplate<String, String> template) {
+        return factory(cf, template, PROFILE_INGESTOR);
     }
 
     /** Config refresh is best-effort (the scheduled refresh is the safety net): log and move on, no DLT. */

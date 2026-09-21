@@ -28,6 +28,7 @@
         "TransactionDeclined",
         "CaseCreated",
         "FraudConfirmed",
+        "CustomerProfileUpdated",
         "ConfigurationChanged",
         "ModelVersionPromoted"
       ]
