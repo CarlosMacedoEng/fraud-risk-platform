@@ -119,7 +119,7 @@ CPU starvation or remote calls inside transactions.
 ## 10. Latency percentiles and throughput
 * Report p50/p95/p99 **and** max from an open-model load generator, both client-side (k6) and server-side
   (Micrometer histogram). Averages hide exactly the tail we fought.
-* Throughput is only meaningful with its latency: "300 rps" was the knee; "150 rps at p99 68 ms" is the SLO point.
+* Throughput is only meaningful with its latency: "300 rps" was the knee; "150 rps at p99 68 ms" was the SLO point (p99 40 ms after the J-26 connection-pool fix).
 * Utilisation vs latency is non-linear (queueing): at ~88% CPU the tail exploded; plan for ≤ 65–70%.
 
 ## 11. Backpressure
@@ -128,6 +128,6 @@ edge, Kafka consumers pull at their own pace, the outbox absorbs broker outages.
 (virtual threads) + a bounded resource (DB pool) = collapse — measured in `stress-01`.
 
 ## 12. Performance test template
-See `perf/scoring.js` and `docs/templates/performance-test-template.md` (Stage 12): scenario, arrival model,
+See `perf/scoring.js` and [`docs/templates/performance-test-template.md`](templates/performance-test-template.md): scenario, arrival model,
 warm-up policy, environment capture, success thresholds, server-side metrics, JVM artefacts, result table
 including failed runs.

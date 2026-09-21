@@ -47,7 +47,7 @@ GC, threads, inference pool), Files (by status, records by outcome).
 |---|---|---|
 | Scoring availability (non-5xx, excl. shed load) | 99.95% / 30 days | 0 × 5xx in all post-fix runs |
 | Scoring latency p99 (server) | ≤ 250 ms | 63 ms at 150 TPS, warm |
-| Degraded decision ratio | ≤ 1% daily | 0.54% at 150 TPS |
+| Degraded decision ratio | ≤ 1% daily | 0.54% at 150 TPS (baseline-06); 3.39% in baseline-08, 99.5% of it device-simulator timeouts (J-33, hypothesis) |
 | Event publication lag | 99% < 5 s | outbox backlog ≤ 12 rows at 150 TPS |
 | Case creation lag (REVIEW → case) | 99% < 60 s | seconds in tests |
 | Inbound files processed by SLA time | 100% (06:00) | — |
@@ -67,6 +67,18 @@ Error budget policy: burning > 50% of the monthly budget freezes non-emergency s
 | CircuitOpen | any integration open 1 min | SEV3 | TS-06 |
 | ReviewVolumeSpike | REVIEW > 1% for 30 min | SEV3 | TS-14 |
 | FileRejected / ScanErrors | any | SEV3 | TS-09 / TS-10 |
+| **ReviewShareDrift** | REVIEW share over 15 min halved or doubled vs previous 3 h, for 10 min | SEV2 | TS-18 / TS-14 |
+| **FeatureStoreWritesSkipped** | any skipped feature write | SEV3 | TS-12 (rebuild) |
+| **CaseCreationStalled** | REVIEW decisions but no new case for 10 min | SEV2 | TS-07a |
+| **ConsumerWithoutPartitions** | a consumer group member with 0 partitions for 5 min | SEV2 | TS-07a |
+| **ConsumerRebalanceFailures** | > 3 failed rebalances in 10 min | SEV3 | TS-07a |
+| **ConsumerLagHigh** | lag > 5,000 for 5 min | SEV3 | TS-07b |
+
+The six rules in bold were added after the troubleshooting lab (journal J-25, J-32): those failures produced no
+alert at all. `ConsumerRebalanceFailures` caught the recurrence of the broker fault two hours after it was added.
+17 rules in total, validated with `promtool check rules`. Note: in the lab, `ReviewVolumeSpike` fires permanently
+because the load-test pool inflates the REVIEW share (J-28); its 1% threshold is a placeholder for the customer's
+agreed review budget.
 
 Every alert names a runbook entry; alerts without an action are removed.
 

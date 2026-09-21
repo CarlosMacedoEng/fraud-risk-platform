@@ -258,8 +258,8 @@ durable storage (the container file system is lost on reschedule).
 failed for about two minutes until it was restarted. We captured diagnostic data and are analysing the cause. The
 service now restarts automatically, and in production at least two instances run at all times."
 
-**Follow-up.** Heap-dump analysis report; confirm replica count and PodDisruptionBudget in the Kubernetes
-manifests (Stage 10).
+**Follow-up.** Heap-dump analysis report; replica count and PodDisruptionBudget are set in the Kubernetes
+manifests (3 replicas minimum, `minAvailable: 2`, AWS_AND_KUBERNETES.md).
 
 ---
 
@@ -858,8 +858,8 @@ version N and N+1 both work with the schema; `lock_timeout` for DDL.
 tonight was not applied (it failed a safety check and was rolled back automatically). No data was affected.
 A revised change is scheduled for …"
 
-**Follow-up.** Add the migration lint and the snapshot migration test to the pipeline (Stage 11 migration
-runbook).
+**Follow-up.** Add the migration lint and the snapshot migration test to the pipeline (see
+MIGRATION_AND_UPGRADE_RUNBOOK.md, which applies the expand/contract fix for real in release 2.0).
 
 ---
 

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://docs.fraud-platform.example/events/EventName.v1.schema.json",
+  "title": "EventName v1 (payload)",
+  "description": "Payload inside the standard envelope (docs/events/envelope.v1.schema.json: eventId, eventType, eventVersion, tenantId, occurredAt, correlationId, payload). Governance: only additive, optional fields within v1; removing, renaming or changing the meaning of a field requires v2, published in parallel until all consumers have migrated. Partition key = the entity whose order matters (e.g. transactionId). Consumers must be idempotent on eventId.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["entityId", "status"],
+  "properties": {
+    "entityId": { "type": "string", "description": "Natural key; also the Kafka partition key" },
+    "status": { "type": "string", "enum": ["CREATED", "UPDATED"] },
+    "optionalField": { "type": ["string", "null"], "description": "Added later in v1 as optional; consumers must tolerate its absence" }
+  }
+}

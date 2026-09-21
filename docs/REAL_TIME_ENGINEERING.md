@@ -17,8 +17,8 @@ Measured on a warm JVM at 150 TPS: **server p50 11 ms, p95 17 ms, p99 63 ms**; d
 |---|---|---|
 | CPU per request | 11.7 ms | calibration run, 30 rps, `process_cpu_usage` |
 | Theoretical ceiling | ~170 rps at 100% CPU | 2,000 CPU-ms/s ÷ 11.7 |
-| Observed knee | ~300 rps offered | stress test (above ~170 rps an increasing share of decisions is degraded, which skips work) |
-| SLO-compliant sustained load | 150 TPS at 83% peak CPU | baseline-06 |
+| Observed knee | ~300 rps offered | stress test (above ~170 rps an increasing share of decisions is degraded, which skips work). **Later explained in part by J-26:** Redis pipelines opened a TCP connection each, exhausting ephemeral ports at ~157 rps. Fixed; the knee has not been re-measured |
+| SLO-compliant sustained load | 150 TPS at 83% peak CPU (baseline-06); after the J-26 fix: p95 15.2 / p99 40.1 ms at 64% peak CPU (baseline-08) | perf/README.md |
 
 Capacity planning rule used: keep steady-state CPU ≤ ~65–70% so queueing does not explode (at 88%
 utilisation the cold runs showed exactly that). For Aldermoor's assumed 250 TPS peak with N+1 redundancy:

@@ -1,0 +1,15 @@
+{
+  "_comment": "Rule inside a strategy document (config/customers/<tenant>/strategies/<version>.json). Validated by StrategyCompiler (unique id, known feature fields and operators, known reason code). Before approval: POST /v1/admin/tenants/{t}/strategies/{v}/simulate and compare with the active version on the same transactions.",
+  "id": "BEN-002",
+  "description": "New beneficiary abroad from a new device, well above the customer's usual amount",
+  "points": 35,
+  "reasonCode": "NEW_BENEFICIARY",
+  "when": {
+    "all": [
+      { "field": "is_new_beneficiary", "op": "eq", "value": 1 },
+      { "field": "beneficiary_foreign", "op": "eq", "value": 1 },
+      { "field": "is_new_device", "op": "eq", "value": 1 },
+      { "field": "amount_to_baseline", "op": "gte", "value": 3 }
+    ]
+  }
+}

@@ -43,7 +43,7 @@ to show that one product serves different risk appetites through configuration.
 | The problem and the value | [BUSINESS_CONTEXT.md](BUSINESS_CONTEXT.md) |
 | The architecture | [ARCHITECTURE.md](ARCHITECTURE.md), [adr/](adr/) |
 | ML and strategy decisions | [MODEL_STRATEGY.md](MODEL_STRATEGY.md), [CONFIGURATION_AND_RISK_STRATEGY.md](CONFIGURATION_AND_RISK_STRATEGY.md) |
-| Real engineering problems and how they were found | [ENGINEERING_JOURNAL.md](ENGINEERING_JOURNAL.md) (38 entries) |
+| Real engineering problems and how they were found | [ENGINEERING_JOURNAL.md](ENGINEERING_JOURNAL.md) (39 entries) |
 | Operations skills | [TROUBLESHOOTING_PLAYBOOK.md](TROUBLESHOOTING_PLAYBOOK.md), [JAVA_PERFORMANCE_GUIDE.md](JAVA_PERFORMANCE_GUIDE.md), [perf/README.md](../perf/README.md) |
 | Delivery and customer work | [CUSTOMER_IMPLEMENTATION_PLAN.md](CUSTOMER_IMPLEMENTATION_PLAN.md), [GO_LIVE_RUNBOOK.md](GO_LIVE_RUNBOOK.md), [customer/](customer/) |
 | Upgrades | [MIGRATION_AND_UPGRADE_RUNBOOK.md](MIGRATION_AND_UPGRADE_RUNBOOK.md) |
