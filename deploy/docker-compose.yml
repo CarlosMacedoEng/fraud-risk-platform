@@ -19,7 +19,9 @@ services:
       POSTGRES_USER: risk
       POSTGRES_PASSWORD: risk
     command: ["postgres", "-c", "shared_preload_libraries=pg_stat_statements", "-c", "pg_stat_statements.track=all",
-              "-c", "max_connections=200", "-c", "log_min_duration_statement=200"]
+              "-c", "max_connections=200", "-c", "log_min_duration_statement=200",
+              "-c", "max_wal_size=4GB", "-c", "log_checkpoints=on"]   # backfill rehearsal: checkpoints every 23 s at 1 GB
+    shm_size: 256mb          # default 64 MB made VACUUM fail ("could not resize shared memory segment")
     ports: ["5432:5432"]
     volumes:
       - pgdata:/var/lib/postgresql/data

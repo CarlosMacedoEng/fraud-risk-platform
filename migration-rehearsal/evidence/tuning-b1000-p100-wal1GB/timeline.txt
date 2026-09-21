@@ -1,0 +1,11 @@
+19:50:39 reset: channel -> NULL for aldermoor-bank, then VACUUM (ANALYZE)
+SET
+UPDATE 459780
+19:50:55 table size / dead tuples before backfill: 2029 MB|459780
+{'batches': 461, 'updated': 459780, 'durationMs': 66723, 'complete': True, 'status': {'tenant': 'aldermoor-bank', 'total': 462404, 'remaining': 0, 'mismatched': 0, 'readyForContract': True}}
+requests=7486 rate=49.9/s failed=0.307%
+client latency ms: p50=11.1 p95=71.3 p99=509.1 max=1014.2
+server decision ms: p50=5.4 p95=38.7 p99=470.6
+degraded decisions=0.01%
+19:53:28 table size / dead tuples after backfill: 2532 MB|153002
+19:53:30 VACUUM (ANALYZE) took 1 s; after: 2532 MB|153002

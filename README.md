@@ -25,7 +25,7 @@ go-live and support — not just a fraud model.
 | 8 | Observability, performance tests (k6), JVM performance guide — **measured** results | ✅ Done |
 | 9 | Troubleshooting lab: 18 reproducible incidents with evidence — [playbook](docs/TROUBLESHOOTING_PLAYBOOK.md); found and fixed 4 real defects (Redis connection churn, model-less pod reported ready, consumer throughput, missing alerts) | ✅ Done |
 | 10 | Kubernetes manifests (kustomize base + dev/prod overlays), deployed to a local kind cluster; AWS design mapping (not deployed) — [doc](docs/AWS_AND_KUBERNETES.md) | ✅ Done |
-| 11 | Lifecycle: migration v1→v2, go-live, support, customer communication | Planned |
+| 11 | Release 1.x → 2.0 migration implemented and rehearsed (expand/backfill/contract, rollback, backfill impact measured) — [runbook](docs/MIGRATION_AND_UPGRADE_RUNBOOK.md); go-live runbook, implementation plan, customer communication and 11 customer artifacts ([docs/customer/](docs/customer/)) | ✅ Done |
 | 12 | Reusable assets, engineering standards, mentoring, interview preparation | Planned |
 
 ## Architecture at a glance

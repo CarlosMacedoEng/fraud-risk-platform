@@ -44,11 +44,14 @@ public class AdminController {
     private final RedisGraphFeatureStore graph;
     private final PlatformProperties props;
     private final com.fraudplatform.decision.application.FeatureStoreRebuildService rebuild;
+    private final com.fraudplatform.decision.application.DecisionChannelBackfillService channelBackfill;
 
     public AdminController(StrategyAdminService strategies, ModelGovernanceService models, AuditRepository audit,
                            RedisGraphFeatureStore graph, PlatformProperties props,
-                           com.fraudplatform.decision.application.FeatureStoreRebuildService rebuild) {
+                           com.fraudplatform.decision.application.FeatureStoreRebuildService rebuild,
+                           com.fraudplatform.decision.application.DecisionChannelBackfillService channelBackfill) {
         this.rebuild = rebuild;
+        this.channelBackfill = channelBackfill;
         this.strategies = strategies;
         this.models = models;
         this.audit = audit;
@@ -207,5 +210,24 @@ public class AdminController {
         Path file = props.modelsDir().resolve(tenant).resolve("graph").resolve("graph-features-latest.jsonl");
         if (!Files.exists(file)) throw new PlatformException(ErrorCode.NOT_FOUND, "no graph snapshot for " + tenant);
         return Map.of("tenant", tenant, "entitiesLoaded", graph.loadSnapshot(tenant, file));
+    }
+
+    // ------------------------------------------------------------------ release 2.0 data migration
+
+    /** Reconciliation / gate for the V7 contract step: total, remaining NULLs, mismatches vs transactions. */
+    @GetMapping("/migrations/decision-channel")
+    public Map<String, Object> channelMigrationStatus(@AuthenticationPrincipal ApiClientPrincipal c, @PathVariable String tenant) {
+        authorize(c, tenant);
+        return channelBackfill.status(tenant);
+    }
+
+    @PostMapping("/migrations/decision-channel/backfill")
+    public Map<String, Object> channelBackfill(@AuthenticationPrincipal ApiClientPrincipal c, @PathVariable String tenant,
+                                               @RequestParam(defaultValue = "5000") int batchSize,
+                                               @RequestParam(defaultValue = "1000") int maxBatches,
+                                               @RequestParam(defaultValue = "50") long pauseMs) {
+        authorize(c, tenant);
+        return channelBackfill.backfill(tenant, Math.min(Math.max(batchSize, 100), 20000), Math.max(maxBatches, 1),
+                Math.min(Math.max(pauseMs, 0), 5000));
     }
 }

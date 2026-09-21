@@ -68,7 +68,9 @@ class IntegrationClientTest {
     @Test
     void neverRetriesNonIdempotentOperations() {
         server.stubFor(post("/cases").willReturn(aResponse().withStatus(503)));
-        assertThatThrownBy(() -> client.post(CREATE, "/cases", Map.of("a", 1), null, Profile.class, null, Duration.ofSeconds(1)))
+        // Generous deadline: this test is about the retry policy, not timing. With 1 s it failed once as TIMEOUT
+        // on a loaded laptop (journal J-39).
+        assertThatThrownBy(() -> client.post(CREATE, "/cases", Map.of("a", 1), null, Profile.class, null, Duration.ofSeconds(5)))
                 .isInstanceOf(IntegrationException.class)
                 .extracting(e -> ((IntegrationException) e).kind()).isEqualTo(IntegrationException.Kind.SERVER_ERROR);
         server.verify(1, postRequestedFor(urlEqualTo("/cases")));

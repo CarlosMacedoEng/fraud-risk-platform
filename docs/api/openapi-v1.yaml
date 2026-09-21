@@ -131,6 +131,34 @@ paths:
         "200": { description: New deployment state (ETag = row version) }
         "409": { $ref: "#/components/responses/Problem" }
         "422": { $ref: "#/components/responses/Problem" }
+  /v1/admin/tenants/{tenant}/migrations/decision-channel:
+    get:
+      summary: Release 2.0 migration reconciliation (gate for the V7 contract step)
+      parameters:
+        - { in: path, name: tenant, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Totals for the tenant
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tenant: { type: string }
+                  total: { type: integer }
+                  remaining: { type: integer, description: decisions with channel NULL }
+                  mismatched: { type: integer, description: channel differs from the transaction's channel }
+                  readyForContract: { type: boolean }
+  /v1/admin/tenants/{tenant}/migrations/decision-channel/backfill:
+    post:
+      summary: Online, throttled, idempotent backfill of risk_decisions.channel (see MIGRATION_AND_UPGRADE_RUNBOOK.md)
+      parameters:
+        - { in: path, name: tenant, required: true, schema: { type: string } }
+        - { in: query, name: batchSize, schema: { type: integer, default: 5000, minimum: 100, maximum: 20000 } }
+        - { in: query, name: maxBatches, schema: { type: integer, default: 1000 } }
+        - { in: query, name: pauseMs, schema: { type: integer, default: 50, maximum: 5000 }, description: "pause between batches; the rehearsal's safe value was 1000 with batchSize 500" }
+      responses:
+        "200": { description: "batches, updated, durationMs, complete, status (reconciliation) — or status ALREADY_RUNNING" }
 components:
   securitySchemes:
     apiKey:

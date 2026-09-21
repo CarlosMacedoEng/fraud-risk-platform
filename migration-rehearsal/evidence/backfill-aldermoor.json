@@ -1,0 +1,1 @@
+{"detail":"database unavailable, retry with the same Idempotency-Key","instance":"/v1/admin/tenants/aldermoor-bank/migrations/decision-channel/backfill","status":503,"title":"A required dependency is unavailable","type":"https://docs.fraud-platform.example/errors/dependency-unavailable","code":"DEPENDENCY_UNAVAILABLE","correlationId":"32a45051-7809-4f69-b37d-914f1b65022b"}

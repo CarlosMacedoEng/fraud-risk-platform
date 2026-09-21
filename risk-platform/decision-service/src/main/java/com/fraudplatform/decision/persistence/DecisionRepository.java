@@ -58,15 +58,17 @@ public class DecisionRepository {
                         INSERT INTO risk_decisions (decision_id, tenant_id, transaction_id, decision, risk_score, risk_level,
                             model_probability, anomaly_percentile, graph_risk, rule_points, reasons, feature_vector, model_version,
                             strategy_version, feature_spec_version, challenger_model_version, challenger_probability,
-                            degraded_modes, processing_ms, client_id, correlation_id, created_at)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::jsonb, ?::jsonb, ?, ?, ?, ?, ?, ?::text[], ?, ?, ?, ?)
+                            degraded_modes, processing_ms, client_id, correlation_id, created_at, channel)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?::jsonb, ?::jsonb, ?, ?, ?, ?, ?, ?::text[], ?, ?, ?, ?,
+                                (SELECT t.channel FROM transactions t WHERE t.tenant_id = ? AND t.transaction_id = ?))
                         """)
                 .params(d.decisionId(), d.tenantId(), d.transactionId(), d.decision().name(), d.riskScore(), d.riskLevel().name(),
                         d.modelProbability(), d.anomalyPercentile(), d.graphRisk(), d.rulePoints(),
                         json.writeValueAsString(d.reasons()), json.writeValueAsString(d.featureVector()), d.modelVersion(),
                         d.strategyVersion(), d.featureSpecVersion(), d.challengerModelVersion(), d.challengerProbability(),
                         "{" + d.degradedModes().stream().map(Enum::name).collect(Collectors.joining(",")) + "}",
-                        d.processingMs(), d.clientId(), d.correlationId(), Timestamp.from(d.createdAt()))
+                        d.processingMs(), d.clientId(), d.correlationId(), Timestamp.from(d.createdAt()),
+                        d.tenantId(), d.transactionId())   // release 2.0: channel (V6); PK lookup, same transaction
                 .update();
     }
 

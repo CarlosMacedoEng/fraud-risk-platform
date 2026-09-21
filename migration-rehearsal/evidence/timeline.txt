@@ -1,0 +1,39 @@
+19:43:15 == T-0 PRE-CHECKS (release 1.x running)
+5|reporting views|2026-09-21 14:46:33
+aldermoor-bank|450749
+quillon-pay|149411
+1156 MB
+19:43:17 backup (pg_dump -Fc) before the change
+19:43:50 backup took 33 s, size 448.9M
+19:43:51 == STEP 1 DEPLOY 2.0 (Flyway applies V6 expand at startup)
+19:44:17 2.0 ready after 21 s
+Migrating schema \
+Successfully applied 1 migration to schema \
+6|decision channel expand|9|t
+19:44:23 == STEP 2 SMOKE: new decisions carry the channel
+200 0.187063s
+19:44:24 channel of the smoke decision: POS
+19:44:24 == STEP 3 RECONCILIATION BEFORE BACKFILL
+{"tenant":"aldermoor-bank","total":450750,"remaining":450749,"mismatched":0,"readyForContract":false}
+{"tenant":"quillon-pay","total":149411,"remaining":149411,"mismatched":0,"readyForContract":false}
+19:44:25 == STEP 4 LATENCY REFERENCE: 50 rps, 60 s, no backfill
+requests=3000 rate=50.0/s failed=0.000%
+client latency ms: p50=11.7 p95=16.6 p99=43.9 max=119.0
+server decision ms: p50=5.5 p95=7.5 p99=16.1
+degraded decisions=0.03%
+19:45:27 == STEP 5 BACKFILL UNDER LOAD: 50 rps while both tenants are backfilled (batch 5000, pause 50 ms)
+requests=4486 rate=49.8/s failed=0.513%
+client latency ms: p50=11.8 p95=28.4 p99=606.9 max=1250.6
+server decision ms: p50=5.7 p95=14.3 p99=359.3
+degraded decisions=0.25%
+19:47:00 == STEP 6 RECONCILIATION AFTER BACKFILL (gate for V7)
+{"tenant":"aldermoor-bank","total":455998,"remaining":0,"mismatched":0,"readyForContract":true}
+{"tenant":"quillon-pay","total":151626,"remaining":0,"mismatched":0,"readyForContract":true}
+19:47:01 == STEP 7 ROLLBACK REHEARSAL: release 1.x against the V6 schema
+19:47:21 release 1.x on V6 schema: state=running exit=0 readiness=200
+Successfully validated 6 migrations (execution time 00:00.027s)
+Current version of schema \
+release 1.x scoring: HTTP 200
+19:47:23 channel written by release 1.x: 'NULL' -> rows written during a rollback need the backfill again before V7
+19:47:25 re-run backfill after the rollback window
+updated 1 | remaining 0 | readyForContract True
