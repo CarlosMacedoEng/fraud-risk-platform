@@ -37,6 +37,10 @@ const scenarios = {
             stages: [{ target: 150, duration: '60s' }, { target: 300, duration: '60s' }, { target: 450, duration: '60s' },
                      { target: 600, duration: '60s' }, { target: 600, duration: '60s' }] },
   },
+  lab: {
+    steady: { executor: 'constant-arrival-rate', rate: Number(__ENV.RATE || 60), timeUnit: '1s',
+              duration: __ENV.DURATION || '60s', preAllocatedVUs: 20, maxVUs: 400 },
+  },
   calibration: {
     steady: { executor: 'constant-arrival-rate', rate: 30, timeUnit: '1s', duration: '90s', preAllocatedVUs: 10, maxVUs: 100 },
   },
@@ -58,7 +62,7 @@ export const options = {
 };
 
 export default function () {
-  const tenant = Math.random() < 0.7 ? 'aldermoor-bank' : 'quillon-pay';
+  const tenant = __ENV.TENANT || (Math.random() < 0.7 ? 'aldermoor-bank' : 'quillon-pay');
   const pool = pools[tenant];
   const tpl = pool[Math.floor(Math.random() * pool.length)];
   const id = `K6-${__VU}-${__ITER}-${Date.now()}`;

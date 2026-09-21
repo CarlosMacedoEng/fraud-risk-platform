@@ -15,12 +15,14 @@ public class FaultInjector {
 
     private static final Logger log = LoggerFactory.getLogger(FaultInjector.class);
 
-    public enum Point { MODEL_INFERENCE, FEATURE_STORE, DECISION_PERSISTENCE, CPU_BURN }
+    public enum Point { MODEL_INFERENCE, FEATURE_STORE, DECISION_PERSISTENCE, CPU_BURN, LOCK_CONTENTION }
 
     public record Fault(long latencyMs, double errorRate) {
     }
 
     private final boolean enabled;
+    /** Global lock for the contention fault: sleeping while holding a monitor pins virtual threads on Java 21. */
+    private static final Object CONTENDED = new Object();
     private final Map<Point, Fault> faults = new EnumMap<>(Point.class);
 
     public FaultInjector(boolean enabled) {
@@ -53,7 +55,15 @@ public class FaultInjector {
             f = faults.get(point);
         }
         if (f == null) return;
-        if (f.latencyMs() > 0) {
+        if (f.latencyMs() > 0 && point == Point.LOCK_CONTENTION) {
+            synchronized (CONTENDED) {
+                try {
+                    Thread.sleep(f.latencyMs());
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        } else if (f.latencyMs() > 0) {
             if (point == Point.CPU_BURN) {
                 long end = System.nanoTime() + f.latencyMs() * 1_000_000;
                 double x = 0;

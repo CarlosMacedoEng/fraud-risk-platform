@@ -1,0 +1,6 @@
+label=after-fix at 18:13:04  ephemeral range: 32768	60999
+before load: TIME_WAIT->redis=0 ESTABLISHED->redis=20
+after 40s @100rps: TIME_WAIT->redis=0 ESTABLISHED->redis=20
+requests=4001 rate=100.0/s failed=0.000%
+client latency ms: p50=9.7 p95=13.1 p99=19.0 max=91.5
+degraded decisions=0.00%

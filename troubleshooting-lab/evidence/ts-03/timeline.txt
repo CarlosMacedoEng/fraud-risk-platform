@@ -1,0 +1,15 @@
+17:36:56 INCIDENT: +15 ms CPU per request, 40 rps
+17:37:58 FIX: remove the hot code path (fault cleared)
+scenario=lab
+requests=2385 rate=39.8/s failed=0.000%
+client latency ms: p50=27.3 p95=448.6 p99=890.2 max=1377.2
+server decision ms: p50=20.8 p95=193.4 p99=331.5
+degraded decisions=9.94%
+http_req_failed rate<0.01:PASS
+process cpu: {} 0.534
+Method                                                                                                                                          Samples Percent
+----------------------------------------------------------------------------------------------------------------------------------------------- ------- -------
+com.fraudplatform.decision.lab.FaultInjector.apply(FaultInjector$Point)                                                                             317  61.20%
+org.springframework.boot.loader.net.protocol.jar.JarFileUrlKey.equals(Object)                                                                         7   1.35%
+io.micrometer.core.instrument.MeterRegistry.getOrCreateMeter(...)                                                                                     3   0.58%
+java.lang.PublicMethods$Key.matches(Method, String, Class[])                                                                                          3   0.58%

@@ -1,0 +1,7 @@
+scenario=lab
+requests=2687 rate=59.2/s failed=17.454%
+client latency ms: p50=600.0 p95=698.9 p99=747.9 max=848.3
+server decision ms: p50=119.3 p95=264.4 p99=292.9
+degraded decisions=21.55%
+http_req_failed rate<0.01:FAIL
+time="2026-09-21T17:36:07Z" level=error msg="thresholds on metrics 'http_req_failed' have been crossed"

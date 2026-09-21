@@ -89,12 +89,13 @@ public class DecisionService {
     private final PlatformProperties.Budgets budgets;
     private final PlatformProperties props;
     private final DecisionMetrics metrics;
+    private final com.fraudplatform.decision.lab.FaultInjector faults;
 
     public DecisionService(ActiveStrategyProvider strategies, CustomerProfileService profiles, ResilientFeatureStore featureStore,
                            GraphFeatureStore graphStore, Optional<DeviceRiskClient> deviceRisk, ModelScorer scorer,
                            DecisionRepository decisions, IdempotencyRepository idempotency, DecisionEventsWriter events,
                            TransactionTemplate tx, ExecutorService enrichmentExecutor, PlatformProperties props,
-                           DecisionMetrics metrics) {
+                           DecisionMetrics metrics, com.fraudplatform.decision.lab.FaultInjector faults) {
         this.strategies = strategies;
         this.profiles = profiles;
         this.featureStore = featureStore;
@@ -109,6 +110,7 @@ public class DecisionService {
         this.budgets = props.budgets();
         this.props = props;
         this.metrics = metrics;
+        this.faults = faults;
     }
 
     public Result score(Command cmd) {
@@ -149,6 +151,8 @@ public class DecisionService {
 
     RiskDecision decide(Command cmd) {
         Transaction t = cmd.transaction();
+        faults.apply(com.fraudplatform.decision.lab.FaultInjector.Point.CPU_BURN);         // lab only
+        faults.apply(com.fraudplatform.decision.lab.FaultInjector.Point.LOCK_CONTENTION);  // lab only
         CompiledStrategy strategy = strategies.forCustomer(t.tenantId(), t.customerId());
         Set<DegradedMode> degraded = EnumSet.noneOf(DegradedMode.class);
 
@@ -211,6 +215,8 @@ public class DecisionService {
 
     private void persist(Command cmd, RiskDecision d) {
         tx.executeWithoutResult(status -> {
+            // lab only: a slow transaction holds its connection (connection-pool exhaustion scenario)
+            faults.apply(com.fraudplatform.decision.lab.FaultInjector.Point.DECISION_PERSISTENCE);
             if (!decisions.insertTransaction(cmd.transaction(), "REALTIME")) {
                 String existing = decisions.findByTransaction(d.tenantId(), d.transactionId())
                         .map(x -> x.decisionId().toString()).orElse("unknown");

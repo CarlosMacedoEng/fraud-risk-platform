@@ -1,0 +1,3 @@
+{'decision': 'APPROVE'} 2378.2683
+{'decision': 'REVIEW'} 13.0914
+{'decision': 'DECLINE'} 8.7276

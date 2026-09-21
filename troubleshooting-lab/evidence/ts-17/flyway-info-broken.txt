@@ -1,0 +1,18 @@
+WARNING: Storing migrations in 'sql' is not recommended and default scanning of this location may be deprecated in a future release
+Flyway OSS Edition 11.20.3 by Redgate
+
+See release notes here: https://rd.gt/416ObMi
+Database: jdbc:postgresql://postgres:5432/riskplatform_ts17 (PostgreSQL 16.11)
+Schema version: 5
+
++-----------+---------+-------------------------+------+---------------------+---------+----------+
+| Category  | Version | Description             | Type | Installed On        | State   | Undoable |
++-----------+---------+-------------------------+------+---------------------+---------+----------+
+| Versioned | 1       | core schema             | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 2       | strategy model audit    | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 3       | strategy canary rollout | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 4       | cases labels outbox     | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 5       | reporting views         | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 6       | decision channel        | SQL  |                     | Pending | No       |
++-----------+---------+-------------------------+------+---------------------+---------+----------+
+

@@ -1,0 +1,92 @@
+
+GROUP           COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+case-creator    kafka:9092  (1)           range                Stable               3
+
+Consumer group 'config-refresh-1125a0a8-f9ff-457e-86ab-007edaa14093' has no active members.
+
+GROUP                                               COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-1125a0a8-f9ff-457e-86ab-007edaa14093 kafka:9092  (1)           -                    Empty             
+Consumer group 'config-refresh-3d1263bf-7763-4401-b6b0-f04f46c56ee7' has no active members.
+   0
+
+GROUP                                               COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-3d1263bf-7763-4401-b6b0-f04f46c56ee7 kafka:9092  (1)           -                    Empty                0
+
+Consumer group 'config-refresh-5344be46-7e53-4774-b8f0-69adbf9e59cb' has no active members.
+
+GROUP                                               COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-5344be46-7e53-4774-b8f0-69adbf9e59cb kafka:9092  (1)           -                    Empty                0
+
+Consumer group 'config-refresh-69c72065-fda0-4588-bbd7-053f49bd73a0' has no active members.
+
+GROUP                                               COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-69c72065-fda0-4588-bbd7-053f49bd73a0 kafka:9092  (1)           -                    Empty                0
+
+Consumer group 'config-refresh-6ff1c325-3b18-4a01-abdb-8b304c782ba9' has no active members.
+
+GROUP                                               COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-6ff1c325-3b18-4a01-abdb-8b304c782ba9 kafka:9092  (1)           -                    Empty                0
+
+Consumer group 'config-refresh-7abd9159-1d81-4af9-881a-654c3f0ce06e' has no active members.
+
+GROUP                                               COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-7abd9159-1d81-4af9-881a-654c3f0ce06e kafka:9092  (1)           -                    Empty                0
+
+Consumer group 'config-refresh-8acd747e-8b1c-4dd4-aa44-3425fb954331' has no active members.
+
+GROUP                                               COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-8acd747e-8b1c-4dd4-aa44-3425fb954331 kafka:9092  (1)           -                    Empty                0
+
+GROUP                                               COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-8ea95a1f-e3de-4b79-8b8d-205ce89f4034 kafka:9092  (1)           range                Stable               1
+
+GROUP                                               COORDINATOR (ID)         
+Consumer group 'config-refresh-a663fa07-0781-4b89-b816-af3a07969451' has no active members.
+ ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-a663fa07-0781-4b89-b816-af3a07969451 kafka:9092  (1)           -                    Empty                0
+
+Consumer group 'config-refresh-be947f0d-72aa-44c7-91fa-2516ea096ea5' has no active members.
+
+GROUP                                               COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-be947f0d-72aa-44c7-91fa-2516ea096ea5 kafka:9092  (1)           -                    Empty     
+Consumer group 'config-refresh-beabe893-f3d1-40c9-9c6b-b9b7b70c6f4a' has no active members.
+           0
+
+GROUP                                               COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-beabe893-f3d1-40c9-9c6b-b9b7b70c6f4a kafka:9092  (1)           -                    Empty                0
+
+GROUP                     
+Consumer group 'config-refresh-c105cc1f-b112-4279-bde8-dda67f5c6b98' has no active members.
+                          COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-c105cc1f-b112-4279-bde8-dda67f5c6b98 kafka:9092  (1)           -                    Empty                0
+
+Consumer group 'config-refresh-c8ada5b4-457d-48b0-b9b5-6dd3afcb5530' has no active members.
+
+GROUP                                               COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-c8ada5b4-457d-48b0-b9b5-6dd3afcb5530 kafka:9092  (1)           -                    Empty                0
+
+GROUP
+Consumer group 'config-refresh-ca0cbf3e-880d-4345-a883-a89e8aed9bb0' has no active members.
+                                               COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-ca0cbf3e-880d-4345-a883-a89e8aed9bb0 kafka:9092  (1)           -                    Empty                0
+
+GROUP                      
+Consumer group 'config-refresh-d9768998-2b95-432c-9447-488816119751' has no active members.
+                         COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+config-refresh-d9768998-2b95-432c-9447-488816119751 kafka:9092  (1)           -                    Empty                0
+
+Consumer group 'dlt-redrive' has no active members.
+
+GROUP           COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+dlt-redrive     kafka:9092  (1)           -                    Empty                0
+
+Warning: Consumer group 'history-ingestor' is rebalancing.
+
+GROUP            COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+history-ingestor kafka:9092  (1)           -                    CompletingRebalance  1
+
+GROUP           COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+label-ingestor  kafka:9092  (1)           range                Stable               1
+
+GROUP            COORDINATOR (ID)          ASSIGNMENT-STRATEGY  STATE                #MEMBERS
+profile-ingestor kafka:9092  (1)           range                Stable               1

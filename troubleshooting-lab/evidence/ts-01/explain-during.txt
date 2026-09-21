@@ -1,0 +1,24 @@
+                                                                     QUERY PLAN                                                                     
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=84277.76..84283.60 rows=50 width=1562) (actual time=62.858..66.174 rows=50 loops=1)
+   Buffers: shared hit=9722 read=68034
+   ->  Gather Merge  (cost=84277.76..109896.52 rows=219574 width=1562) (actual time=62.856..66.169 rows=50 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         Buffers: shared hit=9722 read=68034
+         ->  Sort  (cost=83277.74..83552.21 rows=109787 width=1562) (actual time=60.608..60.612 rows=40 loops=3)
+               Sort Key: created_at DESC, decision_id DESC
+               Sort Method: top-N heapsort  Memory: 227kB
+               Buffers: shared hit=9722 read=68034
+               Worker 0:  Sort Method: top-N heapsort  Memory: 227kB
+               Worker 1:  Sort Method: top-N heapsort  Memory: 227kB
+               ->  Parallel Seq Scan on risk_decisions  (cost=0.00..79630.69 rows=109787 width=1562) (actual time=0.019..44.598 rows=87988 loops=3)
+                     Filter: (tenant_id = 'aldermoor-bank'::text)
+                     Rows Removed by Filter: 37659
+                     Buffers: shared hit=9632 read=68034
+ Planning:
+   Buffers: shared hit=245
+ Planning Time: 1.213 ms
+ Execution Time: 66.331 ms
+(20 rows)
+

@@ -1,0 +1,8 @@
+18:39:49 INCIDENT: replay RiskDecisionCreated 2026-09-21T18:34:49Z .. 2026-09-21T18:40:49Z
+events requeued: {"requeued":2278}
+fraud_cases rows before/after: 290515 / 290515
+cases in external system before/after: 181281 / 181281
+duplicates detected by case-creator (2m): {} 1925.6554
+case-creator|290515
+history-ingestor|1200
+label-ingestor|160

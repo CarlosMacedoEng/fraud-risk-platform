@@ -25,6 +25,13 @@ spring:
       port: ${REDIS_PORT:6379}
       timeout: 50ms
       connect-timeout: 200ms
+      lettuce:
+        pool:                    # pipelines borrow pooled connections instead of connect/close per call (J-26)
+          enabled: true
+          max-active: 16
+          max-idle: 16
+          min-idle: 4
+          max-wait: 20ms         # exhaustion surfaces as a fast failure -> circuit breaker/fallback, not a queue
   flyway:
     locations: classpath:db/migration
   kafka:

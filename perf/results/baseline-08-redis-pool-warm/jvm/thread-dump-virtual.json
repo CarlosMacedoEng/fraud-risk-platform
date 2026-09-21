@@ -1,0 +1,1988 @@
+{
+  "threadDump": {
+    "processId": "1",
+    "time": "2026-09-21T19:05:12.148082922Z",
+    "runtimeVersion": "21.0.12+8-LTS",
+    "threadContainers": [
+      {
+        "container": "<root>",
+        "parent": null,
+        "owner": null,
+        "threads": [
+         {
+           "tid": "9",
+           "name": "Reference Handler",
+           "stack": [
+              "java.base\/java.lang.ref.Reference.waitForReferencePendingList(Native Method)",
+              "java.base\/java.lang.ref.Reference.processPendingReferences(Reference.java:246)",
+              "java.base\/java.lang.ref.Reference$ReferenceHandler.run(Reference.java:208)"
+           ]
+         },
+         {
+           "tid": "10",
+           "name": "Finalizer",
+           "stack": [
+              "java.base\/java.lang.Object.wait0(Native Method)",
+              "java.base\/java.lang.Object.wait(Object.java:366)",
+              "java.base\/java.lang.Object.wait(Object.java:339)",
+              "java.base\/java.lang.ref.NativeReferenceQueue.await(NativeReferenceQueue.java:48)",
+              "java.base\/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:158)",
+              "java.base\/java.lang.ref.NativeReferenceQueue.remove(NativeReferenceQueue.java:89)",
+              "java.base\/java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:173)"
+           ]
+         },
+         {
+           "tid": "11",
+           "name": "Signal Dispatcher",
+           "stack": [
+           ]
+         },
+         {
+           "tid": "16",
+           "name": "Notification Thread",
+           "stack": [
+           ]
+         },
+         {
+           "tid": "17",
+           "name": "Common-Cleaner",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1886)",
+              "java.base\/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)",
+              "java.base\/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)",
+              "java.base\/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)",
+              "java.base\/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:140)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)",
+              "java.base\/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:186)"
+           ]
+         },
+         {
+           "tid": "18",
+           "name": "Cleaner-0",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1886)",
+              "java.base\/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)",
+              "java.base\/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)",
+              "java.base\/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)",
+              "java.base\/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:140)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)",
+              "java.base\/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:186)"
+           ]
+         },
+         {
+           "tid": "21",
+           "name": "AsyncAppender-Worker-ASYNC",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block(AbstractQueuedSynchronizer.java:519)",
+              "java.base\/java.util.concurrent.ForkJoinPool.unmanagedBlock(ForkJoinPool.java:3780)",
+              "java.base\/java.util.concurrent.ForkJoinPool.managedBlock(ForkJoinPool.java:3725)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1746)",
+              "java.base\/java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:420)",
+              "ch.qos.logback.core.AsyncAppenderBase$Worker.run(AsyncAppenderBase.java:298)"
+           ]
+         },
+         {
+           "tid": "27",
+           "name": "container-0",
+           "stack": [
+              "java.base\/java.lang.Thread.sleep0(Native Method)",
+              "java.base\/java.lang.Thread.sleep(Thread.java:509)",
+              "org.apache.catalina.core.StandardServer.await(StandardServer.java:522)",
+              "org.springframework.boot.tomcat.TomcatWebServer$1.run(TomcatWebServer.java:216)"
+           ]
+         },
+         {
+           "tid": "28",
+           "name": "Cleaner-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1886)",
+              "java.base\/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)",
+              "java.base\/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)",
+              "java.base\/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)",
+              "java.base\/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:140)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)",
+              "java.base\/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:186)"
+           ]
+         },
+         {
+           "tid": "31",
+           "name": "lettuce-timer-3-1",
+           "stack": [
+              "java.base\/java.lang.Thread.sleep0(Native Method)",
+              "java.base\/java.lang.Thread.sleep(Thread.java:509)",
+              "io.netty.util.HashedWheelTimer$Worker.waitForNextTick(HashedWheelTimer.java:598)",
+              "io.netty.util.HashedWheelTimer$Worker.run(HashedWheelTimer.java:494)",
+              "io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "32",
+           "name": "HttpClient-1-SelectorManager",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:121)",
+              "java.base\/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:130)",
+              "java.base\/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:142)",
+              "java.net.http\/jdk.internal.net.http.HttpClientImpl$SelectorManager.run(HttpClientImpl.java:1376)"
+           ]
+         },
+         {
+           "tid": "33",
+           "name": "HttpClient-2-SelectorManager",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:121)",
+              "java.base\/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:130)",
+              "java.base\/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:142)",
+              "java.net.http\/jdk.internal.net.http.HttpClientImpl$SelectorManager.run(HttpClientImpl.java:1376)"
+           ]
+         },
+         {
+           "tid": "34",
+           "name": "HttpClient-3-SelectorManager",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:121)",
+              "java.base\/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:130)",
+              "java.base\/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:142)",
+              "java.net.http\/jdk.internal.net.http.HttpClientImpl$SelectorManager.run(HttpClientImpl.java:1376)"
+           ]
+         },
+         {
+           "tid": "35",
+           "name": "HttpClient-4-SelectorManager",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:121)",
+              "java.base\/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:130)",
+              "java.base\/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:142)",
+              "java.net.http\/jdk.internal.net.http.HttpClientImpl$SelectorManager.run(HttpClientImpl.java:1376)"
+           ]
+         },
+         {
+           "tid": "37",
+           "name": "http-nio-8080-Poller",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:121)",
+              "java.base\/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:130)",
+              "java.base\/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:142)",
+              "org.apache.tomcat.util.net.NioEndpoint$Poller.run(NioEndpoint.java:912)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "38",
+           "name": "http-nio-8080-Acceptor",
+           "stack": [
+              "java.base\/sun.nio.ch.Net.accept(Native Method)",
+              "java.base\/sun.nio.ch.ServerSocketChannelImpl.implAccept(ServerSocketChannelImpl.java:433)",
+              "java.base\/sun.nio.ch.ServerSocketChannelImpl.accept(ServerSocketChannelImpl.java:399)",
+              "org.apache.tomcat.util.net.NioEndpoint.serverSocketAccept(NioEndpoint.java:626)",
+              "org.apache.tomcat.util.net.NioEndpoint.serverSocketAccept(NioEndpoint.java:71)",
+              "org.apache.tomcat.util.net.Acceptor.run(Acceptor.java:145)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "41",
+           "name": "org.springframework.kafka.KafkaListenerEndpointContainer#2-0-C-1",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:121)",
+              "java.base\/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:130)",
+              "java.base\/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:142)",
+              "org.apache.kafka.common.network.Selector.select(Selector.java:880)",
+              "org.apache.kafka.common.network.Selector.poll(Selector.java:470)",
+              "org.apache.kafka.clients.NetworkClient.poll(NetworkClient.java:645)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:282)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:253)",
+              "org.apache.kafka.clients.consumer.internals.ClassicKafkaConsumer.pollForFetches(ClassicKafkaConsumer.java:714)",
+              "org.apache.kafka.clients.consumer.internals.ClassicKafkaConsumer.poll(ClassicKafkaConsumer.java:645)",
+              "org.apache.kafka.clients.consumer.internals.ClassicKafkaConsumer.poll(ClassicKafkaConsumer.java:624)",
+              "org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:899)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollConsumer(KafkaMessageListenerContainer.java:1839)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doPoll(KafkaMessageListenerContainer.java:1813)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollAndInvoke(KafkaMessageListenerContainer.java:1494)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.run(KafkaMessageListenerContainer.java:1384)",
+              "java.base\/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "44",
+           "name": "org.springframework.kafka.KafkaListenerEndpointContainer#3-0-C-1",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:121)",
+              "java.base\/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:130)",
+              "java.base\/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:142)",
+              "org.apache.kafka.common.network.Selector.select(Selector.java:880)",
+              "org.apache.kafka.common.network.Selector.poll(Selector.java:470)",
+              "org.apache.kafka.clients.NetworkClient.poll(NetworkClient.java:645)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:282)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:232)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:216)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerCoordinator.commitOffsetsSync(ConsumerCoordinator.java:1158)",
+              "org.apache.kafka.clients.consumer.internals.ClassicKafkaConsumer.commitSync(ClassicKafkaConsumer.java:746)",
+              "org.apache.kafka.clients.consumer.KafkaConsumer.commitSync(KafkaConsumer.java:1098)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doCommitSync(KafkaMessageListenerContainer.java:3625)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.commitSync(KafkaMessageListenerContainer.java:3620)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.commitOffsets(KafkaMessageListenerContainer.java:3603)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.ackCurrent(KafkaMessageListenerContainer.java:3305)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.ackCurrent(KafkaMessageListenerContainer.java:3298)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeOnMessage(KafkaMessageListenerContainer.java:3080)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doInvokeRecordListener(KafkaMessageListenerContainer.java:2988)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doInvokeWithRecords(KafkaMessageListenerContainer.java:2806)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeRecordListener(KafkaMessageListenerContainer.java:2692)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeListener(KafkaMessageListenerContainer.java:2323)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeIfHaveRecords(KafkaMessageListenerContainer.java:1621)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollAndInvoke(KafkaMessageListenerContainer.java:1523)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.run(KafkaMessageListenerContainer.java:1384)",
+              "java.base\/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "45",
+           "name": "kafka-coordinator-heartbeat-thread | label-ingestor",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:221)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:788)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:1024)",
+              "java.base\/java.util.concurrent.locks.ReentrantLock$Sync.lock(ReentrantLock.java:153)",
+              "java.base\/java.util.concurrent.locks.ReentrantLock.lock(ReentrantLock.java:322)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:266)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.pollNoWakeup(ConsumerNetworkClient.java:323)",
+              "org.apache.kafka.clients.consumer.internals.AbstractCoordinator$HeartbeatThread.run(AbstractCoordinator.java:1500)"
+           ]
+         },
+         {
+           "tid": "46",
+           "name": "kafka-coordinator-heartbeat-thread | history-ingestor",
+           "stack": [
+              "java.base\/java.lang.Object.wait0(Native Method)",
+              "java.base\/java.lang.Object.wait(Object.java:366)",
+              "org.apache.kafka.clients.consumer.internals.AbstractCoordinator$HeartbeatThread.run(AbstractCoordinator.java:1526)"
+           ]
+         },
+         {
+           "tid": "49",
+           "name": "org.springframework.kafka.KafkaListenerEndpointContainer#4-0-C-1",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:121)",
+              "java.base\/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:130)",
+              "java.base\/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:142)",
+              "org.apache.kafka.common.network.Selector.select(Selector.java:880)",
+              "org.apache.kafka.common.network.Selector.poll(Selector.java:470)",
+              "org.apache.kafka.clients.NetworkClient.poll(NetworkClient.java:645)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:282)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:253)",
+              "org.apache.kafka.clients.consumer.internals.ClassicKafkaConsumer.pollForFetches(ClassicKafkaConsumer.java:714)",
+              "org.apache.kafka.clients.consumer.internals.ClassicKafkaConsumer.poll(ClassicKafkaConsumer.java:645)",
+              "org.apache.kafka.clients.consumer.internals.ClassicKafkaConsumer.poll(ClassicKafkaConsumer.java:624)",
+              "org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:899)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollConsumer(KafkaMessageListenerContainer.java:1839)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doPoll(KafkaMessageListenerContainer.java:1813)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollAndInvoke(KafkaMessageListenerContainer.java:1494)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.run(KafkaMessageListenerContainer.java:1384)",
+              "java.base\/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "50",
+           "name": "kafka-coordinator-heartbeat-thread | config-refresh-c105cc1f-b112-4279-bde8-dda67f5c6b98",
+           "stack": [
+              "java.base\/java.lang.Object.wait0(Native Method)",
+              "java.base\/java.lang.Object.wait(Object.java:366)",
+              "org.apache.kafka.clients.consumer.internals.AbstractCoordinator$HeartbeatThread.run(AbstractCoordinator.java:1526)"
+           ]
+         },
+         {
+           "tid": "53",
+           "name": "org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:121)",
+              "java.base\/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:130)",
+              "java.base\/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:142)",
+              "org.apache.kafka.common.network.Selector.select(Selector.java:880)",
+              "org.apache.kafka.common.network.Selector.poll(Selector.java:470)",
+              "org.apache.kafka.clients.NetworkClient.poll(NetworkClient.java:645)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:282)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:253)",
+              "org.apache.kafka.clients.consumer.internals.ClassicKafkaConsumer.pollForFetches(ClassicKafkaConsumer.java:714)",
+              "org.apache.kafka.clients.consumer.internals.ClassicKafkaConsumer.poll(ClassicKafkaConsumer.java:645)",
+              "org.apache.kafka.clients.consumer.internals.ClassicKafkaConsumer.poll(ClassicKafkaConsumer.java:624)",
+              "org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:899)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollConsumer(KafkaMessageListenerContainer.java:1839)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doPoll(KafkaMessageListenerContainer.java:1813)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollAndInvoke(KafkaMessageListenerContainer.java:1494)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.run(KafkaMessageListenerContainer.java:1384)",
+              "java.base\/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "54",
+           "name": "kafka-coordinator-heartbeat-thread | profile-ingestor",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:221)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:788)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer.acquire(AbstractQueuedSynchronizer.java:1024)",
+              "java.base\/java.util.concurrent.locks.ReentrantLock$Sync.lock(ReentrantLock.java:153)",
+              "java.base\/java.util.concurrent.locks.ReentrantLock.lock(ReentrantLock.java:322)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:266)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.pollNoWakeup(ConsumerNetworkClient.java:323)",
+              "org.apache.kafka.clients.consumer.internals.AbstractCoordinator$HeartbeatThread.run(AbstractCoordinator.java:1500)"
+           ]
+         },
+         {
+           "tid": "57",
+           "name": "org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1",
+           "stack": [
+              "java.base\/sun.nio.ch.Net.poll(Native Method)",
+              "java.base\/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:191)",
+              "java.base\/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:201)",
+              "java.base\/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:309)",
+              "java.base\/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:346)",
+              "java.base\/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:796)",
+              "java.base\/java.net.Socket$SocketInputStream.read(Socket.java:1099)",
+              "org.postgresql.core.VisibleBufferedInputStream.readMore(VisibleBufferedInputStream.java:192)",
+              "org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:159)",
+              "org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:144)",
+              "org.postgresql.core.VisibleBufferedInputStream.read(VisibleBufferedInputStream.java:76)",
+              "org.postgresql.core.PGStream.receiveChar(PGStream.java:480)",
+              "org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2383)",
+              "org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:446)",
+              "org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:533)",
+              "org.postgresql.jdbc.PgStatement.execute(PgStatement.java:449)",
+              "org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:197)",
+              "org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:158)",
+              "com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)",
+              "com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)",
+              "org.springframework.jdbc.core.JdbcTemplate.lambda$update$0(JdbcTemplate.java:971)",
+              "org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:670)",
+              "org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:966)",
+              "org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:987)",
+              "org.springframework.jdbc.core.simple.DefaultJdbcClient$DefaultStatementSpec.update(DefaultJdbcClient.java:282)",
+              "com.fraudplatform.decision.persistence.CaseRepository.markOpened(CaseRepository.java:48)",
+              "java.base\/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)",
+              "java.base\/java.lang.reflect.Method.invoke(Method.java:580)",
+              "org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)",
+              "org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)",
+              "org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)",
+              "org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)",
+              "org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)",
+              "org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)",
+              "com.fraudplatform.decision.persistence.CaseRepository$$SpringCGLIB$$0.markOpened(<generated>)",
+              "com.fraudplatform.decision.application.CaseService.lambda$dispatch$0(CaseService.java:97)",
+              "org.springframework.transaction.support.TransactionOperations.lambda$executeWithoutResult$0(TransactionOperations.java:68)",
+              "org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:137)",
+              "org.springframework.transaction.support.TransactionOperations.executeWithoutResult(TransactionOperations.java:67)",
+              "com.fraudplatform.decision.application.CaseService.dispatch(CaseService.java:96)",
+              "com.fraudplatform.decision.application.CaseService.openForReviewDecision(CaseService.java:79)",
+              "com.fraudplatform.decision.messaging.EventConsumers.onDecision(EventConsumers.java:87)",
+              "java.base\/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)",
+              "java.base\/java.lang.reflect.Method.invoke(Method.java:580)",
+              "org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:168)",
+              "org.springframework.kafka.listener.adapter.KotlinAwareInvocableHandlerMethod.doInvoke(KotlinAwareInvocableHandlerMethod.java:48)",
+              "org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119)",
+              "org.springframework.kafka.listener.adapter.HandlerAdapter.invoke(HandlerAdapter.java:80)",
+              "org.springframework.kafka.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:489)",
+              "org.springframework.kafka.listener.adapter.MessagingMessageListenerAdapter.invoke(MessagingMessageListenerAdapter.java:426)",
+              "org.springframework.kafka.listener.adapter.RecordMessagingMessageListenerAdapter.onMessage(RecordMessagingMessageListenerAdapter.java:92)",
+              "org.springframework.kafka.listener.adapter.RecordMessagingMessageListenerAdapter.onMessage(RecordMessagingMessageListenerAdapter.java:52)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doInvokeOnMessage(KafkaMessageListenerContainer.java:3099)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeOnMessage(KafkaMessageListenerContainer.java:3078)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doInvokeRecordListener(KafkaMessageListenerContainer.java:2988)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doInvokeWithRecords(KafkaMessageListenerContainer.java:2806)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeRecordListener(KafkaMessageListenerContainer.java:2692)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeListener(KafkaMessageListenerContainer.java:2323)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeIfHaveRecords(KafkaMessageListenerContainer.java:1621)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollAndInvoke(KafkaMessageListenerContainer.java:1523)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.run(KafkaMessageListenerContainer.java:1384)",
+              "java.base\/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "60",
+           "name": "org.springframework.kafka.KafkaListenerEndpointContainer#1-1-C-1",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:121)",
+              "java.base\/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:130)",
+              "java.base\/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:142)",
+              "org.apache.kafka.common.network.Selector.select(Selector.java:880)",
+              "org.apache.kafka.common.network.Selector.poll(Selector.java:470)",
+              "org.apache.kafka.clients.NetworkClient.poll(NetworkClient.java:645)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:282)",
+              "org.apache.kafka.clients.consumer.internals.ConsumerNetworkClient.poll(ConsumerNetworkClient.java:253)",
+              "org.apache.kafka.clients.consumer.internals.ClassicKafkaConsumer.pollForFetches(ClassicKafkaConsumer.java:714)",
+              "org.apache.kafka.clients.consumer.internals.ClassicKafkaConsumer.poll(ClassicKafkaConsumer.java:645)",
+              "org.apache.kafka.clients.consumer.internals.ClassicKafkaConsumer.poll(ClassicKafkaConsumer.java:624)",
+              "org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:899)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollConsumer(KafkaMessageListenerContainer.java:1839)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doPoll(KafkaMessageListenerContainer.java:1813)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollAndInvoke(KafkaMessageListenerContainer.java:1494)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.run(KafkaMessageListenerContainer.java:1384)",
+              "java.base\/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "63",
+           "name": "org.springframework.kafka.KafkaListenerEndpointContainer#1-2-C-1",
+           "stack": [
+              "java.base\/sun.nio.ch.Net.poll(Native Method)",
+              "java.base\/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:191)",
+              "java.base\/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:201)",
+              "java.base\/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:309)",
+              "java.base\/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:346)",
+              "java.base\/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:796)",
+              "java.base\/java.net.Socket$SocketInputStream.read(Socket.java:1099)",
+              "org.postgresql.core.VisibleBufferedInputStream.readMore(VisibleBufferedInputStream.java:192)",
+              "org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:159)",
+              "org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:144)",
+              "org.postgresql.core.VisibleBufferedInputStream.read(VisibleBufferedInputStream.java:76)",
+              "org.postgresql.core.PGStream.receiveChar(PGStream.java:480)",
+              "org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2383)",
+              "org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:446)",
+              "org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:403)",
+              "org.postgresql.jdbc.PgConnection.executeTransactionCommand(PgConnection.java:1022)",
+              "org.postgresql.jdbc.PgConnection.commit(PgConnection.java:1044)",
+              "com.zaxxer.hikari.pool.ProxyConnection.commit(ProxyConnection.java:378)",
+              "com.zaxxer.hikari.pool.HikariProxyConnection.commit(HikariProxyConnection.java)",
+              "org.springframework.jdbc.datasource.DataSourceTransactionManager.doCommit(DataSourceTransactionManager.java:343)",
+              "org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:794)",
+              "org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:757)",
+              "org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:149)",
+              "org.springframework.transaction.support.TransactionOperations.executeWithoutResult(TransactionOperations.java:67)",
+              "com.fraudplatform.decision.application.CaseService.dispatch(CaseService.java:96)",
+              "com.fraudplatform.decision.application.CaseService.openForReviewDecision(CaseService.java:79)",
+              "com.fraudplatform.decision.messaging.EventConsumers.onDecision(EventConsumers.java:87)",
+              "java.base\/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)",
+              "java.base\/java.lang.reflect.Method.invoke(Method.java:580)",
+              "org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:168)",
+              "org.springframework.kafka.listener.adapter.KotlinAwareInvocableHandlerMethod.doInvoke(KotlinAwareInvocableHandlerMethod.java:48)",
+              "org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119)",
+              "org.springframework.kafka.listener.adapter.HandlerAdapter.invoke(HandlerAdapter.java:80)",
+              "org.springframework.kafka.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:489)",
+              "org.springframework.kafka.listener.adapter.MessagingMessageListenerAdapter.invoke(MessagingMessageListenerAdapter.java:426)",
+              "org.springframework.kafka.listener.adapter.RecordMessagingMessageListenerAdapter.onMessage(RecordMessagingMessageListenerAdapter.java:92)",
+              "org.springframework.kafka.listener.adapter.RecordMessagingMessageListenerAdapter.onMessage(RecordMessagingMessageListenerAdapter.java:52)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doInvokeOnMessage(KafkaMessageListenerContainer.java:3099)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeOnMessage(KafkaMessageListenerContainer.java:3078)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doInvokeRecordListener(KafkaMessageListenerContainer.java:2988)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.doInvokeWithRecords(KafkaMessageListenerContainer.java:2806)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeRecordListener(KafkaMessageListenerContainer.java:2692)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeListener(KafkaMessageListenerContainer.java:2323)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.invokeIfHaveRecords(KafkaMessageListenerContainer.java:1621)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.pollAndInvoke(KafkaMessageListenerContainer.java:1523)",
+              "org.springframework.kafka.listener.KafkaMessageListenerContainer$ListenerConsumer.run(KafkaMessageListenerContainer.java:1384)",
+              "java.base\/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "64",
+           "name": "kafka-coordinator-heartbeat-thread | case-creator",
+           "stack": [
+              "java.base\/java.lang.Object.wait0(Native Method)",
+              "java.base\/java.lang.Object.wait(Object.java:366)",
+              "org.apache.kafka.clients.consumer.internals.AbstractCoordinator$HeartbeatThread.run(AbstractCoordinator.java:1526)"
+           ]
+         },
+         {
+           "tid": "65",
+           "name": "kafka-coordinator-heartbeat-thread | case-creator",
+           "stack": [
+              "java.base\/java.lang.Object.wait0(Native Method)",
+              "java.base\/java.lang.Object.wait(Object.java:366)",
+              "org.apache.kafka.clients.consumer.internals.AbstractCoordinator$HeartbeatThread.run(AbstractCoordinator.java:1526)"
+           ]
+         },
+         {
+           "tid": "66",
+           "name": "kafka-coordinator-heartbeat-thread | case-creator",
+           "stack": [
+              "java.base\/java.lang.Object.wait0(Native Method)",
+              "java.base\/java.lang.Object.wait(Object.java:366)",
+              "org.apache.kafka.clients.consumer.internals.AbstractCoordinator$HeartbeatThread.run(AbstractCoordinator.java:1526)"
+           ]
+         },
+         {
+           "tid": "70",
+           "name": "Read-Poller",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollPoller.poll(EPollPoller.java:74)",
+              "java.base\/sun.nio.ch.Poller.poll(Poller.java:370)",
+              "java.base\/sun.nio.ch.Poller.pollLoop(Poller.java:277)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)",
+              "java.base\/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:186)"
+           ]
+         },
+         {
+           "tid": "71",
+           "name": "Read-Updater",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:458)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue.xfer(LinkedTransferQueue.java:613)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue.take(LinkedTransferQueue.java:1257)",
+              "java.base\/sun.nio.ch.Poller.updateLoop(Poller.java:293)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)",
+              "java.base\/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:186)"
+           ]
+         },
+         {
+           "tid": "72",
+           "name": "Write-Poller",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollPoller.poll(EPollPoller.java:74)",
+              "java.base\/sun.nio.ch.Poller.poll(Poller.java:370)",
+              "java.base\/sun.nio.ch.Poller.pollLoop(Poller.java:277)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)",
+              "java.base\/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:186)"
+           ]
+         },
+         {
+           "tid": "73",
+           "name": "Write-Updater",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:458)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue.xfer(LinkedTransferQueue.java:613)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue.take(LinkedTransferQueue.java:1257)",
+              "java.base\/sun.nio.ch.Poller.updateLoop(Poller.java:293)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)",
+              "java.base\/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:186)"
+           ]
+         },
+         {
+           "tid": "75",
+           "name": "lettuce-nioEventLoop-4-1",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:121)",
+              "java.base\/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:130)",
+              "java.base\/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:142)",
+              "io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)",
+              "io.netty.channel.nio.NioIoHandler.select(NioIoHandler.java:668)",
+              "io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:434)",
+              "io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225)",
+              "io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196)",
+              "io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204)",
+              "io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)",
+              "io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "76",
+           "name": "lettuce-nioEventLoop-4-2",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:121)",
+              "java.base\/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:130)",
+              "java.base\/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:142)",
+              "io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)",
+              "io.netty.channel.nio.NioIoHandler.select(NioIoHandler.java:668)",
+              "io.netty.channel.nio.NioIoHandler.run(NioIoHandler.java:434)",
+              "io.netty.channel.SingleThreadIoEventLoop.runIo(SingleThreadIoEventLoop.java:225)",
+              "io.netty.channel.SingleThreadIoEventLoop.run(SingleThreadIoEventLoop.java:196)",
+              "io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204)",
+              "io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)",
+              "io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "87",
+           "name": "DestroyJavaVM",
+           "stack": [
+           ]
+         },
+         {
+           "tid": "112",
+           "name": "kafka-producer-network-thread | decision-service-producer-1",
+           "stack": [
+              "java.base\/sun.nio.ch.EPoll.wait(Native Method)",
+              "java.base\/sun.nio.ch.EPollSelectorImpl.doSelect(EPollSelectorImpl.java:121)",
+              "java.base\/sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:130)",
+              "java.base\/sun.nio.ch.SelectorImpl.select(SelectorImpl.java:142)",
+              "org.apache.kafka.common.network.Selector.select(Selector.java:880)",
+              "org.apache.kafka.common.network.Selector.poll(Selector.java:470)",
+              "org.apache.kafka.clients.NetworkClient.poll(NetworkClient.java:645)",
+              "org.apache.kafka.clients.producer.internals.Sender.runOnce(Sender.java:345)",
+              "org.apache.kafka.clients.producer.internals.Sender.run(Sender.java:247)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "36726",
+           "name": "PostgreSQL-JDBC-SharedTimer-1",
+           "stack": [
+              "java.base\/java.lang.Object.wait0(Native Method)",
+              "java.base\/java.lang.Object.wait(Object.java:366)",
+              "java.base\/java.util.TimerThread.mainLoop(Timer.java:563)",
+              "java.base\/java.util.TimerThread.run(Timer.java:516)"
+           ]
+         },
+         {
+           "tid": "64313",
+           "name": "Attach Listener",
+           "stack": [
+              "java.base\/java.lang.Thread.getStackTrace(Thread.java:2451)",
+              "java.base\/jdk.internal.vm.ThreadDumper.dumpThreadToJson(ThreadDumper.java:270)",
+              "java.base\/jdk.internal.vm.ThreadDumper.dumpThreadsToJson(ThreadDumper.java:242)",
+              "java.base\/jdk.internal.vm.ThreadDumper.dumpThreadsToJson(ThreadDumper.java:206)",
+              "java.base\/jdk.internal.vm.ThreadDumper.dumpThreadsToFile(ThreadDumper.java:117)",
+              "java.base\/jdk.internal.vm.ThreadDumper.dumpThreadsToJson(ThreadDumper.java:85)"
+           ]
+         },
+         {
+           "tid": "66669",
+           "name": "JFR Recorder Thread",
+           "stack": [
+           ]
+         },
+         {
+           "tid": "66903",
+           "name": "JFR Periodic Tasks",
+           "stack": [
+              "java.base\/java.lang.Object.wait0(Native Method)",
+              "java.base\/java.lang.Object.wait(Object.java:366)",
+              "jdk.jfr\/jdk.jfr.internal.PlatformRecorder.takeNap(PlatformRecorder.java:561)",
+              "jdk.jfr\/jdk.jfr.internal.PlatformRecorder.periodicTask(PlatformRecorder.java:529)",
+              "jdk.jfr\/jdk.jfr.internal.PlatformRecorder.lambda$startDiskMonitor$1(PlatformRecorder.java:448)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "66996",
+           "name": "lettuce-eventExecutorLoop-1-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block(AbstractQueuedSynchronizer.java:519)",
+              "java.base\/java.util.concurrent.ForkJoinPool.unmanagedBlock(ForkJoinPool.java:3780)",
+              "java.base\/java.util.concurrent.ForkJoinPool.managedBlock(ForkJoinPool.java:3725)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1746)",
+              "java.base\/java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:435)",
+              "io.netty.util.concurrent.SingleThreadEventExecutor.takeTask(SingleThreadEventExecutor.java:317)",
+              "io.netty.util.concurrent.DefaultEventExecutor.run(DefaultEventExecutor.java:64)",
+              "io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204)",
+              "io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)",
+              "io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "66997",
+           "name": "lettuce-eventExecutorLoop-1-2",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block(AbstractQueuedSynchronizer.java:519)",
+              "java.base\/java.util.concurrent.ForkJoinPool.unmanagedBlock(ForkJoinPool.java:3780)",
+              "java.base\/java.util.concurrent.ForkJoinPool.managedBlock(ForkJoinPool.java:3725)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1746)",
+              "java.base\/java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:435)",
+              "io.netty.util.concurrent.SingleThreadEventExecutor.takeTask(SingleThreadEventExecutor.java:317)",
+              "io.netty.util.concurrent.DefaultEventExecutor.run(DefaultEventExecutor.java:64)",
+              "io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:1204)",
+              "io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)",
+              "io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "67000",
+           "name": "JFR Recording Scheduler",
+           "stack": [
+              "java.base\/java.lang.Object.wait0(Native Method)",
+              "java.base\/java.lang.Object.wait(Object.java:366)",
+              "java.base\/java.lang.Object.wait(Object.java:339)",
+              "java.base\/java.util.TimerThread.mainLoop(Timer.java:537)",
+              "java.base\/java.util.TimerThread.run(Timer.java:516)"
+           ]
+         },
+         {
+           "tid": "198784",
+           "name": "tomcat-handler-44594",
+           "stack": [
+              "java.base\/java.lang.VirtualThread.park(VirtualThread.java:596)",
+              "java.base\/java.lang.System$2.parkVirtualThread(System.java:2644)",
+              "java.base\/jdk.internal.misc.VirtualThreads.park(VirtualThreads.java:54)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:219)",
+              "java.base\/java.util.concurrent.CompletableFuture$Signaller.block(CompletableFuture.java:1864)",
+              "java.base\/java.util.concurrent.ForkJoinPool.unmanagedBlock(ForkJoinPool.java:3780)",
+              "java.base\/java.util.concurrent.ForkJoinPool.managedBlock(ForkJoinPool.java:3725)",
+              "java.base\/java.util.concurrent.CompletableFuture.waitingGet(CompletableFuture.java:1898)",
+              "java.base\/java.util.concurrent.CompletableFuture.join(CompletableFuture.java:2117)",
+              "com.fraudplatform.decision.application.DecisionService.join(DecisionService.java:272)",
+              "com.fraudplatform.decision.application.DecisionService.decide(DecisionService.java:168)",
+              "com.fraudplatform.decision.application.DecisionService.score(DecisionService.java:123)",
+              "com.fraudplatform.decision.api.DecisionController.score(DecisionController.java:78)",
+              "java.base\/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)",
+              "java.base\/java.lang.reflect.Method.invoke(Method.java:580)",
+              "org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)",
+              "org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)",
+              "org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)",
+              "org.springframework.validation.beanvalidation.MethodValidationInterceptor.invoke(MethodValidationInterceptor.java:172)",
+              "org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)",
+              "org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)",
+              "com.fraudplatform.decision.api.DecisionController$$SpringCGLIB$$0.score(<generated>)",
+              "java.base\/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)",
+              "java.base\/java.lang.reflect.Method.invoke(Method.java:580)",
+              "org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)",
+              "org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)",
+              "org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)",
+              "org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)",
+              "org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)",
+              "org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)",
+              "org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)",
+              "org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)",
+              "org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)",
+              "org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903)",
+              "jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649)",
+              "org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)",
+              "jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)",
+              "org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:132)",
+              "org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:59)",
+              "org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)",
+              "org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)",
+              "org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$2(FilterChainProxy.java:235)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:491)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:353)",
+              "org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:84)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:131)",
+              "org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:243)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:230)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:140)",
+              "org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)",
+              "org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:243)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:230)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:140)",
+              "org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:132)",
+              "org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:86)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:243)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:230)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:140)",
+              "org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:243)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:230)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:140)",
+              "com.fraudplatform.decision.api.security.ApiKeyAuthenticationFilter.doFilterInternal(ApiKeyAuthenticationFilter.java:56)",
+              "org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:243)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:230)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:140)",
+              "org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:181)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:243)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:230)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:140)",
+              "org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:243)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:230)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:140)",
+              "org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)",
+              "org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:96)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:243)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:230)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:140)",
+              "org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)",
+              "org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)",
+              "org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:243)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:230)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:140)",
+              "org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)",
+              "org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:243)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:230)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:140)",
+              "org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)",
+              "org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:243)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:230)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:140)",
+              "org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)",
+              "org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:243)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:336)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227)",
+              "org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:140)",
+              "org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:237)",
+              "org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:195)",
+              "org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)",
+              "org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52)",
+              "org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)",
+              "org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)",
+              "org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:317)",
+              "org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:355)",
+              "org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:272)",
+              "org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)",
+              "org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)",
+              "org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)",
+              "org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)",
+              "org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)",
+              "org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)",
+              "org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)",
+              "com.fraudplatform.decision.api.AdmissionControlFilter.doFilterInternal(AdmissionControlFilter.java:79)",
+              "org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)",
+              "org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)",
+              "org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110)",
+              "org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)",
+              "org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)",
+              "org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)",
+              "org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)",
+              "org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)",
+              "com.fraudplatform.decision.api.CorrelationIdFilter.doFilterInternal(CorrelationIdFilter.java:30)",
+              "org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)",
+              "org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)",
+              "org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)",
+              "org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)",
+              "org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535)",
+              "org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)",
+              "org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86)",
+              "org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71)",
+              "org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:347)",
+              "org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:406)",
+              "org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71)",
+              "org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307)",
+              "org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2036)",
+              "org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74)",
+              "java.base\/java.lang.VirtualThread.run(VirtualThread.java:329)"
+           ]
+         },
+         {
+           "tid": "198780",
+           "name": "tomcat-handler-44593",
+           "stack": [
+           ]
+         }
+        ],
+        "threadCount": "47"
+      },
+      {
+        "container": "java.util.concurrent.ThreadPoolExecutor@64d1f549",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "15005",
+           "name": "HttpClient-3-Worker-5",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:410)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:452)",
+              "java.base\/java.util.concurrent.SynchronousQueue$Transferer.xferLifo(SynchronousQueue.java:194)",
+              "java.base\/java.util.concurrent.SynchronousQueue.xfer(SynchronousQueue.java:235)",
+              "java.base\/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:338)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "103750",
+           "name": "HttpClient-3-Worker-13",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:410)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:452)",
+              "java.base\/java.util.concurrent.SynchronousQueue$Transferer.xferLifo(SynchronousQueue.java:194)",
+              "java.base\/java.util.concurrent.SynchronousQueue.xfer(SynchronousQueue.java:235)",
+              "java.base\/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:338)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "167514",
+           "name": "HttpClient-3-Worker-15",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:410)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:452)",
+              "java.base\/java.util.concurrent.SynchronousQueue$Transferer.xferLifo(SynchronousQueue.java:194)",
+              "java.base\/java.util.concurrent.SynchronousQueue.xfer(SynchronousQueue.java:235)",
+              "java.base\/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:338)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "170773",
+           "name": "HttpClient-3-Worker-16",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:410)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:452)",
+              "java.base\/java.util.concurrent.SynchronousQueue$Transferer.xferLifo(SynchronousQueue.java:194)",
+              "java.base\/java.util.concurrent.SynchronousQueue.xfer(SynchronousQueue.java:235)",
+              "java.base\/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:338)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "191825",
+           "name": "HttpClient-3-Worker-17",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:410)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:452)",
+              "java.base\/java.util.concurrent.SynchronousQueue$Transferer.xferLifo(SynchronousQueue.java:194)",
+              "java.base\/java.util.concurrent.SynchronousQueue.xfer(SynchronousQueue.java:235)",
+              "java.base\/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:338)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "191964",
+           "name": "HttpClient-3-Worker-18",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:410)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:452)",
+              "java.base\/java.util.concurrent.SynchronousQueue$Transferer.xferLifo(SynchronousQueue.java:194)",
+              "java.base\/java.util.concurrent.SynchronousQueue.xfer(SynchronousQueue.java:235)",
+              "java.base\/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:338)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "191965",
+           "name": "HttpClient-3-Worker-19",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:410)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:452)",
+              "java.base\/java.util.concurrent.SynchronousQueue$Transferer.xferLifo(SynchronousQueue.java:194)",
+              "java.base\/java.util.concurrent.SynchronousQueue.xfer(SynchronousQueue.java:235)",
+              "java.base\/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:338)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "7"
+      },
+      {
+        "container": "java.util.concurrent.ThreadPoolExecutor@5e600dd5",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+        ],
+        "threadCount": "0"
+      },
+      {
+        "container": "java.util.concurrent.ThreadPoolExecutor@672f69f7",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "110",
+           "name": "inference-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block(AbstractQueuedSynchronizer.java:519)",
+              "java.base\/java.util.concurrent.ForkJoinPool.unmanagedBlock(ForkJoinPool.java:3780)",
+              "java.base\/java.util.concurrent.ForkJoinPool.managedBlock(ForkJoinPool.java:3725)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1746)",
+              "java.base\/java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:420)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "170",
+           "name": "inference-2",
+           "stack": [
+              "ai.onnxruntime.OrtSession.run(Native Method)",
+              "ai.onnxruntime.OrtSession.run(OrtSession.java:421)",
+              "ai.onnxruntime.OrtSession.run(OrtSession.java:268)",
+              "ai.onnxruntime.OrtSession.run(OrtSession.java:236)",
+              "com.fraudplatform.decision.inference.OnnxModelBundle.anomalyRaw(OnnxModelBundle.java:85)",
+              "com.fraudplatform.decision.inference.OnnxModelBundle.score(OnnxModelBundle.java:68)",
+              "com.fraudplatform.decision.inference.ModelScorer.lambda$score$0(ModelScorer.java:55)",
+              "java.base\/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768)",
+              "io.micrometer.core.instrument.internal.TimedRunnable.run(TimedRunnable.java:49)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "307",
+           "name": "inference-3",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block(AbstractQueuedSynchronizer.java:519)",
+              "java.base\/java.util.concurrent.ForkJoinPool.unmanagedBlock(ForkJoinPool.java:3780)",
+              "java.base\/java.util.concurrent.ForkJoinPool.managedBlock(ForkJoinPool.java:3725)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1746)",
+              "java.base\/java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:420)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "312",
+           "name": "inference-4",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block(AbstractQueuedSynchronizer.java:519)",
+              "java.base\/java.util.concurrent.ForkJoinPool.unmanagedBlock(ForkJoinPool.java:3780)",
+              "java.base\/java.util.concurrent.ForkJoinPool.managedBlock(ForkJoinPool.java:3725)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1746)",
+              "java.base\/java.util.concurrent.ArrayBlockingQueue.take(ArrayBlockingQueue.java:420)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "4"
+      },
+      {
+        "container": "org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler$1@d65ba64",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "40",
+           "name": "ThreadPoolTaskScheduler-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@1a983294",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "55",
+           "name": "micrometer-kafka-metrics",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ThreadPoolExecutor@1a1e38ab",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "15040",
+           "name": "HttpClient-1-Worker-11",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:410)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:452)",
+              "java.base\/java.util.concurrent.SynchronousQueue$Transferer.xferLifo(SynchronousQueue.java:194)",
+              "java.base\/java.util.concurrent.SynchronousQueue.xfer(SynchronousQueue.java:235)",
+              "java.base\/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:338)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "15041",
+           "name": "HttpClient-1-Worker-12",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:410)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:452)",
+              "java.base\/java.util.concurrent.SynchronousQueue$Transferer.xferLifo(SynchronousQueue.java:194)",
+              "java.base\/java.util.concurrent.SynchronousQueue.xfer(SynchronousQueue.java:235)",
+              "java.base\/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:338)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "15042",
+           "name": "HttpClient-1-Worker-13",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:410)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:452)",
+              "java.base\/java.util.concurrent.SynchronousQueue$Transferer.xferLifo(SynchronousQueue.java:194)",
+              "java.base\/java.util.concurrent.SynchronousQueue.xfer(SynchronousQueue.java:235)",
+              "java.base\/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:338)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "59251",
+           "name": "HttpClient-1-Worker-15",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:410)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:452)",
+              "java.base\/java.util.concurrent.SynchronousQueue$Transferer.xferLifo(SynchronousQueue.java:194)",
+              "java.base\/java.util.concurrent.SynchronousQueue.xfer(SynchronousQueue.java:235)",
+              "java.base\/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:338)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "148112",
+           "name": "HttpClient-1-Worker-16",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:410)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:452)",
+              "java.base\/java.util.concurrent.SynchronousQueue$Transferer.xferLifo(SynchronousQueue.java:194)",
+              "java.base\/java.util.concurrent.SynchronousQueue.xfer(SynchronousQueue.java:235)",
+              "java.base\/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:338)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "165383",
+           "name": "HttpClient-1-Worker-17",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:410)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue$DualNode.await(LinkedTransferQueue.java:452)",
+              "java.base\/java.util.concurrent.SynchronousQueue$Transferer.xferLifo(SynchronousQueue.java:194)",
+              "java.base\/java.util.concurrent.SynchronousQueue.xfer(SynchronousQueue.java:235)",
+              "java.base\/java.util.concurrent.SynchronousQueue.poll(SynchronousQueue.java:338)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "6"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@61dea766",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "107",
+           "name": "CompletableFutureDelayScheduler",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block(AbstractQueuedSynchronizer.java:519)",
+              "java.base\/java.util.concurrent.ForkJoinPool.unmanagedBlock(ForkJoinPool.java:3780)",
+              "java.base\/java.util.concurrent.ForkJoinPool.managedBlock(ForkJoinPool.java:3725)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1746)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1170)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler$1@58052571",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "62",
+           "name": "ThreadPoolTaskScheduler-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ThreadPoolExecutor@71687d8f",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "195627",
+           "name": "decision-db:connection-adder",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:460)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@63ee2891",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "47",
+           "name": "micrometer-kafka-metrics",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@4bd7e0b6",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "61",
+           "name": "micrometer-kafka-metrics",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler$1@2975715",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "52",
+           "name": "ThreadPoolTaskScheduler-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "ForkJoinPool.commonPool\/jdk.internal.vm.SharedThreadContainer@1d78a427",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+        ],
+        "threadCount": "0"
+      },
+      {
+        "container": "org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler$1@76ac3ad0",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "43",
+           "name": "ThreadPoolTaskScheduler-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler$1@2746bc43",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "48",
+           "name": "ThreadPoolTaskScheduler-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ThreadPoolExecutor@1832b0f6",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+        ],
+        "threadCount": "0"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@f24f707",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "80",
+           "name": "boundedElastic-evictor-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ThreadPoolExecutor@36a1fd20",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+        ],
+        "threadCount": "0"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@105e8710",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "58",
+           "name": "micrometer-kafka-metrics",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@72769bf5",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "39",
+           "name": "micrometer-kafka-metrics",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "org.springframework.scheduling.concurrent.SimpleAsyncTaskScheduler$1@14b0b7f9",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+        ],
+        "threadCount": "0"
+      },
+      {
+        "container": "org.springframework.scheduling.concurrent.SimpleAsyncTaskScheduler$2@2086f336",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "67",
+           "name": "scheduling-1",
+           "stack": [
+              "java.base\/java.lang.VirtualThread.parkNanos(VirtualThread.java:635)",
+              "java.base\/java.lang.System$2.parkVirtualThread(System.java:2653)",
+              "java.base\/jdk.internal.misc.VirtualThreads.park(VirtualThreads.java:67)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:267)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.VirtualThread.run(VirtualThread.java:329)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@558ed473",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+        ],
+        "threadCount": "0"
+      },
+      {
+        "container": "java.util.concurrent.ThreadPoolExecutor@21ffc00e",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+        ],
+        "threadCount": "0"
+      },
+      {
+        "container": "org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler$1@ece769a",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "56",
+           "name": "ThreadPoolTaskScheduler-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@3e11996e",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "74",
+           "name": "VirtualThread-unparker",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)",
+              "java.base\/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:186)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "ForkJoinPool-1\/jdk.internal.vm.SharedThreadContainer@3353fefb",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "68",
+           "name": "ForkJoinPool-1-worker-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1893)",
+              "java.base\/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1809)",
+              "java.base\/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188)"
+           ]
+         },
+         {
+           "tid": "69",
+           "name": "ForkJoinPool-1-worker-2",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1893)",
+              "java.base\/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1809)",
+              "java.base\/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188)"
+           ]
+         },
+         {
+           "tid": "42495",
+           "name": "ForkJoinPool-1-worker-3",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1893)",
+              "java.base\/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1809)",
+              "java.base\/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188)"
+           ]
+         },
+         {
+           "tid": "42496",
+           "name": "ForkJoinPool-1-worker-4",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1893)",
+              "java.base\/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1809)",
+              "java.base\/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188)"
+           ]
+         },
+         {
+           "tid": "42497",
+           "name": "ForkJoinPool-1-worker-5",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1893)",
+              "java.base\/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1809)",
+              "java.base\/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188)"
+           ]
+         }
+        ],
+        "threadCount": "5"
+      },
+      {
+        "container": "reactor.core.scheduler.BoundedElasticScheduler$BoundedScheduledExecutorService@463f8edd",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "81",
+           "name": "boundedElastic-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block(AbstractQueuedSynchronizer.java:519)",
+              "java.base\/java.util.concurrent.ForkJoinPool.unmanagedBlock(ForkJoinPool.java:3780)",
+              "java.base\/java.util.concurrent.ForkJoinPool.managedBlock(ForkJoinPool.java:3725)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1746)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1170)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler$1@5d18a787",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "59",
+           "name": "ThreadPoolTaskScheduler-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ThreadPoolExecutor@4b808427",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+        ],
+        "threadCount": "0"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@6915b614",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "51",
+           "name": "micrometer-kafka-metrics",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@5ceaa2da",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "113",
+           "name": "micrometer-kafka-metrics",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@114b2414",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "29",
+           "name": "decision-db:housekeeper",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      },
+      {
+        "container": "java.util.concurrent.ThreadPerTaskExecutor@12925d2",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "198799",
+           "name": "enrich-154047",
+           "stack": [
+           ]
+         },
+         {
+           "tid": "198798",
+           "name": "enrich-154046",
+           "stack": [
+           ]
+         },
+         {
+           "tid": "198803",
+           "name": "enrich-154051",
+           "stack": [
+           ]
+         },
+         {
+           "tid": "198802",
+           "name": "enrich-154050",
+           "stack": [
+           ]
+         },
+         {
+           "tid": "198801",
+           "name": "enrich-154049",
+           "stack": [
+           ]
+         },
+         {
+           "tid": "198800",
+           "name": "enrich-154048",
+           "stack": [
+           ]
+         },
+         {
+           "tid": "198806",
+           "name": "enrich-154054",
+           "stack": [
+           ]
+         },
+         {
+           "tid": "198805",
+           "name": "enrich-154053",
+           "stack": [
+           ]
+         },
+         {
+           "tid": "198804",
+           "name": "enrich-154052",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.unpark(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.unpark(LockSupport.java:181)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue.xfer(LinkedTransferQueue.java:596)",
+              "java.base\/java.util.concurrent.LinkedTransferQueue.add(LinkedTransferQueue.java:1188)",
+              "java.base\/sun.nio.ch.Poller.registerAsync(Poller.java:171)",
+              "java.base\/sun.nio.ch.Poller.pollIndirect(Poller.java:132)",
+              "java.base\/sun.nio.ch.Poller.poll(Poller.java:102)",
+              "java.base\/sun.nio.ch.Poller.poll(Poller.java:87)",
+              "java.base\/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:175)",
+              "java.base\/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:201)",
+              "java.base\/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:309)",
+              "java.base\/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:346)",
+              "java.base\/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:796)",
+              "java.base\/java.net.Socket$SocketInputStream.read(Socket.java:1099)",
+              "org.postgresql.core.VisibleBufferedInputStream.readMore(VisibleBufferedInputStream.java:192)",
+              "org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:159)",
+              "org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:144)",
+              "org.postgresql.core.VisibleBufferedInputStream.read(VisibleBufferedInputStream.java:76)",
+              "org.postgresql.core.PGStream.receiveChar(PGStream.java:480)",
+              "org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2383)",
+              "org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:446)",
+              "org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:533)",
+              "org.postgresql.jdbc.PgStatement.execute(PgStatement.java:449)",
+              "org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:197)",
+              "org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:140)",
+              "com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52)",
+              "com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java)",
+              "org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:738)",
+              "org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:670)",
+              "org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:732)",
+              "org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:757)",
+              "org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:825)",
+              "org.springframework.jdbc.core.simple.DefaultJdbcClient$DefaultStatementSpec$IndexedParamMappedQuerySpec.list(DefaultJdbcClient.java:390)",
+              "org.springframework.jdbc.core.simple.JdbcClient$MappedQuerySpec.optional(JdbcClient.java:462)",
+              "com.fraudplatform.decision.persistence.CustomerRepository.find(CustomerRepository.java:35)",
+              "java.base\/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)",
+              "java.base\/java.lang.reflect.Method.invoke(Method.java:580)",
+              "org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)",
+              "org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)",
+              "org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)",
+              "org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)",
+              "org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)",
+              "org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)",
+              "com.fraudplatform.decision.persistence.CustomerRepository$$SpringCGLIB$$0.find(<generated>)",
+              "com.fraudplatform.decision.application.CustomerProfileService.find(CustomerProfileService.java:33)",
+              "com.fraudplatform.decision.application.DecisionService.lambda$decide$0(DecisionService.java:161)",
+              "com.fraudplatform.decision.application.DecisionService.lambda$async$0(DecisionService.java:263)",
+              "java.base\/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1768)",
+              "java.base\/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:314)",
+              "java.base\/java.lang.VirtualThread.run(VirtualThread.java:329)"
+           ]
+         }
+        ],
+        "threadCount": "9"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@210635fd",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "25",
+           "name": "Catalina-utility-1",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.park(LockSupport.java:371)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block(AbstractQueuedSynchronizer.java:519)",
+              "java.base\/java.util.concurrent.ForkJoinPool.unmanagedBlock(ForkJoinPool.java:3780)",
+              "java.base\/java.util.concurrent.ForkJoinPool.managedBlock(ForkJoinPool.java:3725)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1746)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1177)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:74)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         },
+         {
+           "tid": "26",
+           "name": "Catalina-utility-2",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:74)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "2"
+      },
+      {
+        "container": "java.util.concurrent.ScheduledThreadPoolExecutor@39153b05",
+        "parent": "<root>",
+        "owner": null,
+        "threads": [
+         {
+           "tid": "42",
+           "name": "micrometer-kafka-metrics",
+           "stack": [
+              "java.base\/jdk.internal.misc.Unsafe.park(Native Method)",
+              "java.base\/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)",
+              "java.base\/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1797)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)",
+              "java.base\/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)",
+              "java.base\/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)",
+              "java.base\/java.lang.Thread.run(Thread.java:1583)"
+           ]
+         }
+        ],
+        "threadCount": "1"
+      }
+    ]
+  }
+}

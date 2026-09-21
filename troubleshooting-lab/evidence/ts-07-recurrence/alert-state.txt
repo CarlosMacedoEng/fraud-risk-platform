@@ -1,0 +1,2 @@
+ConsumerWithoutPartitions pending 2026-09-21T19:16:41.271493463Z
+ConsumerRebalanceFailures firing 2026-09-21T19:16:41.271493463Z

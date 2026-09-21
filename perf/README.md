@@ -35,9 +35,24 @@ does not slow the load generator down (avoids coordinated omission).
 | [baseline-04](results/baseline-04-warm-admission/) | JVM warmed by the stress run | **23.5 ms** | **75.5 ms** | 0.03% | 11.0% | **PASS** |
 | [baseline-05](results/baseline-05-cb-window/) | time-based breaker window; JVM warmed only at 30 rps | 351 ms | 481 ms | >0.1% | 36.2% | **FAIL** — C2 JIT at 24% CPU (J-22) |
 | [baseline-06](results/baseline-06-cb-window-warm/) | same code, warmed by a full baseline run | **18.4 ms** | **68.5 ms** | 0% | **0.54%** | **PASS** |
+| [baseline-07](results/baseline-07-warmup-redis-pool/) | **after J-26 fix** (Lettuce pool) + case-creator concurrency 3; semi-cold JVM (warm-up run) | 346 ms | 628 ms | 4.86% | 27.7% | **FAIL** (cold, as expected — J-22) |
+| [baseline-08](results/baseline-08-redis-pool-warm/) | same build, warmed by run 07 | **15.2 ms** | **40.1 ms** | 0.017% | 3.39%† | **PASS** — CPU peak 64% (was 83%) |
+| [baseline-09](results/baseline-09-cold-redis-pool/) | same build, JVM restarted just before (TS-15) | 327 ms | 534 ms | 4.04% | 20.3% | **FAIL** — C2 JIT 20.6% of CPU |
 | [degradation](results/degradation/) | 150 rps, vendor +300 ms at 60 s, Redis frozen 120–150 s | 221 ms (client, whole run) | 441 ms | 3.36% (all 503 OVERLOADED) | 52% | 0 × 5xx errors, **0 data loss**, see below |
 
 \* client-side overall (calibration has no sustained phase).
+† 1,035 of the 1,040 degraded decisions were `DEVICE_RISK_UNAVAILABLE` (device simulator timeouts at the 55 ms attempt
+timeout); Redis-related modes: 4 of 30,048. Unverified hypothesis: the simulator container also served ~90 case
+creations/s, because the REVIEW share was 72% in this run (velocity artifact, J-28) versus ~20% in Stage 8.
+
+### Correction after Stage 9 (journal J-26): runs 01–06 were measured with a connection-churn defect
+Every Redis pipeline opened and closed a TCP connection (3 per decision). At 150 TPS that is ~450 connects/s,
+and with a 60 s TIME_WAIT (~27,000 sockets) it is close to the container's 28,232 ephemeral ports. The ceiling
+is ~157 rps sustained. Runs 01–06 and the stress runs were therefore measured close to, or beyond, a
+port-exhaustion ceiling. Part of the degradation attributed to CPU and breaker tuning (J-18, J-21) may have
+been connection failures; this cannot be separated retroactively. What changed after the fix, same scenario,
+warm JVM (06 → 08): p99 68.5 → 40.1 ms, CPU peak 83% → 64% while doing ~4× more case-creation work. The
+stress-test knee (~300 rps) has **not** been re-measured.
 
 ### Final state (baseline-06, warm JVM, 2 vCPU)
 * 150 TPS sustained: **p50 12 ms, p95 18 ms, p99 68 ms (client)**; server-side p95 17 ms, p99 63 ms.
@@ -50,9 +65,10 @@ does not slow the load generator down (avoids coordinated omission).
   several minutes and failed the SLO (runs 01, 05). Production consequence: rolling deployments need
   gradual traffic ramp-up (slow start), warm-up traffic before readiness, or JIT/AOT caching (CRaC,
   Leyden AOT cache in newer JDKs) — see JAVA_PERFORMANCE_GUIDE.md.
-* The load pool replays ~7,300 customers at 150 rps, so each customer transacts every ~50 s: velocity
-  features are inflated and ~20% of decisions are REVIEW. The *decision mix* is not representative; the
-  *cost per request* is.
+* The load pool replays 5,000 transactions over 2,679 customers per tenant (an earlier version of this README
+  said ~7,300 customers, which was wrong). At 150 rps (70% Aldermoor) each Aldermoor customer transacts roughly every 25 s, so velocity
+  features are inflated. The REVIEW share was ~20% in Stage 8 and rose to 72–88% later in the day as the
+  24 h velocity windows filled (J-28). The *decision mix* is not representative; the *cost per request* is.
 
 ### Degradation test (NFR-04 / NFR-05)
 | Check | Result |

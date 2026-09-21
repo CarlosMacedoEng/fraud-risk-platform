@@ -1,0 +1,31 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                  Java Methods that Executes the Most
+
+Method                                                                                                                                                                                  Samples Percent
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------- -------
+java.util.concurrent.ConcurrentHashMap.putVal(Object, Object, boolean)                                                                                                                        7   0.93%
+java.lang.StringLatin1.inflate(byte[], int, char[], int, int)                                                                                                                                 6   0.80%
+java.util.Objects.requireNonNull(Object)                                                                                                                                                      6   0.80%
+java.lang.String.equals(Object)                                                                                                                                                               5   0.66%
+java.util.concurrent.ConcurrentHashMap.tabAt(ConcurrentHashMap$Node[], int)                                                                                                                   5   0.66%
+java.util.concurrent.atomic.AtomicReferenceFieldUpdater$AtomicReferenceFieldUpdaterImpl.accessCheck(Object)                                                                                   5   0.66%
+java.lang.String.hashCode()                                                                                                                                                                   5   0.66%
+java.lang.Class.cast(Object)                                                                                                                                                                  5   0.66%
+org.postgresql.core.v3.QueryExecutorImpl.processResults(ResultHandler, int, boolean)                                                                                                          4   0.53%
+java.lang.invoke.Invokers.checkCustomized(MethodHandle)                                                                                                                                       4   0.53%
+java.util.HashMap.putVal(int, Object, Object, boolean, boolean)                                                                                                                               4   0.53%
+java.lang.Class.getComponentType()                                                                                                                                                            4   0.53%
+java.util.concurrent.ConcurrentHashMap.get(Object)                                                                                                                                            4   0.53%
+io.lettuce.core.protocol.CommandWrapper.isDone()                                                                                                                                              4   0.53%
+org.springframework.boot.loader.net.protocol.jar.JarFileUrlKey.equals(Object)                                                                                                                 4   0.53%
+io.micrometer.core.instrument.distribution.TimeWindowMax.record(long)                                                                                                                         4   0.53%
+org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(ResultSet)                                                                                                              4   0.53%
+tools.jackson.core.json.UTF8JsonGenerator._writeStringSegment(String, int, int)                                                                                                               4   0.53%
+java.lang.StringBuilder.<init>()                                                                                                                                                              4   0.53%
+sun.nio.ch.SocketChannelImpl.write(ByteBuffer)                                                                                                                                                4   0.53%
+java.util.HashMap.hash(Object)                                                                                                                                                                4   0.53%
+java.lang.invoke.Invokers$Holder.invokeExact_MT(Object, Object, Object)                                                                                                                       3   0.40%
+org.apache.commons.logging.impl.Slf4jLogFactory$Slf4jLocationAwareLog.isTraceEnabled()                                                                                                        3   0.40%
+io.micrometer.core.instrument.internal.DefaultLongTaskTimer$SampleImpl.compareTo(DefaultLongTaskTimer$SampleImpl)                                                                             3   0.40%
+java.util.EnumMap.isValidKey(Object)                                                                                                                                                          3   0.40%

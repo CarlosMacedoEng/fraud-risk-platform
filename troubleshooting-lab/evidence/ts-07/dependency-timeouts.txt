@@ -1,0 +1,4 @@
+{'dependency': 'DEVICE_RISK_UNAVAILABLE'} 0.0
+{'dependency': 'FEATURE_STORE_DEGRADED'} 0.0
+{'dependency': 'GRAPH_FEATURES_UNAVAILABLE'} 0.0
+{'dependency': 'PROFILE_UNAVAILABLE'} 0.0

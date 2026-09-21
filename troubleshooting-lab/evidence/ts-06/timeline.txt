@@ -1,0 +1,22 @@
+17:42:06 INCIDENT: device-intel +250 ms latency
+17:42:52 FIX: vendor recovered (fault cleared); circuit half-opens and closes
+scenario=lab
+requests=3600 rate=60.0/s failed=0.000%
+client latency ms: p50=10.6 p95=13.8 p99=22.4 max=71.7
+server decision ms: p50=5.1 p95=6.7 p99=13.1
+degraded decisions=48.25%
+http_req_failed rate<0.01:PASS
+== device-outcomes
+{'outcome': 'success'} 32.4
+{'outcome': 'timeout'} 7.0917
+{'outcome': 'circuit_open'} 879.3708
+== circuit-state
+{} 2.0
+== degraded
+{'mode': 'DEVICE_RISK_UNAVAILABLE'} 1076.4
+{'mode': 'FEATURE_STORE_DEGRADED'} 0.0
+{'mode': 'GRAPH_FEATURES_UNAVAILABLE'} 0.0
+{'mode': 'MODEL_UNAVAILABLE'} 0.0
+{'mode': 'PROFILE_UNAVAILABLE'} 0.0
+== circuit-state-after
+{} 2.0

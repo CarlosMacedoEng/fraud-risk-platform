@@ -1,0 +1,7 @@
+19:17:35
+kafka (JVM image) healthy 19:17:45
+case-creator    kafka:9092  (1)           range                Stable               3
+history-ingestor kafka:9092  (1)           range                Stable               1
+label-ingestor  kafka:9092  (1)           range                Stable               1
+profile-ingestor kafka:9092  (1)           range                Stable               1
+smoke after JVM-image broker: requests=401 rate=20.0/s failed=0.000% | OPEN cases +393

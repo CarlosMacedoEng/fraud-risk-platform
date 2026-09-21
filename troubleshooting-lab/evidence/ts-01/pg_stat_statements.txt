@@ -1,0 +1,7 @@
+ calls | mean_ms |                                             q                                              
+-------+---------+--------------------------------------------------------------------------------------------
+     1 |    67.7 | EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM risk_decisions WHERE tenant_id = $1 ORDER BY crea
+     1 |    66.2 | EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM risk_decisions WHERE tenant_id = $1 ORDER BY crea
+     3 |    63.5 | SELECT * FROM risk_decisions WHERE tenant_id = $1 ORDER BY created_at DESC, decision_id DE
+(3 rows)
+

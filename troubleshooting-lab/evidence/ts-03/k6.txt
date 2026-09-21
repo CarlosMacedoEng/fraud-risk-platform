@@ -1,0 +1,6 @@
+scenario=lab
+requests=2385 rate=39.8/s failed=0.000%
+client latency ms: p50=27.3 p95=448.6 p99=890.2 max=1377.2
+server decision ms: p50=20.8 p95=193.4 p99=331.5
+degraded decisions=9.94%
+http_req_failed rate<0.01:PASS

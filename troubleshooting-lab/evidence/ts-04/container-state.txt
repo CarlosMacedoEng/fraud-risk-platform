@@ -1,0 +1,1 @@
+status=exited exit=3 oomKilled=false finished=2026-09-21T17:38:45.930653088Z restarts=0

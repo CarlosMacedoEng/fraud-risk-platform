@@ -39,7 +39,7 @@ services:
       retries: 20
 
   kafka:
-    image: apache/kafka-native:4.1.0
+    image: apache/kafka:4.1.0   # JVM image; the native image showed coordinator desync twice (J-25)
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
@@ -59,6 +59,7 @@ services:
       retries: 30
 
   simulators:
+    restart: unless-stopped
     build:
       context: ..
       dockerfile: deploy/docker/java-service.Dockerfile
@@ -79,6 +80,7 @@ services:
       retries: 30
 
   model-service:
+    restart: unless-stopped
     build:
       context: ..
       dockerfile: deploy/docker/model-service.Dockerfile
@@ -97,6 +99,7 @@ services:
       retries: 30
 
   decision-service:
+    restart: unless-stopped
     build:
       context: ..
       dockerfile: deploy/docker/java-service.Dockerfile
@@ -110,6 +113,7 @@ services:
     environment:
       <<: *java-env
       SPRING_PROFILES_ACTIVE: ${DECISION_PROFILES:-default}
+      SPRING_DATA_REDIS_LETTUCE_POOL_ENABLED: ${REDIS_POOL_ENABLED:-true}   # lab A/B switch for J-26
       PLATFORM_ENV: dev
       REDIS_HOST: redis
       MODELS_DIR: /app/models
@@ -136,6 +140,7 @@ services:
       retries: 40
 
   file-adapter:
+    restart: unless-stopped
     build:
       context: ..
       dockerfile: deploy/docker/java-service.Dockerfile

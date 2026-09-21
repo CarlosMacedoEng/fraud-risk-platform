@@ -1,0 +1,10 @@
+18:55:38 INCIDENT: Redis state lost (keys before: 31388)
+18:56:26 breakers during the inconsistency: {'name': 'redis-features'} 0.0 {'name': 'redis-graph'} 0.0 
+18:56:26 RECOVERY: rebuild feature store (30 days) + reload graph snapshot
+rebuild HTTP 200 in 55.946484s
+graph reload HTTP 200
+{"tenant":"aldermoor-bank","transactionsReplayed":388002,"durationMs":55937,"days":30}{"tenant":"aldermoor-bank","entitiesLoaded":132}
+phase          n     review%  new_device  txn_24h  graph_risk  %NEW_DEVICE  %VELOCITY  %degraded
+baseline       1601  63.6     0.000       201.1    0.0021      0.0          100.0      0.0
+after-flush    1601  1.6      0.026       0.4      0.0000      2.6          0.4        0.0
+after-rebuild  1600  82.9     0.000       199.9    0.0033      0.0          100.0      0.0

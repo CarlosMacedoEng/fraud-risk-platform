@@ -1,0 +1,31 @@
+18:47:45 A) new version deployed with a rotated-but-not-updated DB secret
+18:47:49 ds-v2-badsecret: running exit=0 readiness=000--- liveness=000---
+18:48:13 ds-v2-badsecret: exited exit=1 readiness=000--- liveness=000---
+      7 Unable to obtain connection from database: FATAL: password authentication failed for us
+18:48:15 running instance during the failed rollout: HTTP 200 0.183736s
+18:48:15 B) new version deployed with a wrong models path (config drift)
+18:48:18 ds-v2-nomodels: running exit=0 readiness=000--- liveness=000---
+18:48:31 ds-v2-nomodels: running exit=0 readiness=503 liveness=200
+18:48:43 ds-v2-nomodels: running exit=0 readiness=503 liveness=200
+18:48:56 ds-v2-nomodels: running exit=0 readiness=503 liveness=200
+18:49:08 ds-v2-nomodels: running exit=0 readiness=503 liveness=200
+18:49:20 ds-v2-nomodels: running exit=0 readiness=503 liveness=200
+18:49:33 ds-v2-nomodels: running exit=0 readiness=503 liveness=200
+18:49:45 ds-v2-nomodels: running exit=0 readiness=503 liveness=200
+18:49:57 ds-v2-nomodels: running exit=0 readiness=503 liveness=200
+{"@timestamp":"2026-09-21T18:48:20.770654256Z","@version":"1","message":"model failed to load tenant=aldermoor-bank version=aldermoor-bank-lgbm-1.0.0: java.nio.file.NoSuchFileException: /app/models-v2/aldermoor-bank/aldermoor-bank-lgbm-1.0.0/manifest.json","logger_name":"com.fraudplatform.decision.i
+{"@timestamp":"2026-09-21T18:48:20.772822639Z","@version":"1","message":"model failed to load tenant=quillon-pay version=quillon-pay-lgbm-1.0.0: java.nio.file.NoSuchFileException: /app/models-v2/quillon-pay/quillon-pay-lgbm-1.0.0/manifest.json","logger_name":"com.fraudplatform.decision.inference.Mod
+{"@timestamp":"2026-09-21T18:48:20.772850556Z","@version":"1","message":"model failed to load tenant=quillon-pay version=quillon-pay-lgbm-1.1.0: java.nio.file.NoSuchFileException: /app/models-v2/quillon-pay/quillon-pay-lgbm-1.1.0/manifest.json","logger_name":"com.fraudplatform.decision.inference.Mod
+18:50:09 readiness body: {"components":{"db":{"details":{"database":"PostgreSQL","validationQuery":"isValid()"},"status":"UP"},"models":{"details":{"allModelsLoaded":false,"requireModels":true,"aldermoor-bank":{"version":"aldermoor-bank-lgbm-1.0.0","loaded":false},"quillon-pay":{"version":"quillon-pay-lgbm-1.0.0","loaded":false},"failures":{"aldermoor-bank/aldermoor-bank-lgbm-1.0.0":"NoSuchFileException: /app/models-v2/al
+18:50:14 running instance during the failed rollout: HTTP 200 0.030454s
+18:50:14 FIX: correct secret + path -> the new instance becomes ready, then is removed (lab only)
+18:50:18 ds-v2-fixed: running exit=0 readiness=000--- liveness=000---
+18:50:30 ds-v2-fixed: running exit=0 readiness=200 liveness=200
+18:50:43 ds-v2-fixed: running exit=0 readiness=200 liveness=200
+18:50:55 ds-v2-fixed: running exit=0 readiness=200 liveness=200
+18:51:07 ds-v2-fixed: running exit=0 readiness=200 liveness=200
+18:51:20 ds-v2-fixed: running exit=0 readiness=200 liveness=200
+18:51:32 ds-v2-fixed: running exit=0 readiness=200 liveness=200
+18:51:49 ds-v2-fixed: running exit=0 readiness=200 liveness=200
+18:52:02 ds-v2-fixed: running exit=0 readiness=200 liveness=200
+18:52:14 ds-v2-fixed: running exit=0 readiness=200 liveness=200

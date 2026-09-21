@@ -1,0 +1,10 @@
+== pool.enabled=false  (200 rps x 120 s, after 60 s warm-up)
+peak TIME_WAIT->redis=28229  log lines with 'Cannot assign requested address'=0
+requests=23961 rate=199.5/s failed=11.811%
+client latency ms: p50=54.7 p95=290.9 p99=384.4 max=568.6
+degraded decisions=49.41%
+== pool.enabled=true  (200 rps x 120 s, after 60 s warm-up)
+peak TIME_WAIT->redis=0  log lines with 'Cannot assign requested address'=0
+requests=23992 rate=199.9/s failed=0.000%
+client latency ms: p50=9.5 p95=14.6 p99=37.8 max=167.3
+degraded decisions=0.05%

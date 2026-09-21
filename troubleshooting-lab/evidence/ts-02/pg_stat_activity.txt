@@ -1,0 +1,5 @@
+ state | wait_event_type | count 
+-------+-----------------+-------
+ idle  | Client          |    20
+(1 row)
+

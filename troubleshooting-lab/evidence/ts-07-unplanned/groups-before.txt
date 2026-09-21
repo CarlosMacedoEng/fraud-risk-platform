@@ -1,0 +1,72 @@
+
+Warning: Consumer group 'case-creator' is rebalancing.
+
+GROUP           TOPIC              PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+case-creator    fraud.decisions.v1 2          138610          201723          63113           -               -               -
+case-creator    fraud.decisions.v1 0          137303          198779          61476           -               -               -
+case-creator    fraud.decisions.v1 1          137147          197872          60725           -               -               -
+
+GROUP                                               TOPIC              PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                                                                         HOST            CLIENT-ID
+config-refresh-1125a0a8-f9ff-457e-86ab-007edaa14093 platform.config.v1 0          5               5               0               consumer-config-refresh-1125a0a8-f9ff-457e-86ab-007edaa14093-3-1ef3ceb1-54b1-40f0-965d-9733550abd72 /172.27.0.9     consumer-config-refresh-1125a0a8-f9ff-457e-86ab-007edaa14093-3
+
+Consumer group 'config-refresh-3d1263bf-7763-4401-b6b0-f04f46c56ee7' has no active members.
+
+GROUP                                               TOPIC              PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+config-refresh-3d1263bf-7763-4401-b6b0-f04f46c56ee7 platform.config.v1 0          5               5               0               -               -               -
+
+GROUP    
+Consumer group 'config-refresh-5344be46-7e53-4774-b8f0-69adbf9e59cb' has no active members.
+                                           TOPIC              PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+config-refresh-5344be46-7e53-4774-b8f0-69adbf9e59cb platform.config.v1 0          5               5               0               -               -               -
+
+Consumer group 'config-refresh-69c72065-fda0-4588-bbd7-053f49bd73a0' has no active members.
+
+GROUP                                               TOPIC              PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+config-refresh-69c72065-fda0-4588-bbd7-053f49bd73a0 platform.config.v1 0          5               5               0               -               -               -
+Consumer group 'config-refresh-6ff1c325-3b18-4a01-abdb-8b304c782ba9' has no active members.
+
+
+GROUP                                               TOPIC              PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+config-refresh-6ff1c325-3b18-4a01-abdb-8b304c782ba9 platform.config.v1 0          5               5               0               -               -               -
+
+Consumer group 'config-refresh-7abd9159-1d81-4af9-881a-654c3f0ce06e' has no active members.
+
+GROUP                                               TOPIC              PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+config-refresh-7abd9159-1d81-4af9-881a-654c3f0ce06e platform.config.v1 0          5               5               0               -               -               -
+
+Consumer group 'config-refresh-beabe893-f3d1-40c9-9c6b-b9b7b70c6f4a' has no active members.
+
+GROUP                                               TOPIC              PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+config-refresh-beabe893-f3d1-40c9-9c6b-b9b7b70c6f4a platform.config.v1 0          5               5               0               -               -               -
+
+GROUP    
+Consumer group 'config-refresh-c8ada5b4-457d-48b0-b9b5-6dd3afcb5530' has no active members.
+                                           TOPIC              PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+config-refresh-c8ada5b4-457d-48b0-b9b5-6dd3afcb5530 platform.config.v1 0          5               5               0               -               -               -
+
+Consumer group 'config-refresh-ca0cbf3e-880d-4345-a883-a89e8aed9bb0' has no active members.
+
+GROUP                                               TOPIC              PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+config-refresh-ca0cbf3e-880d-4345-a883-a89e8aed9bb0 platform.config.v1 0          5               5               0               -               -               -
+
+GROUP           TOPIC    
+Consumer group 'dlt-redrive' has no active members.
+                           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+dlt-redrive     fraud.decisions.v1.case-creator.dlt 0          6               6               0               -               -               -
+
+Warning: Consumer group 'history-ingestor' is rebalancing.
+
+GROUP            TOPIC                 PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
+history-ingestor fraud.transactions.v1 2          76729           133331          56602           -               -               -
+history-ingestor fraud.transactions.v1 1          75163           130432          55269           -               -               -
+history-ingestor fraud.transactions.v1 0          75995           131518          55523           -               -               -
+
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                                    HOST            CLIENT-ID
+label-ingestor  fraud.labels.v1 1          53              53              0               consumer-label-ingestor-1-2883a9ae-b3a2-4e8b-b491-2370b6b61b71 /172.27.0.9     consumer-label-ingestor-1
+label-ingestor  fraud.labels.v1 0          57              57              0               consumer-label-ingestor-1-2883a9ae-b3a2-4e8b-b491-2370b6b61b71 /172.27.0.9     consumer-label-ingestor-1
+label-ingestor  fraud.labels.v1 2          50              50              0               consumer-label-ingestor-1-2883a9ae-b3a2-4e8b-b491-2370b6b61b71 /172.27.0.9     consumer-label-ingestor-1
+
+GROUP            TOPIC              PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                                      HOST            CLIENT-ID
+profile-ingestor fraud.customers.v1 1          2508            2508            0               consumer-profile-ingestor-4-879bf11e-f295-4f25-8660-524abbc5c46b /172.27.0.9     consumer-profile-ingestor-4
+profile-ingestor fraud.customers.v1 0          2491            2491            0               consumer-profile-ingestor-4-879bf11e-f295-4f25-8660-524abbc5c46b /172.27.0.9     consumer-profile-ingestor-4
+profile-ingestor fraud.customers.v1 2          2542            2542            0               consumer-profile-ingestor-4-879bf11e-f295-4f25-8660-524abbc5c46b /172.27.0.9     consumer-profile-ingestor-4

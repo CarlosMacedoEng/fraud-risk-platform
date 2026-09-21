@@ -1,0 +1,44 @@
+18:09:15 keys in Redis before incident: 31386
+18:09:31 INCIDENT: docker stop redis
+18:10:13 Redis restarted (empty: appendonly=no)
+18:10:53 keys in Redis after restart + ~30 s of new traffic: 31386 (history before the outage is gone; only new activity was written)
+18:10:53 RECOVERY: rebuild feature store from PostgreSQL + reload graph snapshot
+18:12:11 keys after rebuild: 31386
+scenario=lab
+requests=4501 rate=50.0/s failed=0.000%
+client latency ms: p50=9.9 p95=88.8 p99=91.5 max=152.9
+server decision ms: p50=5.4 p95=34.4 p99=35.8
+degraded decisions=74.69%
+http_req_failed rate<0.01:PASS
+== degraded-during
+{'mode': 'DEVICE_RISK_UNAVAILABLE'} 0.0
+{'mode': 'FEATURE_STORE_DEGRADED'} 1005.3333
+{'mode': 'GRAPH_FEATURES_UNAVAILABLE'} 1005.3333
+{'mode': 'MODEL_UNAVAILABLE'} 0.0
+{'mode': 'PROFILE_UNAVAILABLE'} 0.0
+
+== breaker-open
+{'name': 'redis-features'} 1.0
+{'name': 'redis-graph'} 1.0
+
+== fallback-reads
+{} 1004.0
+
+== fallback-rejected
+{} 0.0
+
+== hikari-pending
+{} 0.0
+
+== rebuild
+{"durationMs":54788,"transactionsReplayed":316607,"tenant":"aldermoor-bank","days":30}
+== graph
+{"tenant":"aldermoor-bank","entitiesLoaded":132}
+
+== CORRECTION (investigated after the run)
+Assumption "Redis comes back empty" was WRONG. appendonly=no disables AOF only; the default RDB save rules
+still apply. Redis log: "Saving the final RDB snapshot before exiting" (18:09:31) and
+"Done loading RDB, keys loaded: 31386" (18:10:14). A graceful stop loses nothing that was already in Redis.
+What IS lost: writes attempted while Redis was down -> risk_featurestore_skipped_writes_total +3373 (5m window).
+Velocity / seen-device state for those transactions is missing until the rebuild replays them from PostgreSQL
+(316,607 transactions / 30 days in 54.8 s). A crash (SIGKILL) or FLUSHDB/eviction loses more -> see TS-18.

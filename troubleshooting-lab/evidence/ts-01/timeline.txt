@@ -1,0 +1,14 @@
+17:33:56 baseline API latency: 0.089850s 0.015462s 0.013914s
+17:33:57 INCIDENT: DROP INDEX ix_decisions_tenant_created
+17:33:58 API latency after drop: 0.090051s 0.071050s 0.066028s
+17:34:05 FIX: CREATE INDEX CONCURRENTLY (no write lock)
+17:34:06 API latency after fix: 0.010975s 0.008695s 0.026228s
+   ->  Index Scan using ix_decisions_tenant_created on risk_decisions  (cost=0.42..276525.40 rows=263293 width=1562) (actual time=0.027..0.099 rows=50 loops=1)
+ Execution Time: 0.178 ms
+   ->  Index Scan using ix_decisions_tenant_created on risk_decisions  (cost=0.42..282396.83 rows=263489 width=1562) (actual time=0.025..0.089 rows=50 loops=1)
+ Execution Time: 0.158 ms
+               Sort Method: top-N heapsort  Memory: 227kB
+               Worker 0:  Sort Method: top-N heapsort  Memory: 227kB
+               Worker 1:  Sort Method: top-N heapsort  Memory: 227kB
+               ->  Parallel Seq Scan on risk_decisions  (cost=0.00..79630.69 rows=109787 width=1562) (actual time=0.019..44.598 rows=87988 loops=3)
+ Execution Time: 66.331 ms

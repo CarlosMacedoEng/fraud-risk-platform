@@ -1,0 +1,11 @@
+window_seconds=242s
+server_latency_p0.5_seconds=0.009980066905687235
+server_latency_p0.95_seconds=0.013872485486618012
+server_latency_p0.99_seconds=0.03275667072195564
+decisions=30048.06947071913
+degraded=1026.5432150208762
+http_5xx=n/a
+gc_pause_seconds_total=0.9589809405548652
+hikari_pending_max=0
+outbox_backlog_max=10
+cpu_process_max=0.643

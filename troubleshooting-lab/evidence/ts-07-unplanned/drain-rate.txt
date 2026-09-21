@@ -1,0 +1,7 @@
+lag 98973 -> 93420 in 63s: drain 88 events/s; external cases +4582 (72/s)
+org.springframework.kafka.KafkaListenerEndpointContainer#0-0 nan ms/record
+org.springframework.kafka.KafkaListenerEndpointContainer#1-0 11.27 ms/record
+org.springframework.kafka.KafkaListenerEndpointContainer#2-0 nan ms/record
+org.springframework.kafka.KafkaListenerEndpointContainer#3-0 nan ms/record
+org.springframework.kafka.KafkaListenerEndpointContainer#4-0 nan ms/record
+concurrency=3: lag 82521 -> 60040 in 93s: drain 241 events/s

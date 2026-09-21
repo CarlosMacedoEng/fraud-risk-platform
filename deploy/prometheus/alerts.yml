@@ -46,6 +46,48 @@ groups:
         for: 30m
         labels: { severity: SEV3 }
         annotations: { summary: "REVIEW rate above 1% for 30 min — possible false-positive spike", runbook: "TROUBLESHOOTING_PLAYBOOK.md#ts-14" }
+      # --- added after the troubleshooting lab (journal J-25, J-32): failures that produced no existing alert
+      - alert: ReviewShareDrift
+        # REVIEW share over 15 min vs the previous 3 h: halved (TS-18 silent feature-store loss) or doubled
+        # (TS-14 bad threshold). Relative, so it still works when the absolute mix is unusual.
+        expr: |
+          (sum(rate(risk_decisions_total{decision="REVIEW"}[15m])) / sum(rate(risk_decisions_total[15m])))
+            / (sum(rate(risk_decisions_total{decision="REVIEW"}[3h] offset 15m)) / sum(rate(risk_decisions_total[3h] offset 15m)))
+            < 0.5
+          or
+          (sum(rate(risk_decisions_total{decision="REVIEW"}[15m])) / sum(rate(risk_decisions_total[15m])))
+            / (sum(rate(risk_decisions_total{decision="REVIEW"}[3h] offset 15m)) / sum(rate(risk_decisions_total[3h] offset 15m)))
+            > 2
+        for: 10m
+        labels: { severity: SEV2 }
+        annotations: { summary: "Decision mix changed sharply without a deployment? Check strategy changes and feature-store state", runbook: "TROUBLESHOOTING_PLAYBOOK.md#ts-18" }
+      - alert: FeatureStoreWritesSkipped
+        expr: increase(risk_featurestore_skipped_writes_total[5m]) > 0
+        labels: { severity: SEV3 }
+        annotations: { summary: "Velocity/seen-entity writes were skipped — schedule a feature-store rebuild after recovery", runbook: "TROUBLESHOOTING_PLAYBOOK.md#ts-12" }
+  - name: messaging
+    rules:
+      - alert: CaseCreationStalled
+        # REVIEW decisions are being produced but no case is opened. Catches consumers that are "up" but not
+        # consuming (TS-07 unplanned: broker rejected every SyncGroup; lag metrics were NaN, so lag alerts were blind).
+        expr: (sum(rate(risk_decisions_total{decision="REVIEW"}[10m])) > 0.1) unless (sum(rate(risk_cases_opened_total[10m])) > 0)
+        for: 10m
+        labels: { severity: SEV2 }
+        annotations: { summary: "REVIEW decisions without new cases for 10 min", runbook: "TROUBLESHOOTING_PLAYBOOK.md#ts-07" }
+      - alert: ConsumerWithoutPartitions
+        expr: max by (client_id) (kafka_consumer_coordinator_assigned_partitions{client_id=~"consumer-(case-creator|history-ingestor|label-ingestor|profile-ingestor).*"}) == 0
+        for: 5m
+        labels: { severity: SEV2 }
+        annotations: { summary: "{{ $labels.client_id }} has no partitions assigned (rebalance loop or coordinator problem)", runbook: "TROUBLESHOOTING_PLAYBOOK.md#ts-07" }
+      - alert: ConsumerRebalanceFailures
+        expr: sum by (client_id) (increase(kafka_consumer_coordinator_failed_rebalance_total[10m])) > 3
+        labels: { severity: SEV3 }
+        annotations: { summary: "{{ $labels.client_id }} failing rebalances", runbook: "TROUBLESHOOTING_PLAYBOOK.md#ts-07" }
+      - alert: ConsumerLagHigh
+        expr: max by (client_id) (kafka_consumer_fetch_manager_records_lag_max) > 5000
+        for: 5m
+        labels: { severity: SEV3 }
+        annotations: { summary: "{{ $labels.client_id }} lag above 5,000 records", runbook: "TROUBLESHOOTING_PLAYBOOK.md#ts-07" }
   - name: file-adapter
     rules:
       - alert: FileRejected

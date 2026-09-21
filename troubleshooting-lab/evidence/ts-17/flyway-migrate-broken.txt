@@ -1,0 +1,28 @@
+WARNING: Storing migrations in 'sql' is not recommended and default scanning of this location may be deprecated in a future release
+Flyway OSS Edition 11.20.3 by Redgate
+
+See release notes here: https://rd.gt/416ObMi
+Database: jdbc:postgresql://postgres:5432/riskplatform_ts17 (PostgreSQL 16.11)
+Successfully validated 6 migrations (execution time 00:00.045s)
+Current version of schema "public": 5
+Migrating schema "public" to version "6 - decision channel"
+ERROR: Migration of schema "public" to version "6 - decision channel" failed! Changes successfully rolled back.
+ERROR: Failed to execute script V6__decision_channel.sql
+-------------------------------------------------
+SQL State  : 23502
+Error Code : 0
+Message    : ERROR: column "channel" of relation "risk_decisions" contains null values
+Location   : /flyway/sql/V6__decision_channel.sql (/flyway/sql/V6__decision_channel.sql)
+Line       : 4
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+Caused by: Failed to execute script V6__decision_channel.sql
+-------------------------------------------------
+SQL State  : 23502
+Error Code : 0
+Message    : ERROR: column "channel" of relation "risk_decisions" contains null values
+Location   : /flyway/sql/V6__decision_channel.sql (/flyway/sql/V6__decision_channel.sql)
+Line       : 4
+Statement  : Run Flyway with -X option to see the actual statement causing the problem
+
+Caused by: org.postgresql.util.PSQLException: ERROR: column "channel" of relation "risk_decisions" contains null values

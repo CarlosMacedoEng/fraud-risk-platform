@@ -1,0 +1,36 @@
+18:33:12 CHANGE: author (aldermoor-admin) creates draft 1.2.0; approver (aldermoor-approver) approves
+create draft HTTP 201
+self-approval by author: HTTP 403
+approval by second person: HTTP 200
+status: None | validation warnings: []
+18:33:12 INCIDENT: 1.2.0 promoted to dev as a 25% canary
+promote HTTP 200
+1.1.0|APPROVE|710|25.6%
+1.1.0|DECLINE|5|0.2%
+1.1.0|REVIEW|2058|74.2%
+1.2.0|APPROVE|88|10.6%
+1.2.0|DECLINE|3|0.4%
+1.2.0|REVIEW|737|89.0%
+18:34:25 fraud_cases created during the canary minute: 2795
+18:34:25 FIX: rollback (removes the candidate; 1.1.0 serves 100%)
+rollback HTTP 200
+{"tenantId":"aldermoor-bank","environment":"dev","activeVersion":"1.1.0","previousVersion":null,"candidateVersion":null,"rolloutPercentage":0,"deployedBy":"aldermoor-admin","deployedAt":"2026-09-21T18:34:26.056766Z","rowVersion":3}
+1.1.0|APPROVE|312|17.3%
+1.1.0|DECLINE|7|0.4%
+1.1.0|REVIEW|1482|82.3%
+18:34:58 PREVENTION: the paired simulation that should gate the canary
+{'activeVersion': '1.1.0', 'candidateVersion': '1.2.0', 'evaluated': 5000, 'reviewRateActive': 0.7706, 'reviewRateCandidate': 0.9058, 'declineRateActive': 0.0028, 'declineRateCandidate': 0.0028}
+18:33:12|aldermoor-approver|STRATEGY_APPROVED|1.2.0
+18:33:12|aldermoor-admin|STRATEGY_DRAFT_CREATED|1.2.0
+18:33:13|aldermoor-admin|STRATEGY_CANARY|dev
+18:34:26|aldermoor-admin|STRATEGY_ROLLBACK|dev
+
+== ANALYSIS (written after the run)
+Baseline problem discovered: control (1.1.0) was already at 74.2% REVIEW. Top REVIEW reason in the last 3 min:
+HIGH_TRANSACTION_VELOCITY (6,249) and ANOMALOUS_PATTERN (3,540); mean model probability 0.007.
+Cause: load-test artifact. The k6 pool has 5,000 transactions over 2,679 customers; at 100 rps each customer makes
+~130 transactions/hour with eventTime=now, so velocity rules fire. Hourly REVIEW share for 1.1.0 rose with the
+filling 24 h velocity window: 46.7% (14h) -> 65.5% -> 47.3% -> 87.6% -> 88.2% (18h).
+Valid comparison despite the inflated baseline = same-window cohorts: canary 1.2.0 89.0% vs control 74.2% REVIEW
+(+14.8 pp); paired simulation over the same 5,000 transactions: 77.1% -> 90.6%. Absolute rates are NOT
+representative of production traffic; the relative effect and the blast-radius control (25% cohort) are the finding.

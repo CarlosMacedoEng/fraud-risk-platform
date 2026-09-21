@@ -67,6 +67,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+        <!-- Pool for Lettuce dedicated connections: executePipelined cannot use the shared native connection,
+             so without a pool every pipeline opened and closed a TCP connection (TS-12, journal J-26). -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
 
         <!-- messaging -->
         <dependency>

@@ -1,0 +1,8 @@
+# Transcribed verbatim from the console output of redis-churn-check.sh (run 17:58:26 UTC, before the Lettuce pool
+# was added). The original file was deleted when the TS-12 re-run reset its evidence folder.
+label=before-fix at 17:58:26  ephemeral range: 32768	60999
+before load: TIME_WAIT->redis=0 ESTABLISHED->redis=2
+after 40s @100rps: TIME_WAIT->redis=12003 ESTABLISHED->redis=2
+requests=4001 rate=100.0/s failed=0.000%
+client latency ms: p50=10.4 p95=13.8 p99=19.7 max=57.4
+degraded decisions=0.05%

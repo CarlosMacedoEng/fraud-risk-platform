@@ -66,6 +66,11 @@ public class MessagingConfig {
 
     private static ConcurrentKafkaListenerContainerFactory<String, String> factory(
             ConsumerFactory<String, String> cf, KafkaTemplate<String, String> template, String group) {
+        return factory(cf, template, group, 1);
+    }
+
+    private static ConcurrentKafkaListenerContainerFactory<String, String> factory(
+            ConsumerFactory<String, String> cf, KafkaTemplate<String, String> template, String group, int concurrency) {
         DeadLetterPublishingRecoverer recoverer = new DeadLetterPublishingRecoverer(template, (record, ex) -> {
             log.error("DLT group={} topic={} partition={} offset={} cause={}", group, record.topic(), record.partition(),
                     record.offset(), ex.getCause() == null ? ex.toString() : ex.getCause().toString());
@@ -80,14 +85,17 @@ public class MessagingConfig {
         f.setConsumerFactory(cf);
         f.setCommonErrorHandler(handler);
         f.getContainerProperties().setAckMode(ContainerProperties.AckMode.RECORD);
-        f.setConcurrency(1);
+        f.setConcurrency(concurrency);
         return f;
     }
 
     @Bean
     ConcurrentKafkaListenerContainerFactory<String, String> caseCreatorFactory(ConsumerFactory<String, String> cf,
-                                                                              KafkaTemplate<String, String> template) {
-        return factory(cf, template, CASE_CREATOR);
+                                                                              KafkaTemplate<String, String> template,
+                                                                              @Value("${platform.messaging.case-creator.concurrency:3}") int concurrency) {
+        // One thread per partition: each record is a synchronous REST call (~11 ms), so a single thread capped
+        // the group at ~88 records/s, below the REVIEW rate at 200 rps (TS-07, journal J-27).
+        return factory(cf, template, CASE_CREATOR, concurrency);
     }
 
     @Bean

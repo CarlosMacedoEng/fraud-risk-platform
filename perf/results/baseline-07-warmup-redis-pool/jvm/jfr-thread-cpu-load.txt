@@ -1,0 +1,94 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                            Thread CPU Load
+
+Thread                                                                                                                                                                                    System   User
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------ ------
+C2 CompilerThread0                                                                                                                                                                         0.06% 12.84%
+ForkJoinPool-1-worker-2                                                                                                                                                                    1.66%  9.75%
+ForkJoinPool-1-worker-1                                                                                                                                                                    2.11%  9.31%
+ForkJoinPool-1-worker-5                                                                                                                                                                    1.53%  8.97%
+inference-3                                                                                                                                                                                0.15%  5.78%
+inference-4                                                                                                                                                                                0.09%  5.73%
+inference-2                                                                                                                                                                                0.09%  5.68%
+inference-1                                                                                                                                                                                0.12%  5.68%
+lettuce-nioEventLoop-4-1                                                                                                                                                                   1.40%  4.65%
+lettuce-nioEventLoop-4-2                                                                                                                                                                   1.09%  3.82%
+AsyncAppender-Worker-ASYNC                                                                                                                                                                 0.36%  1.67%
+org.springframework.kafka.KafkaListenerEndpointContainer#1-0-C-1                                                                                                                           0.44%  1.57%
+org.springframework.kafka.KafkaListenerEndpointContainer#1-1-C-1                                                                                                                           0.41%  1.47%
+org.springframework.kafka.KafkaListenerEndpointContainer#1-2-C-1                                                                                                                           0.45%  1.47%
+org.springframework.kafka.KafkaListenerEndpointContainer#3-0-C-1                                                                                                                           0.20%  1.03%
+Read-Updater                                                                                                                                                                               0.34%  0.88%
+Read-Poller                                                                                                                                                                                0.15%  0.78%
+Attach Listener                                                                                                                                                                            0.08%  0.72%
+DestroyJavaVM                                                                                                                                                                              0.02%  0.66%
+http-nio-8080-Poller                                                                                                                                                                       0.20%  0.44%
+HttpClient-1-SelectorManager                                                                                                                                                               0.17%  0.34%
+kafka-producer-network-thread | decision-service-producer-1                                                                                                                                0.07%  0.34%
+C1 CompilerThread0                                                                                                                                                                         0.03%  0.24%
+decision-db:connection-adder                                                                                                                                                               0.04%  0.24%
+CompletableFutureDelayScheduler                                                                                                                                                            0.00%  0.24%
+HttpClient-3-SelectorManager                                                                                                                                                               0.13%  0.20%
+HttpClient-1-Worker-13                                                                                                                                                                     0.04%  0.20%
+HttpClient-1-Worker-15                                                                                                                                                                     0.02%  0.20%
+HttpClient-1-Worker-12                                                                                                                                                                     0.09%  0.15%
+VirtualThread-unparker                                                                                                                                                                     0.03%  0.15%
+JFR Periodic Tasks                                                                                                                                                                         0.03%  0.15%
+HttpClient-3-Worker-5                                                                                                                                                                      0.00%  0.10%
+org.springframework.kafka.KafkaListenerEndpointContainer#2-0-C-1                                                                                                                           0.00%  0.10%
+kafka-coordinator-heartbeat-thread | history-ingestor                                                                                                                                      0.00%  0.10%
+org.springframework.kafka.KafkaListenerEndpointContainer#4-0-C-1                                                                                                                           0.00%  0.10%
+org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1                                                                                                                           0.00%  0.10%
+HttpClient-1-Worker-11                                                                                                                                                                     0.00%  0.10%
+kafka-coordinator-heartbeat-thread | case-creator                                                                                                                                          0.00%  0.10%
+HttpClient-1-Worker-9                                                                                                                                                                      0.03%  0.05%
+kafka-coordinator-heartbeat-thread | label-ingestor                                                                                                                                        0.00%  0.05%
+kafka-coordinator-heartbeat-thread | config-refresh-c105cc1f-b112-4279-bde8-dda67f5c6b98                                                                                                   0.00%  0.05%
+kafka-coordinator-heartbeat-thread | profile-ingestor                                                                                                                                      0.00%  0.05%
+Catalina-utility-2                                                                                                                                                                         0.00%  0.05%
+Reference Handler                                                                                                                                                                          0.00%  0.05%
+Notification Thread                                                                                                                                                                        0.00%  0.05%
+lettuce-timer-3-1                                                                                                                                                                          0.02%  0.05%
+HttpClient-3-Worker-7                                                                                                                                                                      0.03%  0.05%
+http-nio-8080-Acceptor                                                                                                                                                                     0.00%  0.05%
+HttpClient-3-Worker-9                                                                                                                                                                      0.00%  0.05%
+kafka-coordinator-heartbeat-thread | case-creator                                                                                                                                          0.02%  0.05%
+kafka-coordinator-heartbeat-thread | case-creator                                                                                                                                          0.01%  0.05%
+HttpClient-1-Worker-14                                                                                                                                                                     0.00%  0.05%
+HttpClient-3-Worker-8                                                                                                                                                                      0.00%  0.05%
+HttpClient-3-Worker-10                                                                                                                                                                     0.00%  0.05%
+Service Thread                                                                                                                                                                             0.00%  0.00%
+HttpClient-4-SelectorManager                                                                                                                                                               0.00%  0.00%
+HttpClient-2-SelectorManager                                                                                                                                                               0.00%  0.00%
+HttpClient-3-Worker-12                                                                                                                                                                     0.02%  0.00%
+HttpClient-3-Worker-11                                                                                                                                                                     0.08%  0.00%
+Monitor Deflation Thread                                                                                                                                                                   0.01%  0.00%
+Common-Cleaner                                                                                                                                                                             0.00%  0.00%
+Cleaner-0                                                                                                                                                                                  0.00%  0.00%
+Catalina-utility-1                                                                                                                                                                         0.01%  0.00%
+container-0                                                                                                                                                                                0.00%  0.00%
+Cleaner-1                                                                                                                                                                                  0.00%  0.00%
+decision-db:housekeeper                                                                                                                                                                    0.01%  0.00%
+HttpClient-3-Worker-6                                                                                                                                                                      0.08%  0.00%
+micrometer-kafka-metrics                                                                                                                                                                   0.00%  0.00%
+ThreadPoolTaskScheduler-1                                                                                                                                                                  0.00%  0.00%
+micrometer-kafka-metrics                                                                                                                                                                   0.00%  0.00%
+ThreadPoolTaskScheduler-1                                                                                                                                                                  0.00%  0.00%
+micrometer-kafka-metrics                                                                                                                                                                   0.00%  0.00%
+ThreadPoolTaskScheduler-1                                                                                                                                                                  0.00%  0.00%
+micrometer-kafka-metrics                                                                                                                                                                   0.00%  0.00%
+lettuce-eventExecutorLoop-1-2                                                                                                                                                              0.01%  0.00%
+ThreadPoolTaskScheduler-1                                                                                                                                                                  0.00%  0.00%
+lettuce-eventExecutorLoop-1-1                                                                                                                                                              0.01%  0.00%
+micrometer-kafka-metrics                                                                                                                                                                   0.00%  0.00%
+ThreadPoolTaskScheduler-1                                                                                                                                                                  0.00%  0.00%
+micrometer-kafka-metrics                                                                                                                                                                   0.00%  0.00%
+ThreadPoolTaskScheduler-1                                                                                                                                                                  0.00%  0.00%
+micrometer-kafka-metrics                                                                                                                                                                   0.00%  0.00%
+ThreadPoolTaskScheduler-1                                                                                                                                                                  0.00%  0.00%
+boundedElastic-evictor-1                                                                                                                                                                   0.00%  0.00%
+boundedElastic-1                                                                                                                                                                           0.01%  0.00%
+JFR Recorder Thread                                                                                                                                                                        0.03%  0.00%
+micrometer-kafka-metrics                                                                                                                                                                   0.00%  0.00%
+PostgreSQL-JDBC-SharedTimer-1                                                                                                                                                              0.04%  0.00%

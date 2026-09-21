@@ -6,6 +6,7 @@ import com.fraudplatform.decision.inference.ModelRegistry;
 import org.springframework.boot.health.contributor.Health;
 import org.springframework.boot.health.contributor.HealthIndicator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.LinkedHashMap;
@@ -13,8 +14,13 @@ import java.util.Map;
 
 /**
  * Readiness contributors. "models" and "strategies" are part of the readiness group: an instance whose
- * active strategy cannot be compiled should not receive traffic. A model that fails to load does NOT
- * make the instance unready — the service can still decide in fallback mode — but health shows it.
+ * active strategy cannot be compiled, or whose active model failed to load, should not receive traffic.
+ *
+ * <p>Models are loaded once at startup, so a load failure is a deployment defect (wrong path, missing artifact),
+ * not a transient outage: such an instance is strictly worse than the peers it would replace, and letting it
+ * become ready turns a bad rollout into 100% rules-only fallback (TS-16, journal J-29). Runtime inference
+ * failures are still handled per request by the fallback policy. {@code platform.readiness.require-models=false}
+ * is the explicit opt-out for a deliberate rules-only operation.
  */
 @Configuration
 public class PlatformHealthIndicators {
@@ -38,7 +44,8 @@ public class PlatformHealthIndicators {
     }
 
     @Bean
-    HealthIndicator models(ModelRegistry registry, ActiveStrategyProvider provider, PlatformProperties props) {
+    HealthIndicator models(ModelRegistry registry, ActiveStrategyProvider provider, PlatformProperties props,
+                           @Value("${platform.readiness.require-models:true}") boolean requireModels) {
         return () -> {
             Map<String, Object> details = new LinkedHashMap<>();
             boolean allLoaded = true;
@@ -49,12 +56,14 @@ public class PlatformHealthIndicators {
                     allLoaded &= loaded;
                     details.put(tenant, Map.of("version", version, "loaded", loaded));
                 } catch (RuntimeException e) {
+                    allLoaded = false;
                     details.put(tenant, "ERROR: " + e.getMessage());
                 }
             }
             if (!registry.failures().isEmpty()) details.put("failures", registry.failures());
-            // Degraded but still serving (rules-only fallback): report UP with details, alert on the metric.
-            return Health.up().withDetail("allModelsLoaded", allLoaded).withDetails(details).build();
+            Health.Builder health = allLoaded || !requireModels ? Health.up() : Health.down();
+            return health.withDetail("allModelsLoaded", allLoaded).withDetail("requireModels", requireModels)
+                    .withDetails(details).build();
         };
     }
 }

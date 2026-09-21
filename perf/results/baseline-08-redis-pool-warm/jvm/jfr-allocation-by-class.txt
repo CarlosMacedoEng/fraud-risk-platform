@@ -1,0 +1,31 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=70 -XX:InitialRAMPercentage=50 -XX:+UseG1GC -XX:MaxGCPauseMillis=50  -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps  -Xlog:gc*:file=/dumps/gc.log:time,uptime,level,tags:filecount=5,filesize=10m
+
+                                                                                          Allocation by Class
+
+Object Type                                                                                                                                                                         Allocation Pressure
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------
+io.lettuce.core.datastructure.queue.HashIndexedQueue$Node                                                                                                                                        32.57%
+java.lang.String                                                                                                                                                                                 19.02%
+jdk.internal.net.http.common.MinimalFuture                                                                                                                                                       18.46%
+java.util.TreeMap                                                                                                                                                                                 8.17%
+byte[]                                                                                                                                                                                            5.65%
+int[]                                                                                                                                                                                             4.74%
+java.util.concurrent.locks.ReentrantLock                                                                                                                                                          2.27%
+java.util.HashMap$Node                                                                                                                                                                            1.35%
+java.lang.Object[]                                                                                                                                                                                0.57%
+char[]                                                                                                                                                                                            0.47%
+jdk.internal.vm.StackChunk                                                                                                                                                                        0.40%
+long[]                                                                                                                                                                                            0.33%
+java.util.LinkedHashMap$Entry                                                                                                                                                                     0.31%
+jdk.internal.math.FloatingDecimal$ASCIIToBinaryBuffer                                                                                                                                             0.18%
+java.util.HashSet                                                                                                                                                                                 0.16%
+java.util.Optional                                                                                                                                                                                0.15%
+io.micrometer.core.instrument.ImmutableTag                                                                                                                                                        0.14%
+java.util.HashMap$Node[]                                                                                                                                                                          0.14%
+ai.onnxruntime.TensorInfo                                                                                                                                                                         0.14%
+java.util.stream.ReferencePipeline$Head                                                                                                                                                           0.13%
+org.springframework.data.redis.connection.zset.DefaultTuple                                                                                                                                       0.12%
+java.util.concurrent.ConcurrentHashMap                                                                                                                                                            0.12%
+java.util.ArrayList$Itr                                                                                                                                                                           0.11%
+java.lang.String[]                                                                                                                                                                                0.11%
+java.util.concurrent.ConcurrentHashMap$ValueIterator                                                                                                                                              0.11%

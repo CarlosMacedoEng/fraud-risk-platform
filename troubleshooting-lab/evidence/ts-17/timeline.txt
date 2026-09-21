@@ -1,0 +1,48 @@
+18:53:26 SETUP: scratch database with V1..V5 and a copy of 20,000 recent decisions
+Successfully applied 5 migrations to schema "public", now at version v5 (execution time 00:00.209s)
+COPY 20000
+COPY 20000
+18:53:59 INCIDENT: release ships V6 (ADD COLUMN channel text NOT NULL) - tested only on an empty dev database
+flyway exit code: 1
+ERROR: Migration of schema "public" to version "6 - decision channel" failed! Changes successfully rolled back.
+ERROR: Failed to execute script V6__decision_channel.sql
+SQL State  : 23502
+Message    : ERROR: column "channel" of relation "risk_decisions" contains null values
+SQL State  : 23502
+Message    : ERROR: column "channel" of relation "risk_decisions" contains null values
+Caused by: org.postgresql.util.PSQLException: ERROR: column "channel" of relation "risk_decisions" contains null values
+| Versioned | 1       | core schema             | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 2       | strategy model audit    | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 3       | strategy canary rollout | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 4       | cases labels outbox     | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 5       | reporting views         | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 6       | decision channel        | SQL  |                     | Pending | No       |
+18:54:04 schema after failure: channel column present? 0 (0 = rolled back: PostgreSQL DDL is transactional)
+18:54:04 FIX 1/3 expand: replace V6 with a nullable column (release not yet shipped anywhere, so V6 can be replaced)
+Successfully applied 1 migration to schema "public", now at version v6 (execution time 00:00.009s)
+18:54:06 V6 expand took 1798 ms (incl. container start)
+18:54:06 FIX 2/3 backfill in batches of 5,000
+NOTICE:  backfilled 5000 rows
+NOTICE:  backfilled 5000 rows
+NOTICE:  backfilled 5000 rows
+NOTICE:  backfilled 5000 rows
+NOTICE:  backfilled 0 rows
+DO
+18:54:13 backfill took 1049 ms; rows still NULL: 0
+18:54:13 FIX 3/3 contract: V7 NOT VALID -> VALIDATE -> SET NOT NULL
+Successfully applied 1 migration to schema "public", now at version v7 (execution time 00:00.025s)
+| Versioned | 1       | core schema               | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 2       | strategy model audit      | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 3       | strategy canary rollout   | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 4       | cases labels outbox       | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 5       | reporting views           | SQL  | 2026-09-21 18:53:54 | Success | No       |
+| Versioned | 6       | decision channel expand   | SQL  | 2026-09-21 18:54:05 | Success | No       |
+| Versioned | 7       | decision channel contract | SQL  | 2026-09-21 18:54:15 | Success | No       |
+channel|NO
+ECOM|8019
+POS|6991
+MOBILE|3161
+WEB|1197
+OPEN_BANKING|443
+BRANCH|189
+18:54:18 scratch database dropped

@@ -1,0 +1,2 @@
+{'name': 'redis-features'} 1.0
+{'name': 'redis-graph'} 1.0

@@ -1,0 +1,30 @@
+18:29:57 BASELINE: 1.1.0 active, 40 rps for 40 s
+1.1.0|APPROVE|1576|98.7%
+1.1.0|DECLINE|4|0.3%
+1.1.0|REVIEW|16|1.0%
+18:30:39 PREVENTION CHECK THAT WAS SKIPPED: simulate 1.0.0 against recent traffic
+{'activeVersion': '1.1.0', 'candidateVersion': '1.0.0', 'evaluated': 5000, 'skipped': 0, 'transitions': {'APPROVE': {'APPROVE': 4706, 'REVIEW': 4, 'DECLINE': 3}, 'REVIEW': {'APPROVE': 235, 'REVIEW': 38, 'DECLINE': 8}, 'DECLINE': {'DECLINE': 6}}, 'activeCounts': {'APPROVE': 4713, 'REVIEW': 281, 'DECLINE': 6}, 'candidateCounts': {'APPROVE': 4941, 'REVIEW': 42, 'DECLINE': 17}, 'reviewRateActive': 0.0562, 'reviewRateCandidate': 0.0084, 'declineRateActive': 0.0012, 'declineRateCandidate': 0.0034, 'labelledOutcome': {}}
+18:30:40 INCIDENT: 1.0.0 promoted to dev at 100% (reason given: 'restore previous behaviour')
+promote HTTP 200
+1.0.0|APPROVE|2378|99.1%
+1.0.0|DECLINE|10|0.4%
+1.0.0|REVIEW|12|0.5%
+18:31:43 FIX: rollback dev -> previous version
+rollback HTTP 200
+{"tenantId":"quillon-pay","environment":"dev","activeVersion":"1.1.0","previousVersion":"1.0.0","candidateVersion":null,"rolloutPercentage":0,"deployedBy":"quillon-admin","deployedAt":"2026-09-21T18:31:43.310511Z","rowVersion":3}
+1.1.0|APPROVE|1513|94.6%
+1.1.0|DECLINE|2|0.1%
+1.1.0|REVIEW|85|5.3%
+18:32:25 AUDIT TRAIL
+18:30:41|quillon-admin|STRATEGY_ACTIVATED|dev|{"reason": "restore previous behaviour", "version": "1.0.0", "rolloutPercentage": 100}
+18:31:43|quillon-admin|STRATEGY_ROLLBACK|dev|{"active": "1.1.0", "previous": "1.0.0", "candidate": null, "rowVersion": 3, "rolloutPercentage": 0}
+
+== ANALYSIS (written after the run)
+Observed live effect was SMALL: DECLINE 0.3% -> 0.4%, REVIEW 1.0% -> 0.5%. The k6 lab pool is dominated by
+low-risk transactions, so it does not reproduce the offline evaluation finding (183 false declines for 1.0.0 vs 0
+for 1.1.0 on the labelled evaluation set).
+Confound: the SAME config (1.1.0) produced REVIEW 1.0% before and 5.3% after the rollback. Different transactions
+and accumulated velocity state in each window -> before/after comparisons across time windows are unreliable.
+Controlled comparison = the paired simulation (same 5,000 recent transactions scored by both versions):
+decline 0.12% -> 0.34% (2.8x), review 5.62% -> 0.84%, 235 REVIEW->APPROVE and 11 ->DECLINE transitions.
+Lesson: gate promotions on paired simulation / canary cohorts measured in the same window, not on before/after.

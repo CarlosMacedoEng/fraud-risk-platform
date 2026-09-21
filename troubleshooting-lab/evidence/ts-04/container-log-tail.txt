@@ -1,0 +1,2 @@
+   java.lang.OutOfMemoryError: Java heap space
+   Terminating due to java.lang.OutOfMemoryError: Java heap space

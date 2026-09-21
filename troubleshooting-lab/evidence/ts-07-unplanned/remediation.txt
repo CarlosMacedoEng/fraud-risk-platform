@@ -1,0 +1,14 @@
+17:49:38
+kafka restarted 17:49:40
+== 17:50:10
+{'case-creator': 185314, 'history-ingestor': 167394}
+case-creator    kafka:9092  (1)           -                    PreparingRebalance   2
+== 17:50:45
+{'case-creator': 182637, 'history-ingestor': 163860}
+case-creator    kafka:9092  (1)           range                Stable               1
+== 17:51:20
+{'case-creator': 178151, 'history-ingestor': 157839}
+case-creator    kafka:9092  (1)           range                Stable               1
+== 17:51:54
+{'case-creator': 173262, 'history-ingestor': 151822}
+case-creator    kafka:9092  (1)           range                Stable               1

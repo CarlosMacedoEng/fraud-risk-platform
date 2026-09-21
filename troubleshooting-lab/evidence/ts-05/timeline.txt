@@ -1,0 +1,14 @@
+17:41:03 INCIDENT: global lock held 10 ms per request (serialises the service: max ~100 rps), 60 rps
+17:41:50 FIX: remove the global lock (fault cleared)
+scenario=lab
+requests=2678 rate=59.5/s failed=0.411%
+client latency ms: p50=23.6 p95=489.5 p99=793.3 max=1347.0
+server decision ms: p50=16.9 p95=184.0 p99=317.2
+degraded decisions=13.95%
+http_req_failed rate<0.01:PASS
+carrier threads (ForkJoinPool) BLOCKED in thread dump: 0
+ jdk.JavaMonitorEnter                                                  21           557
+ jdk.VirtualThreadPinned                                                6           105
+     17   monitorClass = java.lang.Object (classLoader = bootstrap)
+      4   monitorClass = org.apache.kafka.clients.consumer.internals.ConsumerCoordinator (classLoader = org.springframework.boot.loader.launch.LaunchedClassLoader)
+admission rejected (1m): {} 12.1159

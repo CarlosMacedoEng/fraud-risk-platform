@@ -1,0 +1,53 @@
+17:52:30 INCIDENT: core banking delivers TXN_HISTORY_aldermoor-bank_20260430_901.csv
+status: REJECTED | reason: SCHEMA_MISMATCH
+{
+ "runId": "2b406c62-a964-4456-bc7e-8c2c02ccbd1f",
+ "file": "TXN_HISTORY_aldermoor-bank_20260430_901.csv",
+ "sha256": "6eee494f186683bd47d5288ee0160167806dae363e4a4faf18e8c858ed19cee4",
+ "tenant": "aldermoor-bank",
+ "fileType": "TXN_HISTORY",
+ "sourceSystem": "core-banking",
+ "businessDate": "2026-04-30",
+ "expectedHeader": [
+  "transaction_id",
+  "event_time",
+  "customer_id",
+  "account_id",
+  "transaction_type",
+  "channel",
+  "amount",
+  "currency",
+  "card_token",
+  "merchant_id",
+  "mcc",
+  "merchant_country",
+  "beneficiary_id",
+  "beneficiary_country",
+  "device_id",
+  "ip_address",
+  "ip_country"
+ ],
+ "actualHeader": [
+  "transaction_id",
+  "event_time",
+  "customer_id",
+  "account_id",
+  "transaction_type",
+  "channel",
+  "currency",
+  "amount",
+  "card_token",
+  "merchant_id",
+  "mcc",
+  "merchant_country",
+  "beneficiary_id",
+  "beneficiary_country",
+  "device_id",
+  "ip_address",
+  "ip_country"
+ ],
+ "status": "REJECTED",
+ "reason": "SCHEMA_MISMATCH",
+ "detail": "header mismatch: expected [transaction_id, event_time, customer_id, account_id, transaction_type, channel, amount, currency, card_token, merchant_id, mcc, merchant_country, beneficiary_id, beneficiary_country, device_id, ip_address, ip_country] but found [transaction_id, event_time, customer_id, account_id, transaction_type, channel, currency, amount, card_token, merchant_id, mcc, merchant_country, beneficiary_id, beneficiary_country, device_id, ip_address, ip_country]"
+}
+17:52:31 file moved to rejected/, nothing published

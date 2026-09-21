@@ -1,0 +1,4 @@
+phase|n|review%|new_device|txn_24h|graph_risk|%NEW_DEVICE|%VELOCITY|%degraded
+baseline|1601|63.6|0.000|201.1|0.0021|0.0|100.0|0.0
+after-flush|1601|1.6|0.026|0.4|0.0000|2.6|0.4|0.0
+after-rebuild|1600|82.9|0.000|199.9|0.0033|0.0|100.0|0.0

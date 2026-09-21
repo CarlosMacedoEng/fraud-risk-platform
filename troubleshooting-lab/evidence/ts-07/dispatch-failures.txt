@@ -1,0 +1,2 @@
+{'kind': 'TIMEOUT'} 1.0565
+{'kind': 'CIRCUIT_OPEN'} 1007.6806

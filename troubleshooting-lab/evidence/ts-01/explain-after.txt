@@ -1,0 +1,13 @@
+                                                                           QUERY PLAN                                                                           
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=0.42..52.94 rows=50 width=1562) (actual time=0.028..0.102 rows=50 loops=1)
+   Buffers: shared hit=45
+   ->  Index Scan using ix_decisions_tenant_created on risk_decisions  (cost=0.42..276525.40 rows=263293 width=1562) (actual time=0.027..0.099 rows=50 loops=1)
+         Index Cond: (tenant_id = 'aldermoor-bank'::text)
+         Buffers: shared hit=45
+ Planning:
+   Buffers: shared hit=264
+ Planning Time: 1.166 ms
+ Execution Time: 0.178 ms
+(9 rows)
+

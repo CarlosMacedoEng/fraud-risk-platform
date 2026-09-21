@@ -1,0 +1,1 @@
+{"status":"success","data":{"resultType":"vector","result":[{"metric":{"decision":"APPROVE"},"value":[1790015502.825,"2378.268300665479"]},{"metric":{"decision":"REVIEW"},"value":[1790015502.825,"13.091385141277865"]},{"metric":{"decision":"DECLINE"},"value":[1790015502.825,"8.727590094185244"]}]}}

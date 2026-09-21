@@ -23,7 +23,7 @@ go-live and support — not just a fraud model.
 | 6 | Kafka events: outbox, consumers, DLT, replay | ✅ Done |
 | 7 | File adapter: legacy files, validation, quarantine, reconciliation | ✅ Done |
 | 8 | Observability, performance tests (k6), JVM performance guide — **measured** results | ✅ Done |
-| 9 | Troubleshooting lab: 18 reproducible incidents | Planned |
+| 9 | Troubleshooting lab: 18 reproducible incidents with evidence — [playbook](docs/TROUBLESHOOTING_PLAYBOOK.md); found and fixed 4 real defects (Redis connection churn, model-less pod reported ready, consumer throughput, missing alerts) | ✅ Done |
 | 10 | Docker Compose, Kubernetes manifests, AWS mapping | Planned |
 | 11 | Lifecycle: migration v1→v2, go-live, support, customer communication | Planned |
 | 12 | Reusable assets, engineering standards, mentoring, interview preparation | Planned |
@@ -93,7 +93,7 @@ Full design: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · Requirements: [docs
 
 | Area | Choice | Reason |
 |---|---|---|
-| Service language | Java 21 (compiled with JDK 25), Spring Boot 3.x, Maven | Enterprise standard; matches role |
+| Service language | Java 21 (compiled with JDK 25), Spring Boot 4.1, Maven | Enterprise standard; matches role |
 | Persistence | PostgreSQL 16, Flyway, HikariCP, Spring `JdbcClient` | Explicit, explainable SQL ([ADR-006](docs/adr/ADR-006-jdbc-over-jpa.md)) |
 | Feature store | Redis 7 | Low-latency counters with TTL ([ADR-003](docs/adr/ADR-003-postgres-plus-redis.md)) |
 | Messaging | Kafka (KRaft) + transactional outbox | At-least-once, no dual writes ([ADR-002](docs/adr/ADR-002-transactional-outbox.md)) |

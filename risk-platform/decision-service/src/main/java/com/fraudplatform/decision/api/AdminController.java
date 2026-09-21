@@ -43,9 +43,12 @@ public class AdminController {
     private final AuditRepository audit;
     private final RedisGraphFeatureStore graph;
     private final PlatformProperties props;
+    private final com.fraudplatform.decision.application.FeatureStoreRebuildService rebuild;
 
     public AdminController(StrategyAdminService strategies, ModelGovernanceService models, AuditRepository audit,
-                           RedisGraphFeatureStore graph, PlatformProperties props) {
+                           RedisGraphFeatureStore graph, PlatformProperties props,
+                           com.fraudplatform.decision.application.FeatureStoreRebuildService rebuild) {
+        this.rebuild = rebuild;
         this.strategies = strategies;
         this.models = models;
         this.audit = audit;
@@ -188,6 +191,14 @@ public class AdminController {
                                                   @RequestParam(defaultValue = "100") int limit) {
         authorize(c, tenant);
         return audit.list(tenant, entityType, Math.min(limit, 1000));
+    }
+
+    /** Recovery: rebuild Redis velocity/"seen" state from PostgreSQL (after a flush or an outage). */
+    @PostMapping("/feature-store/rebuild")
+    public Map<String, Object> rebuildFeatureStore(@AuthenticationPrincipal ApiClientPrincipal c, @PathVariable String tenant,
+                                                   @RequestParam(defaultValue = "30") int days) {
+        authorize(c, tenant);
+        return rebuild.rebuild(tenant, Math.min(Math.max(days, 1), 400));
     }
 
     @PostMapping("/graph/reload")
