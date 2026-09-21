@@ -1,0 +1,9 @@
+[project]
+name = "fraudlab"
+version = "1.0.0"
+description = "Synthetic data generation and fraud-model workbench (portfolio project, synthetic data only)"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
