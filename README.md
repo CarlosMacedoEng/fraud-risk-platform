@@ -10,6 +10,15 @@ go-live and support — not just a fraud model.
 > payment provider and is **not production-ready**. Measured results are reported with the environment
 > they were measured on; targets are labelled as targets.
 
+## Demo (recorded run)
+
+![End-to-end demo: decision, explanation, events and case creation, configuration change with rollback, file ingestion, troubleshooting, performance](docs/media/demo.gif)
+
+A real run of [`scripts/demo.sh`](scripts/demo.sh) against the local stack, recorded with
+[`scripts/record-demo.py`](scripts/record-demo.py) — full timestamped output in
+[docs/media/demo-transcript.txt](docs/media/demo-transcript.txt). Run it yourself:
+**[step-by-step walkthrough](docs/DEMO_WALKTHROUGH.md)**.
+
 ## Status
 
 | Stage | Scope | Status |
@@ -51,7 +60,7 @@ Full design: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · Requirements: [docs
 ```text
 .
 ├── README.md
-├── docs/                         # 26 project documents, ADRs, customer artifacts, templates
+├── docs/                         # project documents, ADRs, customer artifacts, templates, demo media
 │   ├── adr/                      # architecture decision records
 │   ├── customer/                 # questionnaire, status report, incident update, handover...
 │   └── templates/                # reusable engineering templates
@@ -94,7 +103,7 @@ Full design: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · Requirements: [docs
 
 | Area | Choice | Reason |
 |---|---|---|
-| Service language | Java 21 (compiled with JDK 25), Spring Boot 4.1, Maven | Enterprise standard; matches role |
+| Service language | Java 21 (compiled with JDK 25), Spring Boot 4.1, Maven | Enterprise standard |
 | Persistence | PostgreSQL 16, Flyway, HikariCP, Spring `JdbcClient` | Explicit, explainable SQL ([ADR-006](docs/adr/ADR-006-jdbc-over-jpa.md)) |
 | Feature store | Redis 7 | Low-latency counters with TTL ([ADR-003](docs/adr/ADR-003-postgres-plus-redis.md)) |
 | Messaging | Kafka (KRaft) + transactional outbox | At-least-once, no dual writes ([ADR-002](docs/adr/ADR-002-transactional-outbox.md)) |
@@ -135,7 +144,7 @@ Grafana: http://localhost:3000 · Prometheus: http://localhost:9090 · Scoring A
 | `dev-aldermoor-approver-key` / `dev-quillon-approver-key` | second approver (four-eyes) |
 | `dev-file-ops-key` | file-adapter operations |
 
-**Demo flow** (`scripts/demo.sh`, about 10 minutes): real-time decision with reasons and
+**Demo flow** (`scripts/demo.sh`, about 10 minutes — [walkthrough](docs/DEMO_WALKTHROUGH.md)): real-time decision with reasons and
 versions → SHAP explanation → outbox events and case creation → emergency configuration change with four-eyes
 approval and rollback → legacy file ingestion (accepted and rejected) → slow-vendor troubleshooting → performance.
 
@@ -156,6 +165,7 @@ approval and rollback → legacy file ingestion (accepted and rejected) → slow
 | Purpose, context, requirements | [PROJECT_PURPOSE](docs/PROJECT_PURPOSE.md) · [BUSINESS_CONTEXT](docs/BUSINESS_CONTEXT.md) · [REQUIREMENTS_AND_ASSUMPTIONS](docs/REQUIREMENTS_AND_ASSUMPTIONS.md) |
 | Design | [ARCHITECTURE](docs/ARCHITECTURE.md) · [ADRs](docs/adr/) · [DATABASE_DESIGN](docs/DATABASE_DESIGN.md) · [MODEL_STRATEGY](docs/MODEL_STRATEGY.md) · [CONFIGURATION_AND_RISK_STRATEGY](docs/CONFIGURATION_AND_RISK_STRATEGY.md) |
 | Integrations | [API_INTEGRATIONS](docs/API_INTEGRATIONS.md) · [MESSAGING_AND_EVENTS](docs/MESSAGING_AND_EVENTS.md) · [FILE_INTEGRATIONS](docs/FILE_INTEGRATIONS.md) |
+| Demo | [DEMO_WALKTHROUGH](docs/DEMO_WALKTHROUGH.md) · [recording transcript](docs/media/demo-transcript.txt) |
 | Runtime and operations | [REAL_TIME_ENGINEERING](docs/REAL_TIME_ENGINEERING.md) · [JAVA_PERFORMANCE_GUIDE](docs/JAVA_PERFORMANCE_GUIDE.md) · [OBSERVABILITY_AND_OPERATIONS](docs/OBSERVABILITY_AND_OPERATIONS.md) · [TROUBLESHOOTING_PLAYBOOK](docs/TROUBLESHOOTING_PLAYBOOK.md) · [SUPPORT_MODEL](docs/SUPPORT_MODEL.md) · [AWS_AND_KUBERNETES](docs/AWS_AND_KUBERNETES.md) |
 | Delivery | [CUSTOMER_IMPLEMENTATION_PLAN](docs/CUSTOMER_IMPLEMENTATION_PLAN.md) · [MIGRATION_AND_UPGRADE_RUNBOOK](docs/MIGRATION_AND_UPGRADE_RUNBOOK.md) · [GO_LIVE_RUNBOOK](docs/GO_LIVE_RUNBOOK.md) · [CUSTOMER_COMMUNICATION](docs/CUSTOMER_COMMUNICATION.md) · [customer artifacts](docs/customer/) |
 | Team | [REUSABLE_ENGINEERING_ASSETS](docs/REUSABLE_ENGINEERING_ASSETS.md) · [templates](docs/templates/) · [MENTORING_AND_ENGINEERING_STANDARDS](docs/MENTORING_AND_ENGINEERING_STANDARDS.md) · [ENGINEERING_JOURNAL](docs/ENGINEERING_JOURNAL.md) |

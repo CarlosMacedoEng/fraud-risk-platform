@@ -1,0 +1,79 @@
+# scripts/demo.sh — real run on 2026-09-21T21:03:38 (exit code 0)
+# seconds-since-start | output
+   0.38 | 
+   0.38 | =================== 1. Real-time decision: A2A transfer, new device, new beneficiary abroad
+   0.64 | decision : DECLINE | risk score 0.981855 | level CRITICAL
+   0.64 | reasons  : ['HIGH_MODEL_SCORE', 'ANOMALOUS_PATTERN', 'NEW_BENEFICIARY', 'NEW_DEVICE', 'UNUSUAL_LOCATION']
+   0.64 | versions : {'model': 'aldermoor-bank-lgbm-1.0.0', 'strategy': '1.1.0', 'featureSpec': 'fs-1.0', 'challengerModel': None}
+   0.64 | latency  : 12.099 ms (server) | degraded: []
+   0.64 | decisionId c1c0d09c-205d-4a39-be4a-3c8f9bdcacab
+   0.76 | 
+   0.76 | =================== 2. Model explanation for that decision (SHAP from the model service, off the hot path)
+   2.56 | SHAP available: True | model aldermoor-bank-lgbm-1.0.0
+   2.56 |    {'feature': 'is_new_device', 'value': 1.0, 'contribution': 3.26532, 'reasonCode': 'NEW_DEVICE'}
+   2.56 |    {'feature': 'ip_country_mismatch', 'value': 1.0, 'contribution': 2.62369, 'reasonCode': 'UNUSUAL_LOCATION'}
+   2.56 |    {'feature': 'amount_to_baseline', 'value': 10.843107223510742, 'contribution': 2.03955, 'reasonCode': 'CUSTOMER_BEHAVIOR_DEVIATION'}
+   2.56 |    {'feature': 'hour_of_day', 'value': 0.0, 'contribution': 1.15778, 'reasonCode': 'UNUSUAL_TIME'}
+   2.56 |    {'feature': 'beneficiary_foreign', 'value': 1.0, 'contribution': 0.5024, 'reasonCode': 'NEW_BENEFICIARY'}
+   2.56 | stored reasons: ['HIGH_MODEL_SCORE', 'ANOMALOUS_PATTERN', 'NEW_BENEFICIARY', 'NEW_DEVICE', 'UNUSUAL_LOCATION', 'NEW_BENEFICIARY', 'CUSTOMER_BEHAVIOR_DEVIATION', 'HIGH_TRANSACTION_VELOCITY', 'NEW_DEVICE', 'UNUSUAL_TIME']
+   2.57 | 
+   2.57 | =================== 3. Event-driven integration: outbox events for the decision, relay to Kafka, case for REVIEW
+   7.56 |      event_type      |         topic         | published 
+   7.56 | ---------------------+-----------------------+-----------
+   7.56 |  RiskDecisionCreated | fraud.decisions.v1    | t
+   7.56 |  TransactionDeclined | fraud.decisions.v1    | t
+   7.56 |  TransactionReceived | fraud.transactions.v1 | t
+   7.56 | (3 rows)
+   7.56 | 
+   7.57 | --- a moderate transfer from a new device (typically REVIEW) -> RiskDecisionCreated -> case-creator -> case API
+   7.83 | decision : REVIEW | risk score 0.753257 | level HIGH
+   7.83 | reasons  : ['ANOMALOUS_PATTERN', 'HIGH_MODEL_SCORE', 'UNUSUAL_LOCATION', 'HIGH_TRANSACTION_VELOCITY', 'NEW_DEVICE']
+   7.83 | versions : {'model': 'aldermoor-bank-lgbm-1.0.0', 'strategy': '1.1.0', 'featureSpec': 'fs-1.0', 'challengerModel': None}
+   7.83 | latency  : 5.584 ms (server) | degraded: []
+   7.83 | decisionId d7673e08-a64c-4bc0-8c08-9a1895c252c5
+  11.45 |  decision | case_status | priority | external_case_ref 
+  11.45 | ----------+-------------+----------+-------------------
+  11.45 |  REVIEW   | OPEN        | HIGH     | CM-3535
+  11.45 | (1 row)
+  11.45 | 
+  11.46 | 
+  11.46 | =================== 4. Customer configuration change: emergency block of the device, approved by a second person, then rollback
+  11.57 | derive draft 201
+  11.66 | self-approval by the author: 403 (four-eyes)
+  11.74 | approval by the approver: 200
+  11.83 | promote to dev (100%): 200
+  11.83 | --- same customer and device again:
+  12.10 | decision : DECLINE | risk score 0.872447 | level HIGH
+  12.10 | reasons  : ['BLOCKED_ENTITY', 'HIGH_MODEL_SCORE', 'ANOMALOUS_PATTERN', 'CUSTOMER_BEHAVIOR_DEVIATION', 'HIGH_TRANSACTION_VELOCITY']
+  12.10 | versions : {'model': 'aldermoor-bank-lgbm-1.0.0', 'strategy': '1.9.35371', 'featureSpec': 'fs-1.0', 'challengerModel': None}
+  12.10 | latency  : 5.547 ms (server) | degraded: []
+  12.10 | decisionId 6e2b6cdf-96c3-4764-bb6c-72a0e17e53bf
+  12.20 | rollback: 200
+  12.69 |  created_at |       actor        |            action            | entity_id 
+  12.69 | ------------+--------------------+------------------------------+-----------
+  12.69 |  00:03:03   | aldermoor-admin    | STRATEGY_ROLLBACK            | dev
+  12.69 |  00:03:03   | aldermoor-admin    | STRATEGY_ACTIVATED_EMERGENCY | dev
+  12.69 |  00:03:03   | aldermoor-approver | STRATEGY_APPROVED            | 1.9.35371
+  12.69 |  00:03:03   | aldermoor-admin    | STRATEGY_EMERGENCY_DERIVED   | 1.9.35371
+  12.69 |  00:02:13   | aldermoor-admin    | STRATEGY_ROLLBACK            | dev
+  12.69 | (5 rows)
+  12.69 | 
+  12.70 | 
+  12.70 | =================== 5. File ingestion from a legacy system: a valid file and a malformed one
+  12.81 | delivered TXN_HISTORY_aldermoor-bank_20260430_271.csv 29 records
+  13.94 | TXN_HISTORY_aldermoor-bank_20260430_271.csv      COMPLETED                  records={'quarantined': 0, 'new': 29, 'duplicates': 0, 'valid': 29, 'total': 29} events=29 reason=None
+  13.94 | TXN_HISTORY_aldermoor-bank_20260430_902.csv      REJECTED                   records={'quarantined': 10, 'new': 0, 'duplicates': 40, 'valid': 40, 'total': 50} events=0 reason=TOO_MANY_INVALID_RECORDS
+  13.95 | 
+  13.95 | =================== 6. Troubleshooting: the device-intelligence vendor becomes slow (+250 ms)
+  40.53 | requests=751 rate=30.0/s failed=0.000%
+  40.53 | client latency ms: p50=9.3 p95=13.5 p99=68.0 max=71.9
+  40.53 | degraded decisions=53.53%
+  46.92 | degraded by mode (1m): [('DEVICE_RISK_UNAVAILABLE', 435)]
+  47.14 | circuit state (2 = OPEN): [('device-risk', 2)]
+  47.15 | -> latency stayed within budget; the decision ran without the device signal (see playbook TS-06)
+  47.15 | 
+  47.15 | =================== 7. Performance: live percentiles and the recorded test results
+  47.35 | server p95 ms (5m): [('', 14)]
+  47.56 | server p99 ms (5m): [('', 20)]
+  47.57 | Recorded: warm 150 TPS p95 15.2 ms / p99 40.1 ms; cold JVM p95 327 ms (perf/README.md, TS-15).
+  47.57 | Grafana: http://localhost:3000 (dashboard 'Fraud platform')
